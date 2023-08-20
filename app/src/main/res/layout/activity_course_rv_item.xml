@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/displayName"
+        android:layout_width="102dp"
+        android:layout_height="39dp"
+        android:padding="10dp"
+        android:gravity="center"
+        android:text="@string/name"
+        android:textColor="@color/black" />
+
+
+    <TextView
+        android:id="@+id/displaySubject"
+        android:layout_width="102dp"
+        android:layout_height="39dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/subject"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/displayHours"
+        android:layout_width="102dp"
+        android:layout_height="39dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/hours"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/displayCore"
+        android:layout_width="102dp"
+        android:layout_height="39dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/core"
+        android:textColor="@color/black" />
+
+
+</LinearLayout>
+

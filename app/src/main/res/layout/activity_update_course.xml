@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UpdateCourseActivity">
+
+    <!--Edit text to enter course name-->
+    <EditText
+        android:id="@+id/updStudentName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="@string/student_name" />
+
+    <!--edit text to enter course duration-->
+    <EditText
+        android:id="@+id/updStudentSubject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="@string/subjectUpd" />
+
+    <!--edit text to display course tracks-->
+    <EditText
+        android:id="@+id/updStudentHours"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="@string/hoursUpd" />
+
+    <!--edit text for course description-->
+    <EditText
+        android:id="@+id/updStudentCore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="@string/core_yes_noUpd" />
+
+<!--    <EditText-->
+<!--        android:id="@+id/idEdtDescription"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:hint="Descrption" />-->
+
+
+    <!--button for updating our course-->
+    <Button
+        android:id="@+id/idBtnUpdateCourse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/update_item"
+        android:textAllCaps="false" />
+
+
+    <!--button for deleting our course-->
+    <Button
+        android:id="@+id/idBtnDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/delete_item"
+        android:textAllCaps="false" />
+
+</LinearLayout>

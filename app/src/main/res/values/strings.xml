@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">GFG App</string>
+    <string name="course_name">Course Name</string>
+    <string name="course_tracks">Tracks</string>
+    <string name="duration">Duration</string>
+    <string name="description">Description</string>
+    <string name="price" />
+    <string name="name">Name</string>
+    <string name="table_layout_4_open" />
+    <string name="tracks" />
+    <string name="subject">Subject</string>
+    <string name="hours">Hours</string>
+    <string name="core">Core</string>
+    <string name="student_name">Student Name</string>
+    <string name="subjectUpd">Subject</string>
+    <string name="hoursUpd">Hours</string>
+    <string name="core_yes_noUpd">Core: yes/no</string>
+    <string name="update_item">Update Item</string>
+    <string name="delete_item">Delete Item</string>
+    <string name="student_nameMain">Student Name</string>
+    <string name="subjectMain">Subject</string>
+    <string name="hoursMain">Hours</string>
+    <string name="core_yes_noMain">Core: yes/no</string>
+</resources>
