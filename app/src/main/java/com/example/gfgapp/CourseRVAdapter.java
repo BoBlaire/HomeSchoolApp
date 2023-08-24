@@ -1,7 +1,10 @@
 package com.example.gfgapp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.PointF;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,21 +13,28 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHolder> {
 
     // variable for our array list and context
-    private ArrayList<CourseModal> courseModalArrayList;
+    private List<CourseModal> courseModalArrayList;
     private Context context;
-
+    private DBHandler dbHandler;
+//    public static int idPosition;
     // constructor
+
+
     public CourseRVAdapter(ArrayList<CourseModal> courseModalArrayList, Context context) {
         this.courseModalArrayList = courseModalArrayList;
         this.context = context;
     }
+
 
     @NonNull
     @Override
@@ -34,6 +44,7 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
           below line is to inflate our layout. */
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_course_rv_item, parent, false);
+
         return new ViewHolder(view);
 
     }
@@ -41,18 +52,25 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+
+
         /* on below line we are setting data
            to our views of recycler view item. */
         CourseModal modal = courseModalArrayList.get(position);
+
+
         holder.studentNameRV.setText(modal.getStudentName());
         holder.studentCoreRV.setText(modal.getStudentCore());
         holder.studentSubjectRV.setText(modal.getStudentSubject());
         holder.studentHoursRV.setText(modal.getStudentHours());
 
+
         // below line is to add on click listener for our recycler view item.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                modal.setAdapterId(holder.getAdapterPosition());
 
                 // on below line we are calling an intent.
                 Intent i = new Intent(context, UpdateCourseActivity.class);
@@ -62,6 +80,7 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
                 i.putExtra("core", modal.getStudentCore());
                 i.putExtra("subject", modal.getStudentSubject());
                 i.putExtra("hours", modal.getStudentHours());
+                i.putExtra("id", String.valueOf(modal.getAdapterId()));
 
                 // starting our activity.
                 context.startActivity(i);
@@ -85,6 +104,7 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
         // returning the size of our array list
         return courseModalArrayList.size();
     }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 

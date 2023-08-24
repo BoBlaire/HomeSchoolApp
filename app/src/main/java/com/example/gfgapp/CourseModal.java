@@ -42,6 +42,16 @@ public class CourseModal {
     }
 
     private int id;
+    private int adapterId;
+
+    public int getAdapterId() {
+        return adapterId;
+    }
+
+    public void setAdapterId(int adapterId) {
+        this.adapterId = adapterId;
+    }
+
     int o = 0;
     int i = 0;
 

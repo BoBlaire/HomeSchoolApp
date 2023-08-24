@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#353738">
 
     <!--Edit text to enter course name-->
     <EditText
@@ -12,20 +13,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:background="#353738"
+        android:textColor="#C3C3C3"
+        android:textColorHint="@color/white"
         android:hint="@string/student_nameMain" />
 
     <!--edit text to enter course duration-->
 
-<!--Name=Name
-    Duration=Subject
-    Tracks=Hours
-    Description=Core
--->
+    <!--Name=Name
+        Duration=Subject
+        Tracks=Hours
+        Description=Core
+    -->
     <EditText
         android:id="@+id/studentSubjectDb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:background="#353738"
+        android:textColor="#C3C3C3"
+        android:textColorHint="@color/white"
         android:hint="@string/subjectMain" />
 
     <!--edit text to display course tracks-->
@@ -34,6 +41,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:background="#353738"
+        android:textColor="#C3C3C3"
+        android:textColorHint="@color/white"
         android:hint="@string/hoursMain" />
 
     <!--edit text for course description-->
@@ -42,14 +52,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:background="#353738"
+        android:textColor="#C3C3C3"
+        android:textColorHint="@color/white"
         android:hint="@string/core_yes_noMain" />
 
-<!--    <EditText-->
-<!--        android:id="@+id/idEdtDescription"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="10dp"-->
-<!--        android:hint="Descrption" />-->
+    <!--    <EditText-->
+    <!--        android:id="@+id/idEdtDescription"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="10dp"-->
+    <!--        android:hint="Descrption" />-->
 
     <!--button for adding new course-->
     <Button

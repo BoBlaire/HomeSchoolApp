@@ -1,5 +1,6 @@
 package com.example.gfgapp;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -18,13 +19,13 @@ class DBHandler extends SQLiteOpenHelper {
 
     /* creating a constant variables for our database.
        below variable is for our database name. */
-    private static final String DB_NAME = "coursedb";
+    private static final String DB_NAME = "homeschool";
 
     // below int is our database version
-    private static final int DB_VERSION = 4;
+    private static final int DB_VERSION = 2;
 
     // below variable is for our table name.
-    private static final String TABLE_NAME = "mycourses";
+    private static final String TABLE_NAME = "records";
 
     // below variable is for our id column.
     private static final String ID_COL = "id";
@@ -41,7 +42,7 @@ class DBHandler extends SQLiteOpenHelper {
     // below variable is for our student hours column.
     private static final String HOURS_COL = "hours";
 
-    // private static final String EDIT_CORE_COL = "student";
+    private static CourseModal courseModal;
 
 
     // creating a constructor for our database handler.
@@ -116,9 +117,9 @@ class DBHandler extends SQLiteOpenHelper {
                 courseModalArrayList.add(new CourseModal(
                         cursorCourses.getString(1),
                         cursorCourses.getString(2),
-                        cursorCourses.getString(4),
-                        cursorCourses.getString(3)
-                        ));
+                        cursorCourses.getString(3),
+                        cursorCourses.getString(4)
+                ));
             } while (cursorCourses.moveToNext());
             // moving our cursor to next.
         }
@@ -147,7 +148,7 @@ class DBHandler extends SQLiteOpenHelper {
 
         /* on below line we are calling a update method to update our database and passing our values.
            and we are comparing it with name of our course which is stored in original name variable. */
-        db.update(TABLE_NAME, values, "name=?", new String[]{orgStudentName});
+        db.update(TABLE_NAME, values, "id=?", new String[]{orgStudentName});
         db.close();
     }
 
@@ -161,9 +162,41 @@ class DBHandler extends SQLiteOpenHelper {
 
         /* on below line we are calling a method to delete our
            course and we are comparing it with our course name. */
-        db.delete(TABLE_NAME, "name=?", new String[]{studentName});
+        db.delete(TABLE_NAME, "id=?", new String[]{studentName});
         db.close();
     }
+
+
+    public Cursor getDbId(String studentName) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor getDb = (db.rawQuery("SELECT " + ID_COL + " FROM " + TABLE_NAME + " WHERE " + NAME_COL + " = ?", new String[]{studentName}));
+        Cursor getDbId = (db.rawQuery("SELECT * FROM " + TABLE_NAME, null));
+
+//        Cursor getId = (db.rawQuery("SELECT ROW id FROM " + TABLE_NAME + " WHERE " + NAME_COL + " = ?", new String[]{studentName}));
+        getDbId.moveToFirst();
+        return getDbId;
+    }
+
+
+//    private void showDeleteConfirmationDialog(final int recordId) {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//        builder.setMessage("Do you want to delete this record?")
+//                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        // Delete the record from the database
+//                        deleteRecordFromDatabase(recordId);
+//                    }
+//                })
+//                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        // User cancelled the dialog
+//                    }
+//                });
+//        AlertDialog dialog = builder.create();
+//        dialog.show();
+//    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

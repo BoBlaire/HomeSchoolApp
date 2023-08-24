@@ -18,46 +18,23 @@
 
 
         <activity
-
-
             android:name=".MainActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.SEARCH" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@id/actionSearch" />
         </activity>
-        <activity
 
-
-            android:name=".MainActivitys"
-            android:exported="true">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-            <!--            <meta-data tools:ignore="ExtraText">-->
-            <!--                android:name="android.app.searchable"-->
-            <!--                android:resource="@id/actionSearch"-->
-            <!--            </meta-data>-->
-        </activity>
 
 
         <activity
-
-
             android:name=".ViewCourses"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -65,12 +42,11 @@
             </intent-filter>
         </activity>
 
+
+
         <activity
-
-
             android:name=".UpdateCourseActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
