@@ -171,14 +171,21 @@ class DBHandler extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor getDb = (db.rawQuery("SELECT " + ID_COL + " FROM " + TABLE_NAME + " WHERE " + NAME_COL + " = ?", new String[]{studentName}));
+//        Cursor getDb = (db.rawQuery("SELECT " + ID_COL + " FROM " + TABLE_NAME + " WHERE " + NAME_COL + " = ?", new String[]{studentName}));
         Cursor getDbId = (db.rawQuery("SELECT * FROM " + TABLE_NAME, null));
 
-//        Cursor getId = (db.rawQuery("SELECT ROW id FROM " + TABLE_NAME + " WHERE " + NAME_COL + " = ?", new String[]{studentName}));
         getDbId.moveToFirst();
         return getDbId;
     }
 
+    public Cursor getDbIdTrue(String studentName) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor getDbId = (db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + NAME_COL + " = ?", new String[]{studentName}));
+
+        getDbId.moveToFirst();
+        return getDbId;
+    }
 
 //    private void showDeleteConfirmationDialog(final int recordId) {
 //        AlertDialog.Builder builder = new AlertDialog.Builder(context);

@@ -37,6 +37,8 @@ public class ViewCourses extends AppCompatActivity {
     private RecyclerView coursesRV;
     private Context context;
     private int position;
+    static Modal modal = new Modal(false);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +85,9 @@ public class ViewCourses extends AppCompatActivity {
         // inside inflater we are inflating our menu file.
         inflater.inflate(R.menu.search_menu, menu);
 
+
+        // below we are passing all our values.
+
         // below line is to get our menu item.
         MenuItem searchItem = menu.findItem(R.id.actionSearch);
 
@@ -101,6 +106,11 @@ public class ViewCourses extends AppCompatActivity {
                 // inside on query text change method we are
                 // calling a method to filter our recycler view.
                 filter(newText);
+
+                Intent id = new Intent(getApplicationContext(), UpdateCourseActivity.class);
+                id.putExtra("update", true);
+                modal.setAdapterStatement(id.getBooleanExtra("update", false));
+
                 return false;
             }
         });
@@ -118,7 +128,9 @@ public class ViewCourses extends AppCompatActivity {
             if (item.getStudentName().toLowerCase().contains(text.toLowerCase())) {
                 // if the item is matched we are
                 // adding it to our filtered list.
+
                 filteredlist.add(item);
+//                filteredlist.get(item.getAdapterId());
             }
         }
         if (filteredlist.isEmpty()) {

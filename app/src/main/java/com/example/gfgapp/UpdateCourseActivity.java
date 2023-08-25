@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ComponentActivity;
 
 import java.util.Objects;
 
@@ -22,6 +23,9 @@ public class UpdateCourseActivity extends AppCompatActivity {
     String studentName, studentCore, studentSubject, studentHours, id;
     private int idPos;
     CourseRVAdapter courseRVAdapter;
+    String adapterUpdate;
+    private Modal modal;
+    private boolean bool = false;
 
     @SuppressLint({"MissingInflatedId", "ResourceType"})
     @Override
@@ -50,14 +54,13 @@ public class UpdateCourseActivity extends AppCompatActivity {
         studentCore = getIntent().getStringExtra("core");
         idPos = Integer.parseInt(Objects.requireNonNull(getIntent().getStringExtra("id")));
 
+
         /* setting data to edit text
            of our update activity. */
-        System.out.println(idPos);
         Cursor cursor = dbHandler.getDbId(studentName);
+        Cursor cursorAdapter = dbHandler.getDbIdTrue(studentName);
+        modal = ViewCourses.modal;
 
-
-
-        long l = cursor.getLong(cursor.getColumnIndex("id"));
 
         studentNameUpd.setText(studentName);
         studentSubjectUpd.setText(studentSubject);
@@ -69,24 +72,40 @@ public class UpdateCourseActivity extends AppCompatActivity {
         updateCourseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (cursor.moveToPosition(idPos)) {
-                    String str = cursor.getString(cursor.getColumnIndex("id"));
-
-
-                    System.out.println(str);
-                    dbHandler.updateCourse(str, studentNameUpd.getText().toString(), studentSubjectUpd.getText().toString(), studentHoursUpd.getText().toString(), studentCoreUpd.getText().toString());
-
-                    // displaying a toast message that our course has been updated.
-                    Toast.makeText(UpdateCourseActivity.this, "Course Updated..", Toast.LENGTH_SHORT).show();
-
-                    // launching our main activity.
-                    Intent i = new Intent(UpdateCourseActivity.this, MainActivity.class);
-                    startActivity(i);
-                }
                 /* inside this method we are calling an update course
                    method and passing all our edit text values. */
+                if (modal.isAdapterStatement()) {
+                    if (cursorAdapter.moveToPosition(idPos)) {
+                        String str = cursorAdapter.getString(cursorAdapter.getColumnIndex("id"));
 
+
+                        System.out.println(str);
+                        dbHandler.updateCourse(str, studentNameUpd.getText().toString(), studentSubjectUpd.getText().toString(), studentHoursUpd.getText().toString(), studentCoreUpd.getText().toString());
+
+                        // displaying a toast message that our course has been updated.
+                        Toast.makeText(UpdateCourseActivity.this, "Course Updated..", Toast.LENGTH_SHORT).show();
+                        modal.setAdapterStatement(false);
+                        // launching our main activity.
+                        Intent i = new Intent(UpdateCourseActivity.this, MainActivity.class);
+                        startActivity(i);
+                    }
+                } else {
+                    if (cursor.moveToPosition(idPos)) {
+                        String str = cursor.getString(cursor.getColumnIndex("id"));
+
+
+                        System.out.println(str);
+                        dbHandler.updateCourse(str, studentNameUpd.getText().toString(), studentSubjectUpd.getText().toString(), studentHoursUpd.getText().toString(), studentCoreUpd.getText().toString());
+
+                        // displaying a toast message that our course has been updated.
+                        Toast.makeText(UpdateCourseActivity.this, "Course Updated..", Toast.LENGTH_SHORT).show();
+
+                        // launching our main activity.
+                        Intent i = new Intent(UpdateCourseActivity.this, MainActivity.class);
+                        startActivity(i);
+                    }
+
+                }
             }
         });
 
@@ -96,7 +115,7 @@ public class UpdateCourseActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                if (cursor != null && cursor.moveToNext()) {
+                if (cursor != null && cursor.moveToPosition(idPos)) {
                     // calling a method to delete our course.
                     String str = cursor.getString(cursor.getColumnIndex("id"));
                     dbHandler.deleteCourse(str);

@@ -44,6 +44,7 @@ public class CourseModal {
     private int id;
     private int adapterId;
 
+
     public int getAdapterId() {
         return adapterId;
     }
