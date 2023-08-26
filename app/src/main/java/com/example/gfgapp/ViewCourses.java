@@ -4,6 +4,7 @@ import static androidx.recyclerview.widget.RecyclerView.VERTICAL;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.text.Transliterator;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
@@ -36,6 +38,8 @@ public class ViewCourses extends AppCompatActivity {
     private CourseRVAdapter courseRVAdapter;
     private RecyclerView coursesRV;
     private Context context;
+
+
     private int position;
     static Modal modal = new Modal(false);
 
@@ -47,7 +51,8 @@ public class ViewCourses extends AppCompatActivity {
         MainActivity mainActivity = new MainActivity();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) FloatingActionButton button = (FloatingActionButton) findViewById(R.id.buttonPanel);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) FloatingActionButton button = findViewById(R.id.buttonPanel);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) FloatingActionButton buttonDelete = findViewById(R.id.buttonDeleteAll);
         toolbar.setTitle("Home School Records");
         // using toolbar as ActionBar
         setSupportActionBar(toolbar);
@@ -72,8 +77,51 @@ public class ViewCourses extends AppCompatActivity {
             Intent i = new Intent(ViewCourses.this, MainActivity.class);
             startActivity(i);
         });
+
+        buttonDelete.setOnClickListener(v -> {
+            onBackPressed();
+
+        });
+
         // setting our adapter to recycler view.
         coursesRV.setAdapter(courseRVAdapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Create the object of AlertDialog Builder class
+        AlertDialog.Builder builder = new AlertDialog.Builder(ViewCourses.this);
+
+        // Instantiate DBHandler
+        dbHandler = new DBHandler(ViewCourses.this);
+
+        // Set the message show for the Alert time
+        builder.setMessage("Do you want to delete all records?");
+
+        // Set Alert Title
+        builder.setTitle("Delete All Records");
+
+        // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
+        builder.setCancelable(false);
+
+        // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
+        builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
+            // When the user click yes button then app will close
+            dbHandler.massDeleteCourse();
+            finish();
+            startActivity(getIntent());
+        });
+
+        // Set the Negative button with No name Lambda OnClickListener method is use of DialogInterface interface.
+        builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
+            // If user click no then dialog box is canceled.
+            dialog.cancel();
+        });
+
+        // Create the Alert dialog
+        AlertDialog alertDialog = builder.create();
+        // Show the Alert Dialog box
+        alertDialog.show();
     }
 
 
@@ -108,7 +156,7 @@ public class ViewCourses extends AppCompatActivity {
                 filter(newText);
 
                 Intent id = new Intent(getApplicationContext(), UpdateCourseActivity.class);
-                id.putExtra("update", true);
+                id.putExtra("update", menu.hasVisibleItems());
                 modal.setAdapterStatement(id.getBooleanExtra("update", false));
 
                 return false;

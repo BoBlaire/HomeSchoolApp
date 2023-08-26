@@ -98,6 +98,9 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    public void deleteAllRecords() {
+        notifyDataSetChanged();
+    }
 
     @Override
     public int getItemCount() {

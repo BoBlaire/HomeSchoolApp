@@ -166,6 +166,19 @@ class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void massDeleteCourse() {
+
+        /* on below line we are creating
+           a variable to write our database. */
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        /* on below line we are calling a method to delete all records
+           and we are comparing it with our course name. */
+
+        db.execSQL("DELETE FROM " + TABLE_NAME);
+        db.close();
+    }
+
 
     public Cursor getDbId(String studentName) {
 
@@ -187,23 +200,6 @@ class DBHandler extends SQLiteOpenHelper {
         return getDbId;
     }
 
-//    private void showDeleteConfirmationDialog(final int recordId) {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//        builder.setMessage("Do you want to delete this record?")
-//                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//                        // Delete the record from the database
-//                        deleteRecordFromDatabase(recordId);
-//                    }
-//                })
-//                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//                        // User cancelled the dialog
-//                    }
-//                });
-//        AlertDialog dialog = builder.create();
-//        dialog.show();
-//    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
