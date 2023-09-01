@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.PointF;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +29,10 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
     private List<CourseModal> courseModalArrayList;
     private Context context;
     private DBHandler dbHandler;
+    private TextView name, subject, hours, core;
+    Modal modals = ViewCourses.modal;
+
+//    static Modal modal = new Modal(false);
 //    public static int idPosition;
     // constructor
 
@@ -45,6 +52,11 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_course_rv_item, parent, false);
 
+        //Calling resizing text code
+        ViewCourses viewCourses = new ViewCourses();
+        viewCourses.reziseText(view);
+
+
         return new ViewHolder(view);
 
     }
@@ -54,7 +66,7 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
 
-
+        // I call this to resize.. am I right?
         /* on below line we are setting data
            to our views of recycler view item. */
         CourseModal modal = courseModalArrayList.get(position);
@@ -81,7 +93,7 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
                 i.putExtra("subject", modal.getStudentSubject());
                 i.putExtra("hours", modal.getStudentHours());
                 i.putExtra("id", String.valueOf(modal.getAdapterId()));
-
+//                System.out.println(modals.getView());
                 // starting our activity.
                 context.startActivity(i);
             }
@@ -98,9 +110,6 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
         notifyDataSetChanged();
     }
 
-    public void deleteAllRecords() {
-        notifyDataSetChanged();
-    }
 
     @Override
     public int getItemCount() {

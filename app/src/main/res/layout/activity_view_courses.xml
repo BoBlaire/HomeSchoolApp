@@ -15,7 +15,8 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"/>
+            android:layout_height="?attr/actionBarSize"
+            android:autoSizeTextType="uniform"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -47,7 +48,10 @@
                     android:text="Student Name | Student Subject | Student Hours | Student Core"
                     android:textAlignment="center"
                     android:textColor="@color/white"
-                    android:textSize="13.9sp" />
+                    app:autoSizeMaxTextSize="80sp"
+                    app:autoSizeMinTextSize="2.5sp"
+                    app:autoSizeStepGranularity="2sp"
+                    app:autoSizeTextType="uniform"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/idRVCourses"

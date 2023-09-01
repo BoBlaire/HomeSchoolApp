@@ -1,53 +1,60 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:background="#353738">
+    android:orientation="horizontal">
+
+   <com.example.gfgapp.AutoResizeTextView
+       android:id="@+id/test1234"
+       android:layout_width="fill_parent"
+       android:layout_height="fill_parent"
+       android:layout_weight="1" />
+
+
+
+
 
     <TextView
         android:id="@+id/displayName"
-        android:layout_width="102dp"
+        android:layout_width="wrap_content"
         android:layout_height="39dp"
-        android:padding="10dp"
+        android:background="@drawable/boarder"
         android:gravity="center"
+        android:padding="10dp"
         android:text="@string/name"
-
-      android:background="@drawable/boarder"
-
-        android:textColor="@color/white" />
+        android:textColor="@color/black" />
 
 
     <TextView
         android:id="@+id/displaySubject"
-        android:layout_width="102dp"
+        android:layout_width="wrap_content"
         android:layout_height="39dp"
+        android:background="@drawable/boarder"
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/subject"
-        android:background="@drawable/boarder"
-        android:textColor="@color/white" />
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/displayHours"
-        android:layout_width="102dp"
+        android:layout_width="wrap_content"
         android:layout_height="39dp"
+        android:background="@drawable/boarder"
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/hours"
-        android:background="@drawable/boarder"
-        android:textColor="@color/white" />
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/displayCore"
-        android:layout_width="102dp"
+        android:layout_width="wrap_content"
         android:layout_height="39dp"
+        android:background="@drawable/boarder"
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/core"
-        android:background="@drawable/boarder"
-
-        android:textColor="@color/white" />
+        android:textColor="@color/black" />
 
 
 </LinearLayout>
-

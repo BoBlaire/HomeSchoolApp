@@ -53,7 +53,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="@string/update_item"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        />
 
 
     <!--button for deleting our course-->

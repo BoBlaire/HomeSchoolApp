@@ -1,21 +1,36 @@
 package com.example.gfgapp;
 
+import static android.view.View.inflate;
 import static androidx.recyclerview.widget.RecyclerView.VERTICAL;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Insets;
+import android.graphics.Rect;
 import android.icu.text.Transliterator;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Size;
+import android.util.TypedValue;
+import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowInsets;
+import android.view.WindowManager;
+import android.view.WindowMetrics;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -39,23 +54,34 @@ public class ViewCourses extends AppCompatActivity {
     private RecyclerView coursesRV;
     private Context context;
 
-
+    private TextView name, subject, hours, core;
     private int position;
     static Modal modal = new Modal(false);
 
 
+    @RequiresApi(api = Build.VERSION_CODES.R)
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_courses);
-        MainActivity mainActivity = new MainActivity();
 
+        // Getting display size
+        WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        display.getMetrics(displayMetrics);
+        int width_screen = displayMetrics.widthPixels;
+
+        modal.setScreeWidth(width_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) FloatingActionButton button = findViewById(R.id.buttonPanel);
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) FloatingActionButton buttonDelete = findViewById(R.id.buttonDeleteAll);
         toolbar.setTitle("Home School Records");
         // using toolbar as ActionBar
         setSupportActionBar(toolbar);
+
+
         // initializing our all variables.
         courseModalArrayList = new ArrayList<>();
         dbHandler = new DBHandler(ViewCourses.this);
@@ -75,20 +101,25 @@ public class ViewCourses extends AppCompatActivity {
 
         button.setOnClickListener(v -> {
             Intent i = new Intent(ViewCourses.this, MainActivity.class);
+
             startActivity(i);
+
         });
 
         buttonDelete.setOnClickListener(v -> {
+
             onBackPressed();
 
         });
 
         // setting our adapter to recycler view.
         coursesRV.setAdapter(courseRVAdapter);
+
     }
 
     @Override
     public void onBackPressed() {
+
         // Create the object of AlertDialog Builder class
         AlertDialog.Builder builder = new AlertDialog.Builder(ViewCourses.this);
 
@@ -108,6 +139,7 @@ public class ViewCourses extends AppCompatActivity {
         builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
             // When the user click yes button then app will close
             dbHandler.massDeleteCourse();
+            dialog.dismiss();
             finish();
             startActivity(getIntent());
         });
@@ -116,12 +148,28 @@ public class ViewCourses extends AppCompatActivity {
         builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
             // If user click no then dialog box is canceled.
             dialog.cancel();
+            dialog.dismiss();
         });
 
         // Create the Alert dialog
         AlertDialog alertDialog = builder.create();
-        // Show the Alert Dialog box
+
         alertDialog.show();
+    }
+
+    public void reziseText(View view) {
+
+        name = view.findViewById(R.id.displayName);
+        subject = view.findViewById(R.id.displaySubject);
+        hours = view.findViewById(R.id.displayHours);
+        core = view.findViewById(R.id.displayCore);
+
+
+        name.setWidth(modal.getScreeWidth() / 4);
+        subject.setWidth(modal.getScreeWidth() / 4);
+        hours.setWidth(modal.getScreeWidth() / 4);
+        core.setWidth(modal.getScreeWidth() / 4);
+
     }
 
 
