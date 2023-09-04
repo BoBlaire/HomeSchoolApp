@@ -21,4 +21,7 @@
     <string name="subjectMain">Subject</string>
     <string name="hoursMain">Hours</string>
     <string name="core_yes_noMain">Core: yes/no</string>
+    <string name="todo">View List</string>
+    <string name="main_page">Add</string>
+    <string name="welcome">Welcome</string>
 </resources>

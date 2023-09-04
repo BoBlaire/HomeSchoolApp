@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     // creating variables for our edittext, button and dbhandler
 
-    private Button addCourseBtn, readCourseBtn;
+    private Button addCourseBtn, readCourseBtn, splashPageButton;
     private DBHandler dbHandler;
     private EditText studentName, studentHours, studentSubject, studentCore;
     private RecyclerView courseRV;
@@ -71,59 +71,56 @@ public class MainActivity extends AppCompatActivity {
         studentCore = findViewById(R.id.studentCoreDb);
         addCourseBtn = findViewById(R.id.idBtnAddCourse);
         readCourseBtn = findViewById(R.id.idBtnReadCourse);
+        splashPageButton = findViewById(R.id.splashPageButton);
         courseRV = findViewById(R.id.idRVCourses);
 
         // initializing db class
         dbHandler = new DBHandler(MainActivity.this);
 
 
-        addCourseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        addCourseBtn.setOnClickListener(v -> {
 
-                // below line is to get data from all edit text fields.
-                String studentNameDb = studentName.getText().toString();
-                String studentSubjectDb = studentSubject.getText().toString();
-                String studentHoursDb = studentHours.getText().toString();
-                String studentCoreDb = studentCore.getText().toString();
+            // below line is to get data from all edit text fields.
+            String studentNameDb = studentName.getText().toString();
+            String studentSubjectDb = studentSubject.getText().toString();
+            String studentHoursDb = studentHours.getText().toString();
+            String studentCoreDb = studentCore.getText().toString();
 
 
-                // validating if the text fields are empty or not.
-                if (studentNameDb.isEmpty() && studentSubjectDb.isEmpty() && studentHoursDb.isEmpty() && studentCoreDb.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "Please enter all the data..", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                /* on below line we are calling a method to add new
-                   course to sqlite data and pass all our values to it.*/
-                dbHandler.addNewCourse(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb);
-
-                // after adding the data we are displaying a toast message.
-                Toast.makeText(MainActivity.this, "Course has been added.", Toast.LENGTH_SHORT).show();
-                studentName.setText("");
-                studentSubject.setText("");
-                studentHours.setText("");
-                studentCore.setText("");
-
+            // validating if the text fields are empty or not.
+            if (studentNameDb.isEmpty() && studentSubjectDb.isEmpty() && studentHoursDb.isEmpty() && studentCoreDb.isEmpty()) {
+                Toast.makeText(MainActivity.this, "Please enter all the data..", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            /* on below line we are calling a method to add new
+               course to sqlite data and pass all our values to it.*/
+            dbHandler.addNewCourse(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb);
+
+            // after adding the data we are displaying a toast message.
+            Toast.makeText(MainActivity.this, "Course has been added.", Toast.LENGTH_SHORT).show();
+            studentName.setText("");
+            studentSubject.setText("");
+            studentHours.setText("");
+            studentCore.setText("");
+
         });
 
 
-        readCourseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // opening a new activity via a intent.
-                Intent i = new Intent(MainActivity.this, ViewCourses.class);
-                startActivity(i);
+        readCourseBtn.setOnClickListener(v -> {
+            // opening a new activity via a intent.
+            Intent i = new Intent(MainActivity.this, ViewCourses.class);
+            startActivity(i);
 
-            }
+        });
+
+        splashPageButton.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, SplashPage.class);
+            startActivity(i);
         });
     }
 
-//    public WindowManager getWindowService() {
-//
-//        return wm;
-//    }
+
 
 
 }

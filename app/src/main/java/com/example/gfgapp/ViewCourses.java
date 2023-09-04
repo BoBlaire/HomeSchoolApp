@@ -53,7 +53,6 @@ public class ViewCourses extends AppCompatActivity {
     private CourseRVAdapter courseRVAdapter;
     private RecyclerView coursesRV;
     private Context context;
-
     private TextView name, subject, hours, core;
     private int position;
     static Modal modal = new Modal(false);
@@ -100,21 +99,16 @@ public class ViewCourses extends AppCompatActivity {
 
 
         button.setOnClickListener(v -> {
-            Intent i = new Intent(ViewCourses.this, MainActivity.class);
-
+            Intent i = new Intent(ViewCourses.this, SplashPage.class);
             startActivity(i);
-
         });
 
         buttonDelete.setOnClickListener(v -> {
-
             onBackPressed();
-
         });
 
         // setting our adapter to recycler view.
         coursesRV.setAdapter(courseRVAdapter);
-
     }
 
     @Override
