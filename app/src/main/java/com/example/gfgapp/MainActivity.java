@@ -20,7 +20,11 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 /*
     Name=Name
@@ -86,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
             String studentHoursDb = studentHours.getText().toString();
             String studentCoreDb = studentCore.getText().toString();
 
+            //Getting date format for database
+            String df = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault()).format(new Date());
+
 
             // validating if the text fields are empty or not.
             if (studentNameDb.isEmpty() && studentSubjectDb.isEmpty() && studentHoursDb.isEmpty() && studentCoreDb.isEmpty()) {
@@ -95,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
             /* on below line we are calling a method to add new
                course to sqlite data and pass all our values to it.*/
-            dbHandler.addNewCourse(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb);
+            dbHandler.addNewCourse(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df);
 
             // after adding the data we are displaying a toast message.
             Toast.makeText(MainActivity.this, "Course has been added.", Toast.LENGTH_SHORT).show();

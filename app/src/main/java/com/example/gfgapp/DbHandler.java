@@ -7,7 +7,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /*
     Name=Name
@@ -22,7 +24,7 @@ class DBHandler extends SQLiteOpenHelper {
     private static final String DB_NAME = "homeschool";
 
     // below int is our database version
-    private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 3;
 
     // below variable is for our table name.
     private static final String TABLE_NAME = "records";
@@ -41,6 +43,8 @@ class DBHandler extends SQLiteOpenHelper {
 
     // below variable is for our student hours column.
     private static final String HOURS_COL = "hours";
+
+    private static final String DATE_COL = "date";
 
     private static CourseModal courseModal;
 
@@ -62,7 +66,8 @@ class DBHandler extends SQLiteOpenHelper {
                 + NAME_COL + " TEXT,"
                 + SUBJECT_COL + " TEXT,"
                 + HOURS_COL + " TEXT,"
-                + CORE_COL + " TEXT)";
+                + CORE_COL + " TEXT,"
+                + DATE_COL + " TEXT)";
 
         /* at last we are calling a exec sql
            method to execute above sql query */
@@ -70,7 +75,7 @@ class DBHandler extends SQLiteOpenHelper {
     }
 
     // this method is use to add new course to our sqlite database.
-    public void addNewCourse(String studentName, String studentSubject, String studentHours, String studentCore) {
+    public void addNewCourse(String studentName, String studentSubject, String studentHours, String studentCore, String date) {
 
         /* on below line we are creating a variable for
            our sqlite database and calling writable method
@@ -87,6 +92,7 @@ class DBHandler extends SQLiteOpenHelper {
         values.put(SUBJECT_COL, studentSubject);
         values.put(CORE_COL, studentCore);
         values.put(HOURS_COL, studentHours);
+        values.put(DATE_COL, date);
 
 
         /* after adding all values we are passing

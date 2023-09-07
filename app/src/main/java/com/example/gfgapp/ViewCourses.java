@@ -186,8 +186,10 @@ public class ViewCourses extends AppCompatActivity {
 
         // below line is to call set on query text listener method.
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
             @Override
             public boolean onQueryTextSubmit(String query) {
+
                 return false;
             }
 
@@ -197,9 +199,6 @@ public class ViewCourses extends AppCompatActivity {
                 // calling a method to filter our recycler view.
                 filter(newText);
 
-                Intent id = new Intent(getApplicationContext(), UpdateCourseActivity.class);
-                id.putExtra("update", menu.hasVisibleItems());
-                modal.setAdapterStatement(id.getBooleanExtra("update", false));
 
                 return false;
             }
@@ -216,11 +215,14 @@ public class ViewCourses extends AppCompatActivity {
         for (CourseModal item : courseModalArrayList) {
             // checking if the entered string matched with any item of our recycler view.
             if (item.getStudentName().toLowerCase().contains(text.toLowerCase())) {
+
+                Intent id = new Intent(getApplicationContext(), UpdateCourseActivity.class);
+                id.putExtra("update", true);
+                modal.setAdapterStatement(id.getBooleanExtra("update", false));
+
                 // if the item is matched we are
                 // adding it to our filtered list.
-
                 filteredlist.add(item);
-//                filteredlist.get(item.getAdapterId());
             }
         }
         if (filteredlist.isEmpty()) {

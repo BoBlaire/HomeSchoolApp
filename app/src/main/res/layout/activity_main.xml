@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#353738"
     android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:background="#353738">
+    tools:context=".MainActivity">
 
     <!--Edit text to enter course name-->
     <EditText
@@ -14,9 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="#353738"
+        android:hint="@string/student_nameMain"
         android:textColor="#C3C3C3"
-        android:textColorHint="@color/white"
-        android:hint="@string/student_nameMain" />
+        android:textColorHint="@color/white" />
 
     <!--edit text to enter course duration-->
 
@@ -31,9 +31,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="#353738"
+        android:hint="@string/subjectMain"
         android:textColor="#C3C3C3"
-        android:textColorHint="@color/white"
-        android:hint="@string/subjectMain" />
+        android:textColorHint="@color/white" />
 
     <!--edit text to display course tracks-->
     <EditText
@@ -42,9 +42,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="#353738"
+        android:hint="@string/hoursMain"
         android:textColor="#C3C3C3"
-        android:textColorHint="@color/white"
-        android:hint="@string/hoursMain" />
+        android:textColorHint="@color/white" />
 
     <!--edit text for course description-->
     <EditText
@@ -53,9 +53,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="#353738"
+        android:hint="@string/core_yes_noMain"
         android:textColor="#C3C3C3"
-        android:textColorHint="@color/white"
-        android:hint="@string/core_yes_noMain" />
+        android:textColorHint="@color/white" />
+
 
     <!--    <EditText-->
     <!--        android:id="@+id/idEdtDescription"-->
@@ -81,6 +82,7 @@
         android:layout_margin="10dp"
         android:text="View Inputs"
         android:textAllCaps="false" />
+
     <Button
         android:id="@+id/splashPageButton"
         android:layout_width="match_parent"
@@ -88,6 +90,8 @@
         android:layout_margin="10dp"
         android:text="Splash Page"
         android:textAllCaps="false" />
+
+
 
 
 </LinearLayout>
