@@ -67,6 +67,7 @@ public class UpdateCourseActivity extends AppCompatActivity {
         studentHoursUpd.setText(studentHours);
         studentCoreUpd.setText(studentCore);
 
+        System.out.println(modal.isAdapterStatement());
 
         // adding on click listener to our update course button.
         updateCourseBtn.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +75,7 @@ public class UpdateCourseActivity extends AppCompatActivity {
             public void onClick(View v) {
                 /* inside this method we are calling an update course
                    method and passing all our edit text values. */
+
                 if (modal.isAdapterStatement()) {
                     if (cursorAdapter.moveToPosition(idPos)) {
                         String str = cursorAdapter.getString(cursorAdapter.getColumnIndex("id"));
@@ -114,14 +116,24 @@ public class UpdateCourseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-                if (cursor != null && cursor.moveToPosition(idPos)) {
-                    // calling a method to delete our course.
-                    String str = cursor.getString(cursor.getColumnIndex("id"));
-                    dbHandler.deleteCourse(str);
-                    Toast.makeText(UpdateCourseActivity.this, "Deleted the course", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(UpdateCourseActivity.this, MainActivity.class);
-                    startActivity(i);
+                if (modal.isAdapterStatement()) {
+                    if (cursorAdapter.moveToPosition(idPos)) {
+                        // calling a method to delete our course.
+                        String str = cursorAdapter.getString(cursorAdapter.getColumnIndex("id"));
+                        dbHandler.deleteCourse(str);
+                        Toast.makeText(UpdateCourseActivity.this, "Deleted the course", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(UpdateCourseActivity.this, MainActivity.class);
+                        startActivity(i);
+                    }
+                } else {
+                    if (cursor.moveToPosition(idPos)) {
+                        // calling a method to delete our course.
+                        String str = cursor.getString(cursor.getColumnIndex("id"));
+                        dbHandler.deleteCourse(str);
+                        Toast.makeText(UpdateCourseActivity.this, "Deleted the course", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(UpdateCourseActivity.this, MainActivity.class);
+                        startActivity(i);
+                    }
                 }
             }
         });

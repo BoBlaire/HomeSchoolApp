@@ -41,6 +41,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -210,16 +211,20 @@ public class ViewCourses extends AppCompatActivity {
         // creating a new array list to filter our data.
         ArrayList<CourseModal> filteredlist = new ArrayList<CourseModal>();
 
+        if (text.isEmpty()) {
+            Intent id = new Intent(ViewCourses.this, UpdateCourseActivity.class);
+            id.putExtra("update", false);
+            modal.setAdapterStatement(id.getBooleanExtra("update", false));
+        } else if (!text.isEmpty()){
+            Intent id = new Intent(ViewCourses.this, UpdateCourseActivity.class);
+            id.putExtra("update", true);
+            modal.setAdapterStatement(id.getBooleanExtra("update", false));
+        }
 
         // running a for loop to compare elements.
         for (CourseModal item : courseModalArrayList) {
             // checking if the entered string matched with any item of our recycler view.
             if (item.getStudentName().toLowerCase().contains(text.toLowerCase())) {
-
-                Intent id = new Intent(getApplicationContext(), UpdateCourseActivity.class);
-                id.putExtra("update", true);
-                modal.setAdapterStatement(id.getBooleanExtra("update", false));
-
                 // if the item is matched we are
                 // adding it to our filtered list.
                 filteredlist.add(item);
@@ -232,6 +237,7 @@ public class ViewCourses extends AppCompatActivity {
         } else {
             // at last we are passing that filtered
             // list to our adapter class.
+
             courseRVAdapter.filterList(filteredlist);
         }
     }
