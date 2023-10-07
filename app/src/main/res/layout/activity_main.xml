@@ -18,6 +18,8 @@
         android:textColor="#C3C3C3"
         android:textColorHint="@color/white" />
 
+
+
     <!--edit text to enter course duration-->
 
     <!--Name=Name

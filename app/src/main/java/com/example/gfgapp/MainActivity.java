@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView courseRV;
     private CourseRVAdapter courseRVAdapter;
     private TextView name;
+   static MainModal mainModal = new MainModal();
 
 
     // variable for our adapter
@@ -102,7 +103,8 @@ public class MainActivity extends AppCompatActivity {
 
             /* on below line we are calling a method to add new
                course to sqlite data and pass all our values to it.*/
-            dbHandler.addNewCourse(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df);
+            System.out.println("email is: "+mainModal.getUserEmail());
+            dbHandler.addNewCourse(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df, mainModal.getUserEmail());
 
             // after adding the data we are displaying a toast message.
             Toast.makeText(MainActivity.this, "Course has been added.", Toast.LENGTH_SHORT).show();

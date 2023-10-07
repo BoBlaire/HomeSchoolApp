@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHolder> {
@@ -67,6 +68,7 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
 
 
         // I call this to resize.. am I right?
+
         /* on below line we are setting data
            to our views of recycler view item. */
         CourseModal modal = courseModalArrayList.get(position);

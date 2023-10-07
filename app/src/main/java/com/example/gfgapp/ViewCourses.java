@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.view.WindowMetrics;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.appcompat.view.menu.MenuItemImpl;
+import androidx.appcompat.widget.MenuPopupWindow;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -57,6 +62,9 @@ public class ViewCourses extends AppCompatActivity {
     private TextView name, subject, hours, core;
     private int position;
     static Modal modal = new Modal(false);
+    Button menuPopupWindow;
+
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.R)
@@ -168,10 +176,12 @@ public class ViewCourses extends AppCompatActivity {
     }
 
 
+    @SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // below line is to get our inflater
         MenuInflater inflater = getMenuInflater();
+//        menuPopupWindow = findViewById(R.id.actionSort);
 
         // inside inflater we are inflating our menu file.
         inflater.inflate(R.menu.search_menu, menu);
@@ -181,9 +191,28 @@ public class ViewCourses extends AppCompatActivity {
 
         // below line is to get our menu item.
         MenuItem searchItem = menu.findItem(R.id.actionSearch);
+//        MenuItem sortItem = menu.findItem(R.id.actionSort);
+
+//        Button sortView = (Button) ((MenuItem) sortItem).getActionView();
+
+//        sortView.setOnClickListener(v -> {
+//            PopupMenu popup = new PopupMenu(ViewCourses.this, menuPopupWindow);
+//
+//            popup.getMenuInflater().inflate(R.menu.sort_menu, popup.getMenu());
+//            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                @Override
+//                public boolean onMenuItemClick(MenuItem item) {
+//
+//                    return true;
+//                }
+//            });
+//            popup.show();
+//        });
+
 
         // getting search view of our item.
         SearchView searchView = (SearchView) ((MenuItem) searchItem).getActionView();
+
 
         // below line is to call set on query text listener method.
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -215,7 +244,7 @@ public class ViewCourses extends AppCompatActivity {
             Intent id = new Intent(ViewCourses.this, UpdateCourseActivity.class);
             id.putExtra("update", false);
             modal.setAdapterStatement(id.getBooleanExtra("update", false));
-        } else if (!text.isEmpty()){
+        } else if (!text.isEmpty()) {
             Intent id = new Intent(ViewCourses.this, UpdateCourseActivity.class);
             id.putExtra("update", true);
             modal.setAdapterStatement(id.getBooleanExtra("update", false));

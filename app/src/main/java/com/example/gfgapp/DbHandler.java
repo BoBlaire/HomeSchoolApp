@@ -21,13 +21,14 @@ class DBHandler extends SQLiteOpenHelper {
 
     /* creating a constant variables for our database.
        below variable is for our database name. */
-    private static final String DB_NAME = "homeschool";
+    private static final String DB_NAME = "test1";
 
     // below int is our database version
-    private static final int DB_VERSION = 3;
+    private static final int DB_VERSION = 1;
 
     // below variable is for our table name.
     private static final String TABLE_NAME = "records";
+    // below variable is for our user table name.
 
     // below variable is for our id column.
     private static final String ID_COL = "id";
@@ -45,6 +46,10 @@ class DBHandler extends SQLiteOpenHelper {
     private static final String HOURS_COL = "hours";
 
     private static final String DATE_COL = "date";
+
+    private static final String EMAIL_COL = "email";
+
+
 
     private static CourseModal courseModal;
 
@@ -67,6 +72,7 @@ class DBHandler extends SQLiteOpenHelper {
                 + SUBJECT_COL + " TEXT,"
                 + HOURS_COL + " TEXT,"
                 + CORE_COL + " TEXT,"
+                + EMAIL_COL + " TEXT,"
                 + DATE_COL + " TEXT)";
 
         /* at last we are calling a exec sql
@@ -74,8 +80,10 @@ class DBHandler extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
+
+
     // this method is use to add new course to our sqlite database.
-    public void addNewCourse(String studentName, String studentSubject, String studentHours, String studentCore, String date) {
+    public void addNewCourse(String studentName, String studentSubject, String studentHours, String studentCore, String date, String email) {
 
         /* on below line we are creating a variable for
            our sqlite database and calling writable method
@@ -92,7 +100,9 @@ class DBHandler extends SQLiteOpenHelper {
         values.put(SUBJECT_COL, studentSubject);
         values.put(CORE_COL, studentCore);
         values.put(HOURS_COL, studentHours);
+        values.put(EMAIL_COL, email);
         values.put(DATE_COL, date);
+
 
 
         /* after adding all values we are passing
@@ -103,6 +113,13 @@ class DBHandler extends SQLiteOpenHelper {
            database after adding database. */
         db.close();
     }
+
+
+
+
+
+
+
 
     // we have created a new method for reading all the courses.
     public ArrayList<CourseModal> readCourses() {
