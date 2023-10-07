@@ -122,13 +122,13 @@ class DBHandler extends SQLiteOpenHelper {
 
 
     // we have created a new method for reading all the courses.
-    public ArrayList<CourseModal> readCourses() {
+    public ArrayList<CourseModal> readCourses(String email) {
         /* on below line we are creating a
            database for reading our database. */
         SQLiteDatabase db = this.getReadableDatabase();
 
         // on below line we are creating a cursor with query to read data from database.
-        Cursor cursorCourses = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        Cursor cursorCourses = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+ EMAIL_COL + " = ?", new String[]{email});
 
         // on below line we are creating a new array list.
         ArrayList<CourseModal> courseModalArrayList = new ArrayList<>();
@@ -218,6 +218,15 @@ class DBHandler extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor getDbId = (db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + NAME_COL + " = ?", new String[]{studentName}));
+
+        getDbId.moveToFirst();
+        return getDbId;
+    }
+
+    public Cursor getAllClasses(String email) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor getDbId = (db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + EMAIL_COL + " = ?", new String[]{email}));
 
         getDbId.moveToFirst();
         return getDbId;

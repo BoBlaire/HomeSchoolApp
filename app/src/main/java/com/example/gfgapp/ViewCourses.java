@@ -64,7 +64,7 @@ public class ViewCourses extends AppCompatActivity {
     static Modal modal = new Modal(false);
     Button menuPopupWindow;
 
-
+    MainModal mainModal = MainActivity.mainModal;
 
 
     @RequiresApi(api = Build.VERSION_CODES.R)
@@ -94,9 +94,9 @@ public class ViewCourses extends AppCompatActivity {
         courseModalArrayList = new ArrayList<>();
         dbHandler = new DBHandler(ViewCourses.this);
 
-        // getting our course array
+
         // list from db handler class.
-        courseModalArrayList = dbHandler.readCourses();
+        courseModalArrayList = dbHandler.readCourses(mainModal.getUserEmail());
 
         // on below line passing our array lost to our adapter class.
         courseRVAdapter = new CourseRVAdapter(courseModalArrayList, ViewCourses.this);
@@ -106,12 +106,12 @@ public class ViewCourses extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ViewCourses.this, VERTICAL, false);
         coursesRV.setLayoutManager(linearLayoutManager);
 
-
+        //calling splash page
         button.setOnClickListener(v -> {
             Intent i = new Intent(ViewCourses.this, SplashPage.class);
             startActivity(i);
         });
-
+        //calling delete all records
         buttonDelete.setOnClickListener(v -> {
             onBackPressed();
         });
@@ -160,6 +160,7 @@ public class ViewCourses extends AppCompatActivity {
         alertDialog.show();
     }
 
+    //resizing text
     public void reziseText(View view) {
 
         name = view.findViewById(R.id.displayName);
@@ -225,11 +226,10 @@ public class ViewCourses extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+
                 // inside on query text change method we are
                 // calling a method to filter our recycler view.
                 filter(newText);
-
-
                 return false;
             }
         });

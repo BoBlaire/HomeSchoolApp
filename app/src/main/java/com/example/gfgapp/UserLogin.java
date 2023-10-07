@@ -25,25 +25,30 @@ public class UserLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-
+        //creating variables
         userEmail = findViewById(R.id.userEmail);
         userPassword = findViewById(R.id.userPassword);
         button = findViewById(R.id.buttonLogin);
         buttonSignUp = findViewById(R.id.buttonSignUp);
 
-
+        //calling user database
         userDBHandler = new UserDBHandler(UserLogin.this);
 
+        //click listener to login
         button.setOnClickListener(v -> {
+
+            //getting text of our two fields for database
             String userEmailLogin = userEmail.getText().toString();
             String userPasswordLogin = userPassword.getText().toString();
 
+            //passing those two fields and getting our cursor back
             Cursor cursorEmail = userDBHandler.retrieveEmail(userEmailLogin);
             Cursor cursorPass = userDBHandler.retrievePassword(userPasswordLogin);
 
-
-
+            //try statement for login, it trys to login if not the catch says no email
             try {
+
+                //passing cursors to get an actual variable back
                 @SuppressLint("Range") String strEmail = cursorEmail.getString(cursorEmail.getColumnIndex("email"));
                 @SuppressLint("Range") String strPass = cursorPass.getString(cursorPass.getColumnIndex("password"));
 
@@ -62,23 +67,23 @@ public class UserLogin extends AppCompatActivity {
                 } else {
                     Toast.makeText(UserLogin.this, "Something really went wrong..", Toast.LENGTH_SHORT).show();
                 }
-            } catch (Exception e){
+            } catch (Exception e) {
                 Toast.makeText(UserLogin.this, "No Account Attached To Email", Toast.LENGTH_SHORT).show();
             }
-
-
-
-
         });
 
+        //click listener for signup
         buttonSignUp.setOnClickListener(v -> {
 
+            //getting text for cursor
             String userEmailLogin = userEmail.getText().toString();
             String userPasswordLogin = userPassword.getText().toString();
 
+            //passing text to cursor
             Cursor cursorEmail = userDBHandler.retrieveEmail(userEmailLogin);
             Cursor cursorPass = userDBHandler.retrievePassword(userPasswordLogin);
 
+            //trying to signup, and if theres an email already valid the try says email in use
             try {
                 @SuppressLint("Range") String strEmail = cursorEmail.getString(cursorEmail.getColumnIndex("email"));
 
@@ -101,6 +106,7 @@ public class UserLogin extends AppCompatActivity {
                     Toast.makeText(UserLogin.this, "Something really went wrong..", Toast.LENGTH_SHORT).show();
                 }
             } catch (Exception e) {
+
                 //Checking weather the login or signup is valid
                 if (userEmailLogin.isEmpty() || userPasswordLogin.isEmpty()) {
                     Toast.makeText(UserLogin.this, "Please Fill Out All Fields", Toast.LENGTH_SHORT).show();
