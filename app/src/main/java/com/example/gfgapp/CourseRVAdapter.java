@@ -66,12 +66,12 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-
         // I call this to resize.. am I right?
 
         /* on below line we are setting data
            to our views of recycler view item. */
         CourseModal modal = courseModalArrayList.get(position);
+
 
 
         holder.studentNameRV.setText(modal.getStudentName());

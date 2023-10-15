@@ -96,7 +96,8 @@ public class ViewCourses extends AppCompatActivity {
 
 
         // list from db handler class.
-        courseModalArrayList = dbHandler.readCourses(mainModal.getUserEmail());
+        System.out.println("Name: "+mainModal.getUserName());
+        courseModalArrayList = dbHandler.readCourses(mainModal.getUserName(), mainModal.getUserEmail());
 
         // on below line passing our array lost to our adapter class.
         courseRVAdapter = new CourseRVAdapter(courseModalArrayList, ViewCourses.this);
@@ -108,7 +109,7 @@ public class ViewCourses extends AppCompatActivity {
 
         //calling splash page
         button.setOnClickListener(v -> {
-            Intent i = new Intent(ViewCourses.this, SplashPage.class);
+            Intent i = new Intent(ViewCourses.this, MainActivity.class);
             startActivity(i);
         });
         //calling delete all records
@@ -141,7 +142,7 @@ public class ViewCourses extends AppCompatActivity {
         // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
         builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
             // When the user click yes button then app will close
-            dbHandler.massDeleteCourse();
+            dbHandler.massDeleteCourse(mainModal.getUserName());
             dialog.dismiss();
             finish();
             startActivity(getIntent());

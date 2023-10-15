@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         studentCore = findViewById(R.id.studentCoreDb);
         addCourseBtn = findViewById(R.id.idBtnAddCourse);
         readCourseBtn = findViewById(R.id.idBtnReadCourse);
-        splashPageButton = findViewById(R.id.splashPageButton);
+
         courseRV = findViewById(R.id.idRVCourses);
 
         // initializing db class
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
             /* on below line we are calling a method to add new
                course to sqlite data and pass all our values to it.*/
-            System.out.println("email is: "+mainModal.getUserEmail());
+
             dbHandler.addNewCourse(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df, mainModal.getUserEmail());
 
             // after adding the data we are displaying a toast message.
@@ -123,10 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        splashPageButton.setOnClickListener(v -> {
-            Intent i = new Intent(MainActivity.this, SplashPage.class);
-            startActivity(i);
-        });
+
     }
 
 

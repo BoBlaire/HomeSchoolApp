@@ -59,7 +59,8 @@ public class UserLogin extends AppCompatActivity {
                     if (strEmail.equals(userEmailLogin) && strPass.equals(userPasswordLogin)) {
                         mainModal.setUserEmail(strEmail);
                         Toast.makeText(UserLogin.this, "Logged In!", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(UserLogin.this, SplashPage.class);
+                        Intent i = new Intent(UserLogin.this, StudentView.class);
+                        i.putExtra("name", userEmailLogin);
                         startActivity(i);
                     } else if (!strEmail.equals(userEmailLogin) || !strPass.equals(userPasswordLogin)) {
                         Toast.makeText(UserLogin.this, "Email Or Password Incorrect!", Toast.LENGTH_SHORT).show();
@@ -99,7 +100,7 @@ public class UserLogin extends AppCompatActivity {
 
                         Toast.makeText(UserLogin.this, "Signed Up!", Toast.LENGTH_SHORT).show();
 
-                        Intent i = new Intent(UserLogin.this, SplashPage.class);
+                        Intent i = new Intent(UserLogin.this, StudentView.class);
                         startActivity(i);
                     }
                 } else {
@@ -117,7 +118,7 @@ public class UserLogin extends AppCompatActivity {
 
                     Toast.makeText(UserLogin.this, "Signed Up!", Toast.LENGTH_SHORT).show();
 
-                    Intent i = new Intent(UserLogin.this, SplashPage.class);
+                    Intent i = new Intent(UserLogin.this, StudentView.class);
                     startActivity(i);
 
                 } else {

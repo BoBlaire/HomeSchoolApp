@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#353738"
+    android:orientation="vertical"
+    tools:context=".AddStudent">
+
+
+    <EditText
+        android:id="@+id/studentNameEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="@string/student_name" />
+
+
+    <EditText
+        android:id="@+id/studentGrade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="@string/grade" />
+
+
+    <!--button for updating our course-->
+    <Button
+        android:id="@+id/addStudentData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/add_student"
+        android:textAllCaps="false" />
+
+
+</LinearLayout>

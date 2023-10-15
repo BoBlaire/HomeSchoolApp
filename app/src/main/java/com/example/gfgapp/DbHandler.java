@@ -50,7 +50,6 @@ class DBHandler extends SQLiteOpenHelper {
     private static final String EMAIL_COL = "email";
 
 
-
     private static CourseModal courseModal;
 
 
@@ -79,7 +78,6 @@ class DBHandler extends SQLiteOpenHelper {
            method to execute above sql query */
         db.execSQL(query);
     }
-
 
 
     // this method is use to add new course to our sqlite database.
@@ -115,20 +113,14 @@ class DBHandler extends SQLiteOpenHelper {
     }
 
 
-
-
-
-
-
-
     // we have created a new method for reading all the courses.
-    public ArrayList<CourseModal> readCourses(String email) {
+    public ArrayList<CourseModal> readCourses(String name, String email) {
         /* on below line we are creating a
            database for reading our database. */
         SQLiteDatabase db = this.getReadableDatabase();
 
         // on below line we are creating a cursor with query to read data from database.
-        Cursor cursorCourses = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE "+ EMAIL_COL + " = ?", new String[]{email});
+        Cursor cursorCourses = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + NAME_COL + " = ?" + " AND " + EMAIL_COL + " = ?", new String[]{name, email});
 
         // on below line we are creating a new array list.
         ArrayList<CourseModal> courseModalArrayList = new ArrayList<>();
@@ -189,7 +181,7 @@ class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void massDeleteCourse() {
+    public void massDeleteCourse(String name) {
 
         /* on below line we are creating
            a variable to write our database. */
@@ -198,8 +190,31 @@ class DBHandler extends SQLiteOpenHelper {
         /* on below line we are calling a method to delete all records
            and we are comparing it with our course name. */
 
-        db.execSQL("DELETE FROM " + TABLE_NAME);
+        db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + NAME_COL + " = ?", new String[]{name});
         db.close();
+    }
+
+
+    public int getTotalSubjectHours(String name, String subject, String email) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursorCourses = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + NAME_COL + " = ?" + " AND " + EMAIL_COL + " = ?" + " AND " + SUBJECT_COL + " = ?", new String[]{name, email, subject});
+
+        int columnIndex = cursorCourses.getColumnIndexOrThrow("hours");
+
+        int sum = 0;
+
+        if (cursorCourses.moveToFirst()) {
+            do {
+                int number = cursorCourses.getInt(columnIndex);
+
+                sum += number;
+
+            } while (cursorCourses.moveToNext());
+        }
+        return sum;
+
     }
 
 
