@@ -88,7 +88,7 @@ public class UpdateCourseActivity extends AppCompatActivity {
                         Toast.makeText(UpdateCourseActivity.this, "Course Updated..", Toast.LENGTH_SHORT).show();
                         modal.setAdapterStatement(false);
                         // launching our main activity.
-                        Intent i = new Intent(UpdateCourseActivity.this, MainActivity.class);
+                        Intent i = new Intent(UpdateCourseActivity.this, ViewCourses.class);
                         startActivity(i);
                     }
                 } else {
@@ -103,7 +103,7 @@ public class UpdateCourseActivity extends AppCompatActivity {
                         Toast.makeText(UpdateCourseActivity.this, "Course Updated..", Toast.LENGTH_SHORT).show();
 
                         // launching our main activity.
-                        Intent i = new Intent(UpdateCourseActivity.this, MainActivity.class);
+                        Intent i = new Intent(UpdateCourseActivity.this, ViewCourses.class);
                         startActivity(i);
                     }
 
@@ -122,7 +122,7 @@ public class UpdateCourseActivity extends AppCompatActivity {
                         String str = cursorAdapter.getString(cursorAdapter.getColumnIndex("id"));
                         dbHandler.deleteCourse(str);
                         Toast.makeText(UpdateCourseActivity.this, "Deleted the course", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(UpdateCourseActivity.this, MainActivity.class);
+                        Intent i = new Intent(UpdateCourseActivity.this, ViewCourses.class);
                         startActivity(i);
                     }
                 } else {
@@ -131,7 +131,7 @@ public class UpdateCourseActivity extends AppCompatActivity {
                         String str = cursor.getString(cursor.getColumnIndex("id"));
                         dbHandler.deleteCourse(str);
                         Toast.makeText(UpdateCourseActivity.this, "Deleted the course", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(UpdateCourseActivity.this, MainActivity.class);
+                        Intent i = new Intent(UpdateCourseActivity.this, ViewCourses.class);
                         startActivity(i);
                     }
                 }
