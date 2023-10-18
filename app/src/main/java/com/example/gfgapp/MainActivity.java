@@ -8,11 +8,15 @@ import android.content.Context;
 import android.os.Bundle;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,6 +30,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+
 /*
     Name=Name
     Duration=Subject
@@ -38,11 +43,13 @@ public class MainActivity extends AppCompatActivity {
 
     private Button addCourseBtn, readCourseBtn, splashPageButton;
     private DBHandler dbHandler;
-    private EditText studentName, studentHours, studentSubject, studentCore;
+    private EditText studentName, studentHours;
     private RecyclerView courseRV;
     private CourseRVAdapter courseRVAdapter;
     private TextView name;
-   static MainModal mainModal = new MainModal();
+    static MainModal mainModal = new MainModal();
+
+//    private AutoCompleteTextView studentCore, studentSubject;
 
 
     // variable for our adapter
@@ -72,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
         // initializing all our variables.
         studentName = findViewById(R.id.studentNameDb);
         studentHours = findViewById(R.id.studentHoursDb);
-        studentSubject = findViewById(R.id.studentSubjectDb);
-        studentCore = findViewById(R.id.studentCoreDb);
+        AutoCompleteTextView studentSubject = (AutoCompleteTextView) findViewById(R.id.studentSubjectDb);
+        AutoCompleteTextView studentCore = (AutoCompleteTextView) findViewById(R.id.studentCoreDb);
         addCourseBtn = findViewById(R.id.idBtnAddCourse);
         readCourseBtn = findViewById(R.id.idBtnReadCourse);
 
@@ -82,6 +89,19 @@ public class MainActivity extends AppCompatActivity {
         // initializing db class
         dbHandler = new DBHandler(MainActivity.this);
 
+
+        studentName.setText(mainModal.getUserName());
+
+
+//
+        String[] core = getResources().getStringArray(R.array.Core);
+        String[] subjects = getResources().getStringArray(R.array.Subjects);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, core);
+        ArrayAdapter<String> adapterSubjects = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, subjects);
+
+        studentCore.setAdapter(adapter);
+        studentSubject.setAdapter(adapterSubjects);
 
         addCourseBtn.setOnClickListener(v -> {
 
@@ -125,8 +145,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
 
 
 }
