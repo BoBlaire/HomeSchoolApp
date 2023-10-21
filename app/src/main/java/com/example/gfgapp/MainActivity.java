@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button addCourseBtn, readCourseBtn, splashPageButton;
     private DBHandler dbHandler;
-    private EditText studentName, studentHours;
+    private EditText studentName, studentHours, studentDescription;
     private RecyclerView courseRV;
     private CourseRVAdapter courseRVAdapter;
     private TextView name;
@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         AutoCompleteTextView studentCore = (AutoCompleteTextView) findViewById(R.id.studentCoreDb);
         addCourseBtn = findViewById(R.id.idBtnAddCourse);
         readCourseBtn = findViewById(R.id.idBtnReadCourse);
+        studentDescription = findViewById(R.id.studentDescriptionDb);
 
         courseRV = findViewById(R.id.idRVCourses);
 
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
             String studentSubjectDb = studentSubject.getText().toString();
             String studentHoursDb = studentHours.getText().toString();
             String studentCoreDb = studentCore.getText().toString();
-
+            String studentDescDb = studentDescription.getText().toString();
             //Getting date format for database
             String df = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault()).format(new Date());
 
@@ -124,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             /* on below line we are calling a method to add new
                course to sqlite data and pass all our values to it.*/
 
-            dbHandler.addNewCourse(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df, mainModal.getUserEmail());
+            dbHandler.addNewCourse(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df, mainModal.getUserEmail(), studentDescDb);
 
             // after adding the data we are displaying a toast message.
             Toast.makeText(MainActivity.this, "Course has been added.", Toast.LENGTH_SHORT).show();
@@ -132,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
             studentSubject.setText("");
             studentHours.setText("");
             studentCore.setText("");
+            studentDescription.setText("");
 
         });
 

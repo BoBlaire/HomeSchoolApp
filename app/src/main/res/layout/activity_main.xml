@@ -17,17 +17,10 @@
         android:background="#353738"
         android:hint="@string/student_nameMain"
         android:inputType="none"
-        android:textColor="#C3C3C3"
-        android:textColorHint="@color/white" />
+        android:textColor="#C3C3C3" />
 
 
-    <!--edit text to enter course duration-->
 
-    <!--Name=Name
-        Duration=Subject
-        Tracks=Hours
-        Description=Core
-    -->
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
@@ -57,9 +50,8 @@
         android:layout_margin="10dp"
         android:background="#353738"
         android:hint="@string/hoursMain"
-        android:textColor="#C3C3C3"
         android:inputType="numberDecimal"
-        android:textColorHint="@color/white" />
+        android:textColor="#C3C3C3" />
 
     <!--edit text for course description-->
 
@@ -81,20 +73,23 @@
             android:inputType="none"
             android:text="Core"
 
-                />
+            />
 
 
-        </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
 
-
-
-    <!--    <EditText-->
-    <!--        android:id="@+id/idEdtDescription"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_margin="10dp"-->
-    <!--        android:hint="Descrption" />-->
+    <EditText
+        android:id="@+id/studentDescriptionDb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="#353738"
+        android:hint="Descrption"
+        android:inputType="textCapSentences|textMultiLine"
+        android:maxLength="2000"
+        android:maxLines="4"
+        android:textColor="#C3C3C3" />
 
     <!--button for adding new course-->
     <Button

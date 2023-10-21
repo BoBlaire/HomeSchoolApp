@@ -24,7 +24,7 @@ class DBHandler extends SQLiteOpenHelper {
     private static final String DB_NAME = "test1";
 
     // below int is our database version
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     // below variable is for our table name.
     private static final String TABLE_NAME = "records";
@@ -49,6 +49,8 @@ class DBHandler extends SQLiteOpenHelper {
 
     private static final String EMAIL_COL = "email";
 
+    private static final String DESC_COL = "descrip";
+
 
     private static CourseModal courseModal;
 
@@ -71,6 +73,7 @@ class DBHandler extends SQLiteOpenHelper {
                 + SUBJECT_COL + " TEXT,"
                 + HOURS_COL + " TEXT,"
                 + CORE_COL + " TEXT,"
+                + DESC_COL + " TEXT,"
                 + EMAIL_COL + " TEXT,"
                 + DATE_COL + " TEXT)";
 
@@ -81,7 +84,7 @@ class DBHandler extends SQLiteOpenHelper {
 
 
     // this method is use to add new course to our sqlite database.
-    public void addNewCourse(String studentName, String studentSubject, String studentHours, String studentCore, String date, String email) {
+    public void addNewCourse(String studentName, String studentSubject, String studentHours, String studentCore, String date, String email, String desc) {
 
         /* on below line we are creating a variable for
            our sqlite database and calling writable method
@@ -100,7 +103,7 @@ class DBHandler extends SQLiteOpenHelper {
         values.put(HOURS_COL, studentHours);
         values.put(EMAIL_COL, email);
         values.put(DATE_COL, date);
-
+        values.put(DESC_COL, desc);
 
 
         /* after adding all values we are passing
@@ -133,7 +136,8 @@ class DBHandler extends SQLiteOpenHelper {
                         cursorCourses.getString(1),
                         cursorCourses.getString(2),
                         cursorCourses.getString(3),
-                        cursorCourses.getString(4)
+                        cursorCourses.getString(4),
+                        cursorCourses.getString(5)
                 ));
             } while (cursorCourses.moveToNext());
             // moving our cursor to next.

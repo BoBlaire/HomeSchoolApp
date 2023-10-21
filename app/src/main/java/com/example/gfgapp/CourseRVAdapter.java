@@ -95,6 +95,7 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
                 i.putExtra("subject", modal.getStudentSubject());
                 i.putExtra("hours", modal.getStudentHours());
                 i.putExtra("id", String.valueOf(modal.getAdapterId()));
+                i.putExtra("description", modal.getDescrip());
 //                System.out.println(modals.getView());
                 // starting our activity.
                 context.startActivity(i);

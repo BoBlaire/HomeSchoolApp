@@ -5,14 +5,11 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-   <com.example.gfgapp.AutoResizeTextView
-       android:id="@+id/test1234"
-       android:layout_width="fill_parent"
-       android:layout_height="fill_parent"
-       android:layout_weight="1" />
-
-
-
+    <com.example.gfgapp.AutoResizeTextView
+        android:id="@+id/test1234"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" />
 
 
     <TextView
@@ -20,7 +17,9 @@
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:background="@drawable/boarder"
+        android:ellipsize="end"
         android:gravity="center"
+        android:maxLines="1"
         android:padding="10dp"
         android:text="@string/name"
         android:textColor="@color/black" />
@@ -31,7 +30,9 @@
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:background="@drawable/boarder"
+        android:ellipsize="end"
         android:gravity="center"
+        android:maxLines="1"
         android:padding="10dp"
         android:text="@string/subject"
         android:textColor="@color/black" />
@@ -41,6 +42,8 @@
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:background="@drawable/boarder"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/hours"
@@ -51,8 +54,10 @@
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:background="@drawable/boarder"
+        android:ellipsize="end"
         android:gravity="center"
         android:padding="10dp"
+        android:maxLines="1"
         android:text="@string/core"
         android:textColor="@color/black" />
 

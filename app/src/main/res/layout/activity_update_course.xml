@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#353738"
     tools:context=".UpdateCourseActivity">
 
     <!--Edit text to enter course name-->
@@ -15,12 +17,26 @@
         android:hint="@string/student_name" />
 
     <!--edit text to enter course duration-->
-    <EditText
-        android:id="@+id/updStudentSubject"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:hint="@string/subjectUpd" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <AutoCompleteTextView
+            android:id="@+id/updStudentSubject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="none"
+            android:text="Subject"
+
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <!--edit text to display course tracks-->
     <EditText
@@ -31,12 +47,28 @@
         android:hint="@string/hoursUpd" />
 
     <!--edit text for course description-->
-    <EditText
-        android:id="@+id/updStudentCore"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:hint="@string/core_yes_noUpd" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <AutoCompleteTextView
+            android:id="@+id/updStudentCore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="none"
+            android:text="Core"
+
+            />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 <!--    <EditText-->
 <!--        android:id="@+id/idEdtDescription"-->
@@ -44,7 +76,17 @@
 <!--        android:layout_height="wrap_content"-->
 <!--        android:layout_margin="10dp"-->
 <!--        android:hint="Descrption" />-->
-
+    <EditText
+        android:id="@+id/studentDescriptionUpd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="#353738"
+        android:hint="Descrption"
+        android:inputType="textCapSentences|textMultiLine"
+        android:maxLength="2000"
+        android:maxLines="4"
+        android:textColor="#C3C3C3" />
 
     <!--button for updating our course-->
     <Button

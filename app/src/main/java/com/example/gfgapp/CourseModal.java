@@ -8,6 +8,15 @@ public class CourseModal {
     private String studentSubject;
     private String studentHours;
     private String studentCore;
+    private String descrip;
+
+    public String getDescrip() {
+        return descrip;
+    }
+
+    public void setDescrip(String descrip) {
+        this.descrip = descrip;
+    }
 
     public String getStudentName() {
         return studentName;
@@ -69,11 +78,12 @@ public class CourseModal {
     }
 
     // constructor
-    public CourseModal(String studentName, String studentSubject, String studentHours, String studentCore) {
+    public CourseModal(String studentName, String studentSubject, String studentHours, String studentCore, String description) {
         this.studentName = studentName;
         this.studentSubject = studentSubject;
         this.studentHours = studentHours;
         this.studentCore = studentCore;
+        this.descrip = description;
     }
 
 

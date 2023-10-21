@@ -85,6 +85,7 @@ public class ViewCourses extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) FloatingActionButton button = findViewById(R.id.buttonPanel);
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) FloatingActionButton buttonDelete = findViewById(R.id.buttonDeleteAll);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) FloatingActionButton buttonHome = findViewById(R.id.buttonHome);
         toolbar.setTitle("Home School Records");
         // using toolbar as ActionBar
         setSupportActionBar(toolbar);
@@ -116,7 +117,10 @@ public class ViewCourses extends AppCompatActivity {
         buttonDelete.setOnClickListener(v -> {
             onBackPressed();
         });
-
+        buttonHome.setOnClickListener(v -> {
+            Intent i = new Intent(ViewCourses.this, StudentView.class);
+            startActivity(i);
+        });
         // setting our adapter to recycler view.
         coursesRV.setAdapter(courseRVAdapter);
     }
@@ -193,24 +197,6 @@ public class ViewCourses extends AppCompatActivity {
 
         // below line is to get our menu item.
         MenuItem searchItem = menu.findItem(R.id.actionSearch);
-//        MenuItem sortItem = menu.findItem(R.id.actionSort);
-
-//        Button sortView = (Button) ((MenuItem) sortItem).getActionView();
-
-//        sortView.setOnClickListener(v -> {
-//            PopupMenu popup = new PopupMenu(ViewCourses.this, menuPopupWindow);
-//
-//            popup.getMenuInflater().inflate(R.menu.sort_menu, popup.getMenu());
-//            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//                @Override
-//                public boolean onMenuItemClick(MenuItem item) {
-//
-//                    return true;
-//                }
-//            });
-//            popup.show();
-//        });
-
 
         // getting search view of our item.
         SearchView searchView = (SearchView) ((MenuItem) searchItem).getActionView();
