@@ -53,11 +53,11 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
         });
 
 
-        int total = dbHandler.getTotalSubjectHours(modal.getName(), "Math", mainModal.getUserEmail()) +
+        double total = dbHandler.getTotalSubjectHours(modal.getName(), "Math", mainModal.getUserEmail()) +
                 dbHandler.getTotalSubjectHours(modal.getName(), "English", mainModal.getUserEmail()) +
                 dbHandler.getTotalSubjectHours(modal.getName(), "Science", mainModal.getUserEmail()) +
                 dbHandler.getTotalSubjectHours(modal.getName(), "History", mainModal.getUserEmail());
-
+        System.out.println("total is: "+total);
         holder.studentNameCard.setText(modal.getName());
         holder.studentMath.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Math", mainModal.getUserEmail())));
         holder.studentEnglish.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "English", mainModal.getUserEmail())));

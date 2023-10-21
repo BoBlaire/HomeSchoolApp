@@ -45,7 +45,7 @@ public class StudentView extends AppCompatActivity {
         ArrayList<StudentModal> totalSubjectHours = new ArrayList<StudentModal>();
 
 
-        courseModelArrayList = studentDBHandler.readStudents();
+        courseModelArrayList = studentDBHandler.readStudents(mainModal.getUserEmail());
 
 
         studentAdapter = new StudentAdapter(StudentView.this, courseModelArrayList);

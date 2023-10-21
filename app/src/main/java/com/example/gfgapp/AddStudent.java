@@ -14,6 +14,8 @@ public class AddStudent extends AppCompatActivity {
     EditText studentName, studentGrade;
     Button addStudent;
 
+    MainModal mainModal = MainActivity.mainModal;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,7 @@ public class AddStudent extends AppCompatActivity {
             if (nameStudent.isEmpty() || gradeStudent.isEmpty()) {
                 Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show();
             } else if (!nameStudent.isEmpty() || !gradeStudent.isEmpty()) {
-                studentDBHandler.addUserInfo(nameStudent, gradeStudent);
+                studentDBHandler.addUserInfo(nameStudent, gradeStudent, mainModal.getUserEmail());
 
                 Intent i = new Intent(AddStudent.this, StudentView.class);
                 startActivity(i);

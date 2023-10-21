@@ -130,7 +130,7 @@ public class UpdateCourseActivity extends AppCompatActivity {
         deleteCourseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                System.out.println(idPos);
                 if (modal.isAdapterStatement()) {
                     if (cursorAdapter.moveToPosition(idPos)) {
                         // calling a method to delete our course.

@@ -200,7 +200,7 @@ class DBHandler extends SQLiteOpenHelper {
     }
 
 
-    public int getTotalSubjectHours(String name, String subject, String email) {
+    public double getTotalSubjectHours(String name, String subject, String email) {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -208,16 +208,17 @@ class DBHandler extends SQLiteOpenHelper {
 
         int columnIndex = cursorCourses.getColumnIndexOrThrow("hours");
 
-        int sum = 0;
+        double sum = 0;
 
         if (cursorCourses.moveToFirst()) {
             do {
-                int number = cursorCourses.getInt(columnIndex);
+                double number = cursorCourses.getDouble(columnIndex);
 
                 sum += number;
 
             } while (cursorCourses.moveToNext());
         }
+        System.out.println("sum is:" + sum);
         return sum;
 
     }

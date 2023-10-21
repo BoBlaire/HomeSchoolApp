@@ -149,6 +149,7 @@ public class ViewCourses extends AppCompatActivity {
             dbHandler.massDeleteCourse(mainModal.getUserName());
             dialog.dismiss();
             finish();
+
             startActivity(getIntent());
         });
 

@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
             // after adding the data we are displaying a toast message.
             Toast.makeText(MainActivity.this, "Course has been added.", Toast.LENGTH_SHORT).show();
-            studentName.setText("");
+            studentName.setText(mainModal.getUserName());
             studentSubject.setText("");
             studentHours.setText("");
             studentCore.setText("");

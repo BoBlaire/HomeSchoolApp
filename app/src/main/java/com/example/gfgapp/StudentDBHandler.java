@@ -22,7 +22,7 @@ class StudentDBHandler extends SQLiteOpenHelper {
     private static final String DB_NAME = "hours";
 
     // below int is our database version
-    private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 3;
 
     // below variable is for our table name.
     private static final String TABLE_NAME = "records";
@@ -35,6 +35,8 @@ class StudentDBHandler extends SQLiteOpenHelper {
     private static final String NAME_COL = "name";
 
     private static final String GRADE_COL = "grade";
+
+    private static final String EMAIL_COL = "email";
     MainModal mainModal = MainActivity.mainModal;
 
 //    private Context context = ;
@@ -60,7 +62,8 @@ class StudentDBHandler extends SQLiteOpenHelper {
         String query = "CREATE TABLE " + USER_TABLE_NAME + " ("
                 + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + NAME_COL + " TEXT,"
-                + GRADE_COL + " TEXT)";
+                + GRADE_COL + " TEXT,"
+                + EMAIL_COL + " TEXT)";
 
         /* at last we are calling a exec sql
            method to execute above sql query */
@@ -68,7 +71,7 @@ class StudentDBHandler extends SQLiteOpenHelper {
     }
 
 
-    public void addUserInfo(String name, String grade) {
+    public void addUserInfo(String name, String grade, String email) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         /* on below line we are creating a
@@ -80,6 +83,7 @@ class StudentDBHandler extends SQLiteOpenHelper {
 
         values.put(NAME_COL, name);
         values.put(GRADE_COL, grade);
+        values.put(EMAIL_COL, email);
 
         /* after adding all values we are passing
            content values to our table. */
@@ -101,14 +105,14 @@ class StudentDBHandler extends SQLiteOpenHelper {
 
 
     // we have created a new method for reading all the courses.
-    public ArrayList<StudentModal> readStudents() {
+    public ArrayList<StudentModal> readStudents(String email) {
         /* on below line we are creating a
            database for reading our database. */
         SQLiteDatabase db = this.getReadableDatabase();
 
 
         // on below line we are creating a cursor with query to read data from database.
-        Cursor cursorCourses = db.rawQuery("SELECT * FROM " + USER_TABLE_NAME, null);
+        Cursor cursorCourses = db.rawQuery("SELECT * FROM " + USER_TABLE_NAME + " WHERE "+ EMAIL_COL + " = ?", new String[]{email});
 
         // on below line we are creating a new array list.
         ArrayList<StudentModal> courseModalArrayList = new ArrayList<>();
