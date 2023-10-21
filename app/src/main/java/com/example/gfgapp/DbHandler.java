@@ -150,7 +150,7 @@ class DBHandler extends SQLiteOpenHelper {
 
     // below is the method for updating our courses
     public void updateCourse(String orgStudentName, String studentName, String studentSubject,
-                             String studentHours, String studentCore) {
+                             String studentHours, String studentCore, String description) {
 
         // calling a method to get writable database.
         SQLiteDatabase db = this.getWritableDatabase();
@@ -162,6 +162,7 @@ class DBHandler extends SQLiteOpenHelper {
         values.put(SUBJECT_COL, studentSubject);
         values.put(HOURS_COL, studentHours);
         values.put(CORE_COL, studentCore);
+        values.put(DESC_COL, description);
 
 
 

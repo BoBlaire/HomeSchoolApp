@@ -97,7 +97,7 @@ public class UpdateCourseActivity extends AppCompatActivity {
 
 
                         System.out.println(str);
-                        dbHandler.updateCourse(str, studentNameUpd.getText().toString(), studentSubjectUpd.getText().toString(), studentHoursUpd.getText().toString(), studentCoreUpd.getText().toString());
+                        dbHandler.updateCourse(str, studentNameUpd.getText().toString(), studentSubjectUpd.getText().toString(), studentHoursUpd.getText().toString(), studentCoreUpd.getText().toString(), studentDescriptionUpd.getText().toString());
 
                         // displaying a toast message that our course has been updated.
                         Toast.makeText(UpdateCourseActivity.this, "Course Updated..", Toast.LENGTH_SHORT).show();
@@ -112,7 +112,7 @@ public class UpdateCourseActivity extends AppCompatActivity {
 
 
                         System.out.println(str);
-                        dbHandler.updateCourse(str, studentNameUpd.getText().toString(), studentSubjectUpd.getText().toString(), studentHoursUpd.getText().toString(), studentCoreUpd.getText().toString());
+                        dbHandler.updateCourse(str, studentNameUpd.getText().toString(), studentSubjectUpd.getText().toString(), studentHoursUpd.getText().toString(), studentCoreUpd.getText().toString(), studentDescriptionUpd.getText().toString());
 
                         // displaying a toast message that our course has been updated.
                         Toast.makeText(UpdateCourseActivity.this, "Course Updated..", Toast.LENGTH_SHORT).show();
