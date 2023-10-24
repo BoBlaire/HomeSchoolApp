@@ -200,11 +200,11 @@ class DBHandler extends SQLiteOpenHelper {
     }
 
 
-    public double getTotalSubjectHours(String name, String subject, String email) {
+    public double getTotalSubjectHours(String name, String subject, String email, String core) {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursorCourses = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + NAME_COL + " = ?" + " AND " + EMAIL_COL + " = ?" + " AND " + SUBJECT_COL + " = ?", new String[]{name, email, subject});
+        Cursor cursorCourses = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + NAME_COL + " = ?" + " AND " + EMAIL_COL + " = ?" + " AND " + SUBJECT_COL + " = ?" + " AND "+ CORE_COL + " = ?", new String[]{name, email, subject, core});
 
         int columnIndex = cursorCourses.getColumnIndexOrThrow("hours");
 

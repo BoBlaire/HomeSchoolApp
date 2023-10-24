@@ -53,17 +53,29 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
         });
 
 
-        double total = dbHandler.getTotalSubjectHours(modal.getName(), "Math", mainModal.getUserEmail()) +
-                dbHandler.getTotalSubjectHours(modal.getName(), "English", mainModal.getUserEmail()) +
-                dbHandler.getTotalSubjectHours(modal.getName(), "Science", mainModal.getUserEmail()) +
-                dbHandler.getTotalSubjectHours(modal.getName(), "History", mainModal.getUserEmail());
-        System.out.println("total is: "+total);
+        double total = dbHandler.getTotalSubjectHours(modal.getName(), "Math", mainModal.getUserEmail(), "No") +
+                dbHandler.getTotalSubjectHours(modal.getName(), "English", mainModal.getUserEmail(), "No") +
+                dbHandler.getTotalSubjectHours(modal.getName(), "Science", mainModal.getUserEmail(), "No") +
+                dbHandler.getTotalSubjectHours(modal.getName(), "History", mainModal.getUserEmail(), "No");
+
+        double totalCore = dbHandler.getTotalSubjectHours(modal.getName(), "Math", mainModal.getUserEmail(), "Yes") +
+                dbHandler.getTotalSubjectHours(modal.getName(), "English", mainModal.getUserEmail(), "Yes") +
+                dbHandler.getTotalSubjectHours(modal.getName(), "Science", mainModal.getUserEmail(), "Yes") +
+                dbHandler.getTotalSubjectHours(modal.getName(), "History", mainModal.getUserEmail(), "Yes");
+
+
         holder.studentNameCard.setText(modal.getName());
-        holder.studentMath.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Math", mainModal.getUserEmail())));
-        holder.studentEnglish.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "English", mainModal.getUserEmail())));
-        holder.studentScience.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Science", mainModal.getUserEmail())));
-        holder.studentHistory.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "History", mainModal.getUserEmail())));
-        holder.totalHours.setText(String.valueOf(total));
+        holder.studentMathCore.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Math", mainModal.getUserEmail(), "No")));
+        holder.studentEnglishCore.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "English", mainModal.getUserEmail(), "No")));
+        holder.studentScienceCore.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Science", mainModal.getUserEmail(), "No")));
+        holder.studentHistoryCore.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "History", mainModal.getUserEmail(), "No")));
+        holder.totalHoursCore.setText(String.valueOf(total));
+
+        holder.studentMath.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Math", mainModal.getUserEmail(), "Yes")));
+        holder.studentEnglish.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "English", mainModal.getUserEmail(), "Yes")));
+        holder.studentScience.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Science", mainModal.getUserEmail(), "Yes")));
+        holder.studentHistory.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "History", mainModal.getUserEmail(), "Yes")));
+        holder.totalHours.setText(String.valueOf(totalCore));
 
 
     }
@@ -77,7 +89,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
     // View holder class for initializing of your views such as TextView and Imageview
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView studentNameCard, studentMath, studentScience, studentEnglish, studentHistory, totalHours;
+        private final TextView studentNameCard, studentMath, studentScience, studentEnglish, studentHistory, totalHours, studentMathCore, studentScienceCore, studentEnglishCore, studentHistoryCore, totalHoursCore;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -88,6 +100,12 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
             studentEnglish = itemView.findViewById(R.id.studentEnglish);
             studentHistory = itemView.findViewById(R.id.studentHistory);
             totalHours = itemView.findViewById(R.id.totalHours);
+
+            studentMathCore = itemView.findViewById(R.id.studentMathCore);
+            studentScienceCore = itemView.findViewById(R.id.studentScienceCore);
+            studentEnglishCore = itemView.findViewById(R.id.studentEnglishCore);
+            studentHistoryCore = itemView.findViewById(R.id.studentHistoryCore);
+            totalHoursCore = itemView.findViewById(R.id.totalHoursCore);
 
 
         }

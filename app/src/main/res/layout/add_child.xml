@@ -52,6 +52,102 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
+<!--        <TextView-->
+<!--            android:id="@+id/studentMathsCore"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/studentNameCard"-->
+<!--            android:layout_gravity="start|center_horizontal"-->
+<!--            android:layout_marginStart="26dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginBottom="5dp"-->
+<!--            android:layout_toEndOf="@id/studentMath"-->
+<!--            android:autoSizeMaxTextSize="100sp"-->
+<!--            android:autoSizeMinTextSize="12sp"-->
+<!--            android:autoSizeStepGranularity="2sp"-->
+<!--            android:autoSizeTextType="uniform"-->
+<!--            android:text="Math Hours: "-->
+<!--            android:textColor="@color/light_gray"-->
+<!--            android:textSize="15sp"-->
+<!--            android:textStyle="bold" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/studentScienceCore"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/studentMath"-->
+<!--            android:layout_gravity="start|center_horizontal"-->
+<!--            android:layout_marginLeft="30dp"-->
+<!--            android:layout_marginTop="2dp"-->
+<!--            android:layout_marginBottom="5dp"-->
+<!--            android:layout_toEndOf="@id/studentScience"-->
+<!--            android:autoSizeMaxTextSize="100sp"-->
+<!--            android:autoSizeMinTextSize="12sp"-->
+<!--            android:autoSizeStepGranularity="2sp"-->
+<!--            android:autoSizeTextType="uniform"-->
+<!--            android:text="Science Hours: "-->
+<!--            android:textColor="@color/light_gray"-->
+<!--            android:textSize="15sp"-->
+<!--            android:textStyle="bold" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/studentEnglishCore"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/studentScience"-->
+<!--            android:layout_gravity="start|center_horizontal"-->
+<!--            android:layout_marginLeft="30dp"-->
+<!--            android:layout_marginTop="2dp"-->
+<!--            android:layout_marginBottom="5dp"-->
+<!--            android:layout_toEndOf="@id/studentEnglish"-->
+<!--            android:autoSizeMaxTextSize="100sp"-->
+<!--            android:autoSizeMinTextSize="12sp"-->
+<!--            android:autoSizeStepGranularity="2sp"-->
+<!--            android:autoSizeTextType="uniform"-->
+<!--            android:text="English Hours: "-->
+<!--            android:textColor="@color/light_gray"-->
+<!--            android:textSize="15sp"-->
+<!--            android:textStyle="bold" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/studentHistoryCore"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/studentEnglish"-->
+<!--            android:layout_gravity="start|center_horizontal"-->
+<!--            android:layout_marginLeft="30dp"-->
+<!--            android:layout_marginTop="2dp"-->
+<!--            android:layout_marginBottom="5dp"-->
+<!--            android:layout_toEndOf="@id/studentHistory"-->
+<!--            android:autoSizeMaxTextSize="100sp"-->
+<!--            android:autoSizeMinTextSize="12sp"-->
+<!--            android:autoSizeStepGranularity="2sp"-->
+<!--            android:autoSizeTextType="uniform"-->
+<!--            android:text="History Hours: "-->
+<!--            android:textColor="@color/light_gray"-->
+<!--            android:textSize="15sp"-->
+<!--            android:textStyle="bold" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/studentTotalCore"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/studentHistory"-->
+<!--            android:layout_gravity="start|center_horizontal"-->
+<!--            android:layout_marginLeft="30dp"-->
+<!--            android:layout_marginTop="2dp"-->
+<!--            android:layout_marginBottom="5dp"-->
+<!--            android:layout_toEndOf="@id/studentHistory"-->
+<!--            android:autoSizeMaxTextSize="100sp"-->
+<!--            android:autoSizeMinTextSize="12sp"-->
+<!--            android:autoSizeStepGranularity="2sp"-->
+<!--            android:autoSizeTextType="uniform"-->
+<!--            android:text="Total Hours: "-->
+<!--            android:textColor="@color/light_gray"-->
+<!--            android:textSize="15sp"-->
+<!--            android:textStyle="bold" />-->
+
+
         <TextView
             android:id="@+id/studentSciences"
             android:layout_width="wrap_content"
@@ -126,7 +222,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/studentNameCard"
             android:layout_gravity="start|center_horizontal"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="25dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             android:layout_toEndOf="@id/studentMaths"
@@ -134,26 +230,63 @@
             android:autoSizeMinTextSize="12sp"
             android:autoSizeStepGranularity="2sp"
             android:autoSizeTextType="uniform"
-            android:text="Math Hours: "
+            android:text="MH"
+            android:textColor="@color/light_gray"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/studentMathCore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/studentNameCard"
+            android:layout_gravity="start|center_horizontal"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@id/studentMath"
+            android:autoSizeMaxTextSize="100sp"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:text="MH"
             android:textColor="@color/light_gray"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/studentScience"
+        android:id="@+id/studentScience"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/studentMath"
+        android:layout_gravity="start|bottom"
+            android:layout_marginLeft="25dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@id/studentMaths"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeStepGranularity="2sp"
+        android:autoSizeTextType="uniform"
+        android:text="SH"
+        android:textColor="@color/light_gray"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/studentScienceCore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/studentMath"
             android:layout_gravity="start|bottom"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="45dp"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="5dp"
-            android:layout_toEndOf="@id/studentMaths"
+            android:layout_toEndOf="@id/studentMath"
             android:autoSizeMaxTextSize="100sp"
             android:autoSizeMinTextSize="12sp"
             android:autoSizeStepGranularity="2sp"
             android:autoSizeTextType="uniform"
-            android:text="Science Hours: "
+            android:text="SH"
             android:textColor="@color/light_gray"
             android:textSize="15sp"
             android:textStyle="bold" />
@@ -164,7 +297,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/studentScience"
             android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="25dp"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="5dp"
             android:layout_toEndOf="@id/studentMaths"
@@ -172,7 +305,25 @@
             android:autoSizeMinTextSize="12sp"
             android:autoSizeStepGranularity="2sp"
             android:autoSizeTextType="uniform"
-            android:text="English Hours: "
+            android:text="EH"
+            android:textColor="@color/light_gray"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/studentEnglishCore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/studentScience"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@id/studentMath"
+            android:autoSizeMaxTextSize="100sp"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:text="EH"
             android:textColor="@color/light_gray"
             android:textSize="15sp"
             android:textStyle="bold" />
@@ -183,7 +334,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/studentEnglish"
             android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="25dp"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="5dp"
             android:layout_toEndOf="@id/studentMaths"
@@ -191,11 +342,28 @@
             android:autoSizeMinTextSize="12sp"
             android:autoSizeStepGranularity="2sp"
             android:autoSizeTextType="uniform"
-            android:text="History Hours: "
+            android:text="HH"
             android:textColor="@color/light_gray"
             android:textSize="15sp"
             android:textStyle="bold" />
-
+        <TextView
+            android:id="@+id/studentHistoryCore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/studentEnglish"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@id/studentMath"
+            android:autoSizeMaxTextSize="100sp"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:text="HH"
+            android:textColor="@color/light_gray"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/totalHours"
@@ -203,7 +371,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/studentHistory"
             android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="20dp"
             android:layout_toEndOf="@id/studentMaths"
@@ -211,8 +379,66 @@
             android:autoSizeMinTextSize="12sp"
             android:autoSizeStepGranularity="2sp"
             android:autoSizeTextType="uniform"
-            android:text="Total Hours: "
+            android:text="TH"
             android:textColor="@color/light_gray"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/totalHoursCore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/studentHistory"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="20dp"
+            android:layout_toEndOf="@id/studentMath"
+            android:autoSizeMaxTextSize="100sp"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:text="TH"
+            android:textColor="@color/light_gray"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/core"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/studentMathCore"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@id/studentNameCard"
+            android:autoSizeMaxTextSize="100sp"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:text="Core:"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/coreNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/studentMathCore"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@id/core"
+            android:autoSizeMaxTextSize="100sp"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:text="Non Core:"
+            android:textColor="@color/black"
             android:textSize="15sp"
             android:textStyle="bold" />
 

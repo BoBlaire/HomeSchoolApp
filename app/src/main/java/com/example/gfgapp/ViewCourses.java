@@ -241,7 +241,11 @@ public class ViewCourses extends AppCompatActivity {
         // running a for loop to compare elements.
         for (CourseModal item : courseModalArrayList) {
             // checking if the entered string matched with any item of our recycler view.
-            if (item.getStudentName().toLowerCase().contains(text.toLowerCase())) {
+            if (item.getStudentSubject().toLowerCase().contains(text.toLowerCase())) {
+                // if the item is matched we are
+                // adding it to our filtered list.
+                filteredlist.add(item);
+            } else if (item.getStudentCore().toLowerCase().contains(text.toLowerCase())) {
                 // if the item is matched we are
                 // adding it to our filtered list.
                 filteredlist.add(item);
