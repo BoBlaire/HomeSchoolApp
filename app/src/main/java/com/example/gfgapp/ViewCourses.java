@@ -12,6 +12,24 @@ import android.graphics.Rect;
 import android.icu.text.Transliterator;
 import android.os.Build;
 import android.os.Bundle;
+import android.app.Activity;
+import android.os.Bundle;
+
+import java.io.IOException;
+import java.io.OutputStream;
+
+import android.bluetooth.BluetoothSocket;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.os.Environment;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import android.util.DisplayMetrics;
 import android.util.Size;
 import android.util.TypedValue;
@@ -59,6 +77,9 @@ public class ViewCourses extends AppCompatActivity {
     private CourseRVAdapter courseRVAdapter;
     private RecyclerView coursesRV;
     private Context context;
+    byte FONT_TYPE;
+    private static BluetoothSocket btsocket;
+    private static OutputStream btoutputstream;
     private TextView name, subject, hours, core;
     private int position;
     static Modal modal = new Modal(false);
@@ -86,6 +107,9 @@ public class ViewCourses extends AppCompatActivity {
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) FloatingActionButton button = findViewById(R.id.buttonPanel);
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) FloatingActionButton buttonDelete = findViewById(R.id.buttonDeleteAll);
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) FloatingActionButton buttonHome = findViewById(R.id.buttonHome);
+
+
+
         toolbar.setTitle("Home School Records");
         // using toolbar as ActionBar
         setSupportActionBar(toolbar);
@@ -97,7 +121,7 @@ public class ViewCourses extends AppCompatActivity {
 
 
         // list from db handler class.
-        System.out.println("Name: "+mainModal.getUserName());
+        System.out.println("Name: " + mainModal.getUserName());
         courseModalArrayList = dbHandler.readCourses(mainModal.getUserName(), mainModal.getUserEmail());
 
         // on below line passing our array lost to our adapter class.
@@ -121,6 +145,7 @@ public class ViewCourses extends AppCompatActivity {
             Intent i = new Intent(ViewCourses.this, StudentView.class);
             startActivity(i);
         });
+
         // setting our adapter to recycler view.
         coursesRV.setAdapter(courseRVAdapter);
     }

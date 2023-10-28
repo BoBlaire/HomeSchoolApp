@@ -35,8 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/student_nameMain"
-            android:inputType="numberDecimal"
-            android:textColor="@color/light_gray"
+            android:inputType="none"
+            android:textColor="@color/white"
             android:textColorHint="@color/light_gray" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:hint="Hours"
             android:inputType="numberDecimal"
-            android:textColor="@color/light_gray"
+            android:textColor="@color/white"
             android:textColorHint="@color/light_gray" />
     </com.google.android.material.textfield.TextInputLayout>
     <!--edit text for course description-->
@@ -144,7 +144,7 @@
             android:inputType="textCapSentences|textMultiLine"
             android:maxLength="2000"
             android:maxLines="4"
-            android:textColor="@color/light_gray"
+            android:textColor="@color/white"
             android:textColorHint="@color/light_gray" />
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -9,12 +9,26 @@
     tools:context=".UpdateCourseActivity">
 
     <!--Edit text to enter course name-->
-    <EditText
-        android:id="@+id/updStudentName"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/name_text_input2"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="@string/student_name" />
+
+        app:layout_constraintBottom_toTopOf="@+id/name_text_input1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.894"
+        tools:layout_editor_absoluteX="0dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/updStudentName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/student_nameMain"
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:textColorHint="@color/light_gray" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <!--edit text to enter course duration-->
     <com.google.android.material.textfield.TextInputLayout
@@ -39,12 +53,27 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <!--edit text to display course tracks-->
-    <EditText
-        android:id="@+id/updStudentHours"
+    <!--        android:textColor="#C3C3C3" />-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/name_text_input"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="@string/hoursUpd" />
+
+        app:layout_constraintBottom_toTopOf="@+id/name_text_input1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.894"
+        tools:layout_editor_absoluteX="0dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/updStudentHours"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Hours"
+            android:inputType="numberDecimal"
+            android:textColor="@color/white"
+            android:textColorHint="@color/light_gray" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <!--edit text for course description-->
     <com.google.android.material.textfield.TextInputLayout
@@ -76,17 +105,30 @@
 <!--        android:layout_height="wrap_content"-->
 <!--        android:layout_margin="10dp"-->
 <!--        android:hint="Descrption" />-->
-    <EditText
-        android:id="@+id/studentDescriptionUpd"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/name_text_input1"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="#353738"
-        android:hint="Descrption"
-        android:inputType="textCapSentences|textMultiLine"
-        android:maxLength="2000"
-        android:maxLines="4"
-        android:textColor="#C3C3C3" />
+
+        app:layout_constraintBottom_toTopOf="@+id/name_text_input1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.894"
+        tools:layout_editor_absoluteX="0dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/studentDescriptionUpd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLength="2000"
+            android:maxLines="4"
+            android:textColor="@color/white"
+            android:textColorHint="@color/light_gray" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
 
     <!--button for updating our course-->
     <Button

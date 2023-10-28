@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         return new CourseRVAdapter.ViewHolder(view);
     }
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "NewApi"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,23 +117,26 @@ public class MainActivity extends AppCompatActivity {
 
 
             // validating if the text fields are empty or not.
-            if (studentNameDb.isEmpty() && studentSubjectDb.isEmpty() && studentHoursDb.isEmpty() && studentCoreDb.isEmpty()) {
+            if ((studentNameDb.isEmpty() || studentSubjectDb.equals("Subject") || studentHoursDb.isEmpty() || studentCoreDb.equals("Core") || studentDescDb.trim().isEmpty())) {
                 Toast.makeText(MainActivity.this, "Please enter all the data..", Toast.LENGTH_SHORT).show();
-                return;
+
+
+            } else {
+                dbHandler.addNewCourse(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df, mainModal.getUserEmail(), studentDescDb);
+                Toast.makeText(MainActivity.this, "Course has been added.", Toast.LENGTH_SHORT).show();
+                studentName.setText(mainModal.getUserName());
+                studentSubject.setAdapter(adapterSubjects);
+                studentHours.setText("");
+                studentCore.setAdapter(adapter);
+                studentDescription.setText("");
             }
 
             /* on below line we are calling a method to add new
                course to sqlite data and pass all our values to it.*/
 
-            dbHandler.addNewCourse(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df, mainModal.getUserEmail(), studentDescDb);
 
             // after adding the data we are displaying a toast message.
-            Toast.makeText(MainActivity.this, "Course has been added.", Toast.LENGTH_SHORT).show();
-            studentName.setText(mainModal.getUserName());
-            studentSubject.setText("");
-            studentHours.setText("");
-            studentCore.setText("");
-            studentDescription.setText("");
+
 
         });
 
