@@ -1,23 +1,38 @@
 package com.example.gfgapp;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
+
 public class UserLogin extends AppCompatActivity {
 
+    private static final int RC_SIGN_IN = 718;
     EditText userEmail, userPassword;
     Button button, buttonSignUp;
     MainModal mainModal = MainActivity.mainModal;
     private UserDBHandler userDBHandler;
+
+    static StudentModal studentModal;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -30,11 +45,33 @@ public class UserLogin extends AppCompatActivity {
         userPassword = findViewById(R.id.userPassword);
         button = findViewById(R.id.buttonLogin);
         buttonSignUp = findViewById(R.id.buttonSignUp);
+        // Set the dimensions of the sign-in button.
+        SignInButton signInButton = findViewById(R.id.sign_in_button);
+        signInButton.setSize(SignInButton.SIZE_STANDARD);
+//        findViewById(R.id.sign_in_button).setOnClickListener((View.OnClickListener) this);
+
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        GoogleSignInClient client = GoogleSignIn.getClient(this, gso);
+
 
         //calling user database
         userDBHandler = new UserDBHandler(UserLogin.this);
 
         //click listener to login
+
+
+        signInButton.setOnClickListener(v -> {
+            Intent signInIntent = client.getSignInIntent();
+            startActivityForResult(signInIntent, RC_SIGN_IN);
+        });
+
+
         button.setOnClickListener(v -> {
 
             //getting text of our two fields for database
@@ -126,5 +163,66 @@ public class UserLogin extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            mainModal.setGoogleEmail(account.getEmail());
+            System.out.println("account email: "+account.getEmail());
+
+            Cursor cursorEmail = userDBHandler.retrieveEmail(account.getEmail());
+            @SuppressLint("Range") String strEmail = cursorEmail.getString(cursorEmail.getColumnIndex("email"));
+
+            if (!strEmail.equals(account.getEmail())) {
+                userDBHandler.addUserInfo(account.getEmail(), account.getId());
+            }
+
+            // Signed in successfully, show authenticated UI.
+            updateUI(account);
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+            updateUI(null);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Check for existing Google Sign In account, if the user is already signed in
+        // the GoogleSignInAccount will be non-null.
+//        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+//        if (account != null) {
+//            Intent intent = new Intent(UserLogin.this, StudentView.class);
+//            startActivity(intent);
+//        }
+    }
+
+    //Change UI according to user data.
+    public void updateUI(GoogleSignInAccount account) {
+
+        if (account != null) {
+            Toast.makeText(this, "You Signed In successfully", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this, StudentView.class));
+
+        } else {
+            Toast.makeText(this, "You Didn't signed in", Toast.LENGTH_LONG).show();
+        }
+
     }
 }

@@ -37,7 +37,6 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
     }
 
 
-
     @Override
     public void onBindViewHolder(@NonNull StudentAdapter.ViewHolder holder, int position) {
         // to set data to textview and imageview of each card layout
@@ -53,33 +52,64 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
         });
 
 
-        double total = dbHandler.getTotalSubjectHours(modal.getName(), "Math", mainModal.getUserEmail(), "No") +
-                dbHandler.getTotalSubjectHours(modal.getName(), "English", mainModal.getUserEmail(), "No") +
-                dbHandler.getTotalSubjectHours(modal.getName(), "Science", mainModal.getUserEmail(), "No") +
-                dbHandler.getTotalSubjectHours(modal.getName(), "History", mainModal.getUserEmail(), "No");
+        try {
+            double total = dbHandler.getTotalSubjectHours(modal.getName(), "Math", mainModal.getUserEmail(), "No") +
+                    dbHandler.getTotalSubjectHours(modal.getName(), "English", mainModal.getUserEmail(), "No") +
+                    dbHandler.getTotalSubjectHours(modal.getName(), "Science", mainModal.getUserEmail(), "No") +
+                    dbHandler.getTotalSubjectHours(modal.getName(), "History", mainModal.getUserEmail(), "No");
 
-        double totalCore = dbHandler.getTotalSubjectHours(modal.getName(), "Math", mainModal.getUserEmail(), "Yes") +
-                dbHandler.getTotalSubjectHours(modal.getName(), "English", mainModal.getUserEmail(), "Yes") +
-                dbHandler.getTotalSubjectHours(modal.getName(), "Science", mainModal.getUserEmail(), "Yes") +
-                dbHandler.getTotalSubjectHours(modal.getName(), "History", mainModal.getUserEmail(), "Yes");
+            double totalCore = dbHandler.getTotalSubjectHours(modal.getName(), "Math", mainModal.getUserEmail(), "Yes") +
+                    dbHandler.getTotalSubjectHours(modal.getName(), "English", mainModal.getUserEmail(), "Yes") +
+                    dbHandler.getTotalSubjectHours(modal.getName(), "Science", mainModal.getUserEmail(), "Yes") +
+                    dbHandler.getTotalSubjectHours(modal.getName(), "History", mainModal.getUserEmail(), "Yes");
 
 
-        holder.studentNameCard.setText(modal.getName());
-        holder.studentMathCore.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Math", mainModal.getUserEmail(), "No")));
-        holder.studentEnglishCore.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "English", mainModal.getUserEmail(), "No")));
-        holder.studentScienceCore.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Science", mainModal.getUserEmail(), "No")));
-        holder.studentHistoryCore.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "History", mainModal.getUserEmail(), "No")));
-        holder.studentPeCore.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Pe", mainModal.getUserEmail(), "No")));
-        holder.studentExtraCore.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Extracurriculars", mainModal.getUserEmail(), "No")));
-        holder.totalHoursCore.setText(String.valueOf(total));
+            holder.studentNameCard.setText(modal.getName());
+            holder.studentMathCore.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Math", mainModal.getUserEmail(), "No")));
+            holder.studentEnglishCore.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "English", mainModal.getUserEmail(), "No")));
+            holder.studentScienceCore.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Science", mainModal.getUserEmail(), "No")));
+            holder.studentHistoryCore.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "History", mainModal.getUserEmail(), "No")));
+            holder.studentPeCore.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Pe", mainModal.getUserEmail(), "No")));
+            holder.studentExtraCore.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Extracurriculars", mainModal.getUserEmail(), "No")));
+            holder.totalHoursCore.setText(String.valueOf(total));
 
-        holder.studentMath.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Math", mainModal.getUserEmail(), "Yes")));
-        holder.studentEnglish.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "English", mainModal.getUserEmail(), "Yes")));
-        holder.studentScience.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Science", mainModal.getUserEmail(), "Yes")));
-        holder.studentHistory.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "History", mainModal.getUserEmail(), "Yes")));
-        holder.studentPe.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Pe", mainModal.getUserEmail(), "Yes")));
-        holder.studentExtra.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Extracurriculars", mainModal.getUserEmail(), "Yes")));
-        holder.totalHours.setText(String.valueOf(totalCore));
+            holder.studentMath.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Math", mainModal.getUserEmail(), "Yes")));
+            holder.studentEnglish.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "English", mainModal.getUserEmail(), "Yes")));
+            holder.studentScience.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Science", mainModal.getUserEmail(), "Yes")));
+            holder.studentHistory.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "History", mainModal.getUserEmail(), "Yes")));
+            holder.studentPe.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Pe", mainModal.getUserEmail(), "Yes")));
+            holder.studentExtra.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Extracurriculars", mainModal.getUserEmail(), "Yes")));
+            holder.totalHours.setText(String.valueOf(totalCore));
+        } catch (Exception e) {
+            double total = dbHandler.getTotalSubjectHours(modal.getName(), "Math", mainModal.getGoogleEmail(), "No") +
+                    dbHandler.getTotalSubjectHours(modal.getName(), "English", mainModal.getGoogleEmail(), "No") +
+                    dbHandler.getTotalSubjectHours(modal.getName(), "Science", mainModal.getGoogleEmail(), "No") +
+                    dbHandler.getTotalSubjectHours(modal.getName(), "History", mainModal.getGoogleEmail(), "No");
+
+            double totalCore = dbHandler.getTotalSubjectHours(modal.getName(), "Math", mainModal.getGoogleEmail(), "Yes") +
+                    dbHandler.getTotalSubjectHours(modal.getName(), "English", mainModal.getGoogleEmail(), "Yes") +
+                    dbHandler.getTotalSubjectHours(modal.getName(), "Science", mainModal.getGoogleEmail(), "Yes") +
+                    dbHandler.getTotalSubjectHours(modal.getName(), "History", mainModal.getGoogleEmail(), "Yes");
+
+
+            holder.studentNameCard.setText(modal.getName());
+            holder.studentMathCore.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Math", mainModal.getGoogleEmail(), "No")));
+            holder.studentEnglishCore.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "English", mainModal.getGoogleEmail(), "No")));
+            holder.studentScienceCore.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Science", mainModal.getGoogleEmail(), "No")));
+            holder.studentHistoryCore.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "History", mainModal.getGoogleEmail(), "No")));
+            holder.studentPeCore.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Pe", mainModal.getGoogleEmail(), "No")));
+            holder.studentExtraCore.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Extracurriculars", mainModal.getGoogleEmail(), "No")));
+            holder.totalHoursCore.setText(String.valueOf(total));
+
+            holder.studentMath.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Math", mainModal.getGoogleEmail(), "Yes")));
+            holder.studentEnglish.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "English", mainModal.getGoogleEmail(), "Yes")));
+            holder.studentScience.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Science", mainModal.getGoogleEmail(), "Yes")));
+            holder.studentHistory.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "History", mainModal.getGoogleEmail(), "Yes")));
+            holder.studentPe.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Pe", mainModal.getGoogleEmail(), "Yes")));
+            holder.studentExtra.setText(String.valueOf(dbHandler.getTotalSubjectHours(modal.getName(), "Extracurriculars", mainModal.getGoogleEmail(), "Yes")));
+            holder.totalHours.setText(String.valueOf(totalCore));
+
+        }
 
 
     }
@@ -93,7 +123,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
     // View holder class for initializing of your views such as TextView and Imageview
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView studentNameCard, studentMath, studentScience, studentEnglish, studentHistory, studentPe, studentExtra,totalHours, studentMathCore, studentScienceCore, studentEnglishCore, studentHistoryCore, studentPeCore, studentExtraCore, totalHoursCore;
+        private final TextView studentNameCard, studentMath, studentScience, studentEnglish, studentHistory, studentPe, studentExtra, totalHours, studentMathCore, studentScienceCore, studentEnglishCore, studentHistoryCore, studentPeCore, studentExtraCore, totalHoursCore;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -114,8 +144,6 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
             studentPeCore = itemView.findViewById(R.id.peHoursCore);
             studentExtraCore = itemView.findViewById(R.id.extraHoursCore);
             totalHoursCore = itemView.findViewById(R.id.totalHoursCore);
-
-
 
 
         }

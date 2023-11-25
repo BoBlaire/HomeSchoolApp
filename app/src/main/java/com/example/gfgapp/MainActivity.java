@@ -122,7 +122,17 @@ public class MainActivity extends AppCompatActivity {
 
 
             } else {
-                dbHandler.addNewCourse(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df, mainModal.getUserEmail(), studentDescDb);
+
+
+               if(mainModal.getUserEmail() == null) {
+                   dbHandler.addNewCourse(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df, mainModal.getGoogleEmail(), studentDescDb);
+               } else {
+                   dbHandler.addNewCourse(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df, mainModal.getUserEmail(), studentDescDb);
+               }
+
+
+
+
                 Toast.makeText(MainActivity.this, "Course has been added.", Toast.LENGTH_SHORT).show();
                 studentName.setText(mainModal.getUserName());
                 studentSubject.setAdapter(adapterSubjects);

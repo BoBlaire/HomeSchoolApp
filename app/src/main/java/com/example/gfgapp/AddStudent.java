@@ -38,7 +38,15 @@ public class AddStudent extends AppCompatActivity {
             if (nameStudent.isEmpty() || gradeStudent.isEmpty()) {
                 Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show();
             } else if (!nameStudent.isEmpty() || !gradeStudent.isEmpty()) {
-                studentDBHandler.addUserInfo(nameStudent, gradeStudent, mainModal.getUserEmail());
+
+
+                if (mainModal.getUserEmail() == null) {
+                    studentDBHandler.addUserInfo(nameStudent, gradeStudent, mainModal.getGoogleEmail());
+                } else {
+                    studentDBHandler.addUserInfo(nameStudent, gradeStudent, mainModal.getUserEmail());
+                }
+
+
 
                 Intent i = new Intent(AddStudent.this, StudentView.class);
                 startActivity(i);

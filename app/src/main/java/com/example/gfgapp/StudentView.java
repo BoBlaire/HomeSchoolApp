@@ -42,10 +42,18 @@ public class StudentView extends AppCompatActivity {
 
         // Here, we have created new array list and added data to it
         ArrayList<StudentModal> courseModelArrayList = new ArrayList<StudentModal>();
-        ArrayList<StudentModal> totalSubjectHours = new ArrayList<StudentModal>();
+        ArrayList<StudentModal> courseModelArrayListBackup = new ArrayList<>();
+//        ArrayList<StudentModal> totalSubjectHours = new ArrayList<StudentModal>();
+//        courseModelArrayListBackup.add("00000@gmail.com");
 
+//            courseModelArrayList = studentDBHandler.readStudents(mainModal.getUserEmail());
 
-        courseModelArrayList = studentDBHandler.readStudents(mainModal.getUserEmail());
+        System.out.println("view: "+mainModal.getGoogleEmail());
+        if (mainModal.getGoogleEmail() == null) {
+            mainModal.setGoogleEmail("00000@gmail.com");
+        }
+            courseModelArrayList = studentDBHandler.readStudents(mainModal.getGoogleEmail());
+
 
 
         studentAdapter = new StudentAdapter(StudentView.this, courseModelArrayList);

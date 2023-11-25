@@ -122,8 +122,11 @@ public class ViewCourses extends AppCompatActivity {
 
         // list from db handler class.
         System.out.println("Name: " + mainModal.getUserName());
-        courseModalArrayList = dbHandler.readCourses(mainModal.getUserName(), mainModal.getUserEmail());
-
+        try {
+            courseModalArrayList = dbHandler.readCourses(mainModal.getUserName(), mainModal.getUserEmail());
+        } catch (Exception e) {
+            courseModalArrayList = dbHandler.readCourses(mainModal.getUserName(), mainModal.getGoogleEmail());
+        }
         // on below line passing our array lost to our adapter class.
         courseRVAdapter = new CourseRVAdapter(courseModalArrayList, ViewCourses.this);
         coursesRV = findViewById(R.id.idRVCourses);
@@ -154,7 +157,7 @@ public class ViewCourses extends AppCompatActivity {
     public void onBackPressed() {
 
         // Create the object of AlertDialog Builder class
-        AlertDialog.Builder builder = new AlertDialog.Builder(ViewCourses.this);
+        @SuppressLint("ResourceType") AlertDialog.Builder builder = new AlertDialog.Builder(ViewCourses.this, R.style.AlertDialogCustom);
 
         // Instantiate DBHandler
         dbHandler = new DBHandler(ViewCourses.this);
