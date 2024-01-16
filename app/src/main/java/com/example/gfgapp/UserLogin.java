@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +29,8 @@ public class UserLogin extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 718;
     EditText userEmail, userPassword;
+
+    TextView signup;
     Button button, buttonSignUp;
     MainModal mainModal = MainActivity.mainModal;
     private UserDBHandler userDBHandler;
@@ -45,13 +48,11 @@ public class UserLogin extends AppCompatActivity {
         userPassword = findViewById(R.id.userPassword);
         button = findViewById(R.id.buttonLogin);
         buttonSignUp = findViewById(R.id.buttonSignUp);
+        signup = findViewById(R.id.signup);
         // Set the dimensions of the sign-in button.
         SignInButton signInButton = findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
-//        findViewById(R.id.sign_in_button).setOnClickListener((View.OnClickListener) this);
 
-        // Configure sign-in to request the user's ID, email address, and basic
-        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -63,14 +64,25 @@ public class UserLogin extends AppCompatActivity {
         //calling user database
         userDBHandler = new UserDBHandler(UserLogin.this);
 
-        //click listener to login
-
-
-        signInButton.setOnClickListener(v -> {
-            Intent signInIntent = client.getSignInIntent();
-            startActivityForResult(signInIntent, RC_SIGN_IN);
+        signup.setOnClickListener(v -> {
+            Intent i = new Intent(UserLogin.this, SignUp.class);
+            startActivity(i);
         });
 
+
+//        click listener to login
+        signInButton.setOnClickListener(v -> {
+            try {
+
+
+                Intent signInIntent = client.getSignInIntent();
+                startActivityForResult(signInIntent, RC_SIGN_IN);
+
+
+            } catch (ArrayIndexOutOfBoundsException e) {
+                Toast.makeText(UserLogin.this, "You need to sign-up before logging in with Google", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         button.setOnClickListener(v -> {
 
@@ -95,6 +107,7 @@ public class UserLogin extends AppCompatActivity {
                 } else if (!userEmailLogin.isEmpty() || !userPasswordLogin.isEmpty()) {
                     if (strEmail.equals(userEmailLogin) && strPass.equals(userPasswordLogin)) {
                         mainModal.setUserEmail(strEmail);
+
                         Toast.makeText(UserLogin.this, "Logged In!", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(UserLogin.this, StudentView.class);
                         i.putExtra("name", userEmailLogin);
@@ -106,77 +119,86 @@ public class UserLogin extends AppCompatActivity {
                     Toast.makeText(UserLogin.this, "Something really went wrong..", Toast.LENGTH_SHORT).show();
                 }
             } catch (Exception e) {
+
                 Toast.makeText(UserLogin.this, "No Account Attached To Email", Toast.LENGTH_SHORT).show();
             }
         });
 
-        //click listener for signup
-        buttonSignUp.setOnClickListener(v -> {
-
-            //getting text for cursor
-            String userEmailLogin = userEmail.getText().toString();
-            String userPasswordLogin = userPassword.getText().toString();
-
-            //passing text to cursor
-            Cursor cursorEmail = userDBHandler.retrieveEmail(userEmailLogin);
-            Cursor cursorPass = userDBHandler.retrievePassword(userPasswordLogin);
-
-            //trying to signup, and if theres an email already valid the try says email in use
-            try {
-                @SuppressLint("Range") String strEmail = cursorEmail.getString(cursorEmail.getColumnIndex("email"));
-
-                //Checking weather the login or signup is valid
-                if (userEmailLogin.isEmpty() || userPasswordLogin.isEmpty()) {
-                    Toast.makeText(UserLogin.this, "Please Fill Out All Fields", Toast.LENGTH_SHORT).show();
-                } else if (!userEmailLogin.isEmpty() || !userPasswordLogin.isEmpty()) {
-                    if (strEmail.equals(userEmailLogin)) {
-                        Toast.makeText(UserLogin.this, "This Email Already In Use", Toast.LENGTH_SHORT).show();
-                    } else if (strEmail.equals(userEmailLogin)) {
-                        mainModal.setUserEmail(strEmail);
-                        userDBHandler.addUserInfo(userEmailLogin, userPasswordLogin);
-
-                        Toast.makeText(UserLogin.this, "Signed Up!", Toast.LENGTH_SHORT).show();
-
-                        Intent i = new Intent(UserLogin.this, StudentView.class);
-                        startActivity(i);
-                    }
-                } else {
-                    Toast.makeText(UserLogin.this, "Something really went wrong..", Toast.LENGTH_SHORT).show();
-                }
-            } catch (Exception e) {
-
-                //Checking weather the login or signup is valid
-                if (userEmailLogin.isEmpty() || userPasswordLogin.isEmpty()) {
-                    Toast.makeText(UserLogin.this, "Please Fill Out All Fields", Toast.LENGTH_SHORT).show();
-                } else if (!userEmailLogin.isEmpty() || !userPasswordLogin.isEmpty()) {
-
-                    mainModal.setUserEmail(userEmailLogin);
-                    userDBHandler.addUserInfo(userEmailLogin, userPasswordLogin);
-
-                    Toast.makeText(UserLogin.this, "Signed Up!", Toast.LENGTH_SHORT).show();
-
-                    Intent i = new Intent(UserLogin.this, StudentView.class);
-                    startActivity(i);
-
-                } else {
-                    Toast.makeText(UserLogin.this, "Something really went wrong..", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+//        //click listener for signup
+//        buttonSignUp.setOnClickListener(v -> {
+//
+//            //getting text for cursor
+//            String userEmailLogin = userEmail.getText().toString();
+//            String userPasswordLogin = userPassword.getText().toString();
+//
+//            //passing text to cursor
+//            Cursor cursorEmail = userDBHandler.retrieveEmail(userEmailLogin);
+//            Cursor cursorPass = userDBHandler.retrievePassword(userPasswordLogin);
+//
+//            //trying to signup, and if theres an email already valid the try says email in use
+//            try {
+//                @SuppressLint("Range") String strEmail = cursorEmail.getString(cursorEmail.getColumnIndex("email"));
+//
+//                //Checking weather the login or signup is valid
+//                if (userEmailLogin.isEmpty() || userPasswordLogin.isEmpty()) {
+//                    Toast.makeText(UserLogin.this, "Please Fill Out All Fields", Toast.LENGTH_SHORT).show();
+//                } else if (!userEmailLogin.isEmpty() || !userPasswordLogin.isEmpty()) {
+//                    if (strEmail.equals(userEmailLogin)) {
+//                        Toast.makeText(UserLogin.this, "This Email Already In Use", Toast.LENGTH_SHORT).show();
+//                    } else if (strEmail.equals(userEmailLogin)) {
+//                        mainModal.setUserEmail(strEmail);
+//                        userDBHandler.addUserInfo(userEmailLogin, userPasswordLogin);
+//
+//                        Toast.makeText(UserLogin.this, "Signed Up!", Toast.LENGTH_SHORT).show();
+//
+//                        Intent i = new Intent(UserLogin.this, StudentView.class);
+//                        startActivity(i);
+//                    }
+//                } else {
+//                    Toast.makeText(UserLogin.this, "Something really went wrong..", Toast.LENGTH_SHORT).show();
+//                }
+//            } catch (Exception e) {
+//
+//                //Checking weather the login or signup is valid
+//                if (userEmailLogin.isEmpty() || userPasswordLogin.isEmpty()) {
+//                    Toast.makeText(UserLogin.this, "Please Fill Out All Fields", Toast.LENGTH_SHORT).show();
+//                } else if (!userEmailLogin.isEmpty() || !userPasswordLogin.isEmpty()) {
+//
+//                    mainModal.setUserEmail(userEmailLogin);
+//                    userDBHandler.addUserInfo(userEmailLogin, userPasswordLogin);
+//
+//                    Toast.makeText(UserLogin.this, "Signed Up!", Toast.LENGTH_SHORT).show();
+//
+//                    Intent i = new Intent(UserLogin.this, StudentView.class);
+//                    startActivity(i);
+//
+//                } else {
+//                    Toast.makeText(UserLogin.this, "Something really went wrong..", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
     }
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             mainModal.setGoogleEmail(account.getEmail());
-            System.out.println("account email: "+account.getEmail());
+            System.out.println("account email: " + account.getEmail());
 
             Cursor cursorEmail = userDBHandler.retrieveEmail(account.getEmail());
-            @SuppressLint("Range") String strEmail = cursorEmail.getString(cursorEmail.getColumnIndex("email"));
 
-            if (!strEmail.equals(account.getEmail())) {
+
+            try {
+                @SuppressLint("Range") String strEmail = cursorEmail.getString(cursorEmail.getColumnIndex("email"));
+
+                if (!strEmail.equals(account.getEmail())) {
+                    userDBHandler.addUserInfo(account.getEmail(), account.getId());
+
+                }
+            } catch (Exception e) {
                 userDBHandler.addUserInfo(account.getEmail(), account.getId());
             }
+
 
             // Signed in successfully, show authenticated UI.
             updateUI(account);

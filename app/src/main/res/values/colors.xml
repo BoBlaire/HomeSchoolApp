@@ -10,5 +10,6 @@
     <color name="gray">#36454F</color>
     <color name="light_gray">#71797E</color>
     <color name="grayer">#353738</color>
-
+    <color name="colorPrimaryDark">#FF4081</color>
+    <color name="background">#353738</color>
 </resources>

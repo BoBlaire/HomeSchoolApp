@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GFG App</string>
+    <string name="app_name">Toxic HomeSchool</string>
     <string name="course_name">Course Name</string>
     <string name="course_tracks">Tracks</string>
     <string name="duration">Duration</string>
@@ -35,7 +35,11 @@
     <string name="grade">Grade</string>
     <string name="add_student">Add Student</string>
 
-
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
+    <string name="logo_description">App Logo</string>
 
 
 </resources>

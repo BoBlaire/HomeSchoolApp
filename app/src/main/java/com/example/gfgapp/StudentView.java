@@ -49,10 +49,16 @@ public class StudentView extends AppCompatActivity {
 //            courseModelArrayList = studentDBHandler.readStudents(mainModal.getUserEmail());
 
         System.out.println("view: "+mainModal.getGoogleEmail());
-        if (mainModal.getGoogleEmail() == null) {
-            mainModal.setGoogleEmail("00000@gmail.com");
-        }
+
+
+        if (mainModal.getGoogleEmail() != null) {
             courseModelArrayList = studentDBHandler.readStudents(mainModal.getGoogleEmail());
+        } else if (mainModal.getGoogleEmail() == null) {
+            courseModelArrayList = studentDBHandler.readStudents(mainModal.getUserEmail());
+        }
+
+
+
 
 
 
