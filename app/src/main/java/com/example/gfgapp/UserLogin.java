@@ -6,11 +6,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,7 +27,7 @@ public class UserLogin extends AppCompatActivity {
     private static final int RC_SIGN_IN = 718;
     EditText userEmail, userPassword;
 
-    TextView signup;
+    TextView signup, forgotPassword;
     Button button, buttonSignUp;
     MainModal mainModal = MainActivity.mainModal;
     private UserDBHandler userDBHandler;
@@ -49,6 +46,9 @@ public class UserLogin extends AppCompatActivity {
         button = findViewById(R.id.buttonLogin);
         buttonSignUp = findViewById(R.id.buttonSignUp);
         signup = findViewById(R.id.signup);
+        forgotPassword = findViewById(R.id.forgotPassword);
+
+
         // Set the dimensions of the sign-in button.
         SignInButton signInButton = findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
@@ -68,6 +68,26 @@ public class UserLogin extends AppCompatActivity {
             Intent i = new Intent(UserLogin.this, SignUp.class);
             startActivity(i);
         });
+
+        forgotPassword.setOnClickListener(V -> {
+            // define Intent object with action attribute as ACTION_SEND
+//            Intent intent = new Intent(Intent.ACTION_SEND);
+//
+//            // add three fields to intent using putExtra function
+//            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{emailsend});
+//            intent.putExtra(Intent.EXTRA_SUBJECT, "Password Reset");
+//            intent.putExtra(Intent.EXTRA_TEXT, emailbody);
+//
+//            // set type of intent
+//            intent.setType("message/rfc822");
+//
+//            // startActivity with intent with chooser as Email client using createChooser function
+//            startActivity(Intent.createChooser(intent, "Choose an Email client :"));
+            Intent i = new Intent(UserLogin.this, ForgotPassword.class);
+            startActivity(i);
+        });
+
+
 
 
 //        click listener to login

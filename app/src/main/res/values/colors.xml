@@ -11,5 +11,6 @@
     <color name="light_gray">#71797E</color>
     <color name="grayer">#353738</color>
     <color name="colorPrimaryDark">#FF4081</color>
+    <color name="colorPrimaryLight">#D1D1D1</color>
     <color name="background">#353738</color>
 </resources>
