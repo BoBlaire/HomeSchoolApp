@@ -64,6 +64,8 @@ public class ForgotPassword extends AppCompatActivity {
                             Toast.makeText(c, "Sending... Please wait", Toast.LENGTH_LONG).show();
                         }
                     });
+                    Intent i = new Intent(ForgotPassword.this, ForgotPassword.class);
+                    startActivity(i);
                     sendEmail(str_to, "Password Reset", "This is your six digit code you will use to authenticate for use of resetting your password. \n\n Your code is: "+getRandomNumberString());
                 }else{
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
