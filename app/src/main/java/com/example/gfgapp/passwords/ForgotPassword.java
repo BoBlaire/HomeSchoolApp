@@ -1,4 +1,4 @@
-package com.example.gfgapp;
+package com.example.gfgapp.passwords;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,16 +9,17 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.gfgapp.MainActivity;
+import com.example.gfgapp.R;
+import com.example.gfgapp.email.GMailSender;
+import com.example.gfgapp.modal.MainModal;
 
 import java.util.Random;
 
@@ -26,7 +27,7 @@ public class ForgotPassword extends AppCompatActivity {
     EditText email;
     Button sendEmail;
 
-
+    MainModal mainModal = MainActivity.mainModal;
     EditText et_to, et_message, et_subject;
     Button btn_send;
     Context c;
@@ -43,17 +44,15 @@ public class ForgotPassword extends AppCompatActivity {
 
         email = findViewById(R.id.userEmail);
         sendEmail = findViewById(R.id.sendEmail);
-
         sendEmail.setOnClickListener(v -> {
-
 
             String str_to = email.getText().toString();
 
-            if (!str_to.equals("")){
+            if (!str_to.equals("")) {
 
 
                 //Check if 'To:' field is a valid email
-                if (isValidEmail(str_to)){
+                if (isValidEmail(str_to)) {
                     email.setError(null);
 
 
@@ -64,10 +63,14 @@ public class ForgotPassword extends AppCompatActivity {
                             Toast.makeText(c, "Sending... Please wait", Toast.LENGTH_LONG).show();
                         }
                     });
-                    Intent i = new Intent(ForgotPassword.this, ForgotPassword.class);
+                    String randomNum = getRandomNumberString();
+
+                    Intent i = new Intent(ForgotPassword.this, GoogleVerification.class);
                     startActivity(i);
-                    sendEmail(str_to, "Password Reset", "This is your six digit code you will use to authenticate for use of resetting your password. \n\n Your code is: "+getRandomNumberString());
-                }else{
+                    mainModal.setEmail(str_to);
+                    mainModal.setGoogleVerification(randomNum);
+                    sendEmail(str_to, "Password Reset", "This is your six digit code you will use to authenticate for use of resetting your password. \n\n Your code is: " + randomNum);
+                } else {
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
@@ -76,21 +79,10 @@ public class ForgotPassword extends AppCompatActivity {
                         }
                     });
                 }
-
-
-            }else{
+            } else {
                 Toast.makeText(c, "There are empty fields.", Toast.LENGTH_LONG).show();
             }
-
-
         });
-
-
-
-
-
-
-
         c = this;
     }
 
@@ -118,7 +110,7 @@ public class ForgotPassword extends AppCompatActivity {
                             message,
                             GMail,
                             to);
-                    Log.w("sendEmail","Email successfully sent!");
+                    Log.w("sendEmail", "Email successfully sent!");
 
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
@@ -136,11 +128,8 @@ public class ForgotPassword extends AppCompatActivity {
                             Toast.makeText(c, "Email not sent. \n\n Error: " + e.getMessage().toString(), Toast.LENGTH_LONG).show();
                         }
                     });
-
-
                 }
             }
-
         }).start();
     }
 

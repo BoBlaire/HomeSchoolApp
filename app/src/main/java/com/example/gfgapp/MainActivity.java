@@ -4,17 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -24,9 +19,12 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.gfgapp.databases.*;
+import com.example.gfgapp.modal.CourseModal;
+import com.example.gfgapp.modal.MainModal;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -47,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView courseRV;
     private CourseRVAdapter courseRVAdapter;
     private TextView name;
-    static MainModal mainModal = new MainModal();
+    public static MainModal mainModal = new MainModal();
 
 //    private AutoCompleteTextView studentCore, studentSubject;
 

@@ -1,4 +1,4 @@
-package com.example.gfgapp;
+package com.example.gfgapp.ui.login;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
@@ -14,6 +14,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.gfgapp.passwords.ForgotPassword;
+import com.example.gfgapp.MainActivity;
+import com.example.gfgapp.modal.MainModal;
+import com.example.gfgapp.R;
+import com.example.gfgapp.modal.StudentModal;
+import com.example.gfgapp.StudentView;
+import com.example.gfgapp.databases.UserDBHandler;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;

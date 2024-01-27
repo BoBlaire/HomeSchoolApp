@@ -18,13 +18,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GFGApp">
         <activity
-            android:name=".PasswordReset"
+            android:name=".passwords.ChangePassword"
             android:exported="false" />
         <activity
-            android:name=".ForgotPassword"
+            android:name=".passwords.GoogleVerification"
             android:exported="false" />
         <activity
-            android:name=".SignUp"
+            android:name=".passwords.ForgotPassword"
+            android:exported="false" />
+        <activity
+            android:name=".ui.login.SignUp"
             android:exported="false" />
 
         <meta-data
@@ -32,7 +35,7 @@
             android:value=".MainActivity" />
 
         <activity
-            android:name=".UserLogin"
+            android:name=".ui.login.UserLogin"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,15 +45,6 @@
         </activity>
         <activity
             android:name=".StudentView"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".SplashPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -93,15 +87,6 @@
         </activity>
         <activity
             android:name=".AddStudent"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".BTDeviceList"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

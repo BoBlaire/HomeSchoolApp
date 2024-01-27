@@ -1,9 +1,7 @@
 package com.example.gfgapp;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +9,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.gfgapp.databases.DBHandler;
+import com.example.gfgapp.modal.MainModal;
+import com.example.gfgapp.modal.StudentModal;
 
 import java.util.ArrayList;
 

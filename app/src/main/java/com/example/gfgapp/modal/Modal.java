@@ -1,4 +1,4 @@
-package com.example.gfgapp;
+package com.example.gfgapp.modal;
 
 import android.content.Context;
 import android.util.DisplayMetrics;

@@ -1,4 +1,4 @@
-package com.example.gfgapp;
+package com.example.gfgapp.email;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

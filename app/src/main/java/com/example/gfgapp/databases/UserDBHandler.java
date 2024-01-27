@@ -1,11 +1,12 @@
-package com.example.gfgapp;
+package com.example.gfgapp.databases;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.gfgapp.modal.CourseModal;
 
 /*
     Name=Name
@@ -13,7 +14,7 @@ import android.database.sqlite.SQLiteOpenHelper;
     Tracks=Hours
     Description=Core
 */
-class UserDBHandler extends SQLiteOpenHelper {
+public class UserDBHandler extends SQLiteOpenHelper {
 
     /* creating a constant variables for our database.
        below variable is for our database name. */
@@ -96,6 +97,22 @@ class UserDBHandler extends SQLiteOpenHelper {
 
         /* at last we are closing our
            database after adding database. */
+        db.close();
+    }
+
+    public void updateCourse(String newPassword, String email) {
+
+        // calling a method to get writable database.
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        /* on below line we are passing all values
+           along with its key and value pair. */
+        values.put(PASSWORD_COL, newPassword);
+
+        /* on below line we are calling a update method to update our database and passing our values.
+           and we are comparing it with name of our course which is stored in original name variable. */
+        db.update(USER_TABLE_NAME, values, "email=?", new String[]{email});
         db.close();
     }
 

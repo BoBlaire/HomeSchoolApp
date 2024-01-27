@@ -1,6 +1,9 @@
-package com.example.gfgapp;
+package com.example.gfgapp.email;
 
 
+
+import com.example.gfgapp.email.ByteArrayDataSource;
+import com.example.gfgapp.email.JSSEProvider;
 
 import java.security.Security;
 import java.util.Properties;

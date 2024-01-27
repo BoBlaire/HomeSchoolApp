@@ -1,9 +1,27 @@
-package com.example.gfgapp;
+package com.example.gfgapp.modal;
 
 public class MainModal {
 private String userEmail;
 private String userName;
 private String googleEmail;
+private String googleVerification;
+private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getGoogleVerification() {
+        return googleVerification;
+    }
+
+    public void setGoogleVerification(String googleVerification) {
+        this.googleVerification = googleVerification;
+    }
 
     public String getGoogleEmail() {
         return googleEmail;

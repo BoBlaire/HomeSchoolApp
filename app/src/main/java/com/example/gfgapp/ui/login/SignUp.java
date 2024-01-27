@@ -1,4 +1,4 @@
-package com.example.gfgapp;
+package com.example.gfgapp.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,8 +8,12 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.gfgapp.MainActivity;
+import com.example.gfgapp.R;
+import com.example.gfgapp.databases.UserDBHandler;
+import com.example.gfgapp.modal.MainModal;
 
 public class SignUp extends AppCompatActivity {
 

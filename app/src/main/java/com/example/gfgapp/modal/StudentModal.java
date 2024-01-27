@@ -1,4 +1,4 @@
-package com.example.gfgapp;
+package com.example.gfgapp.modal;
 
 public class StudentModal {
 

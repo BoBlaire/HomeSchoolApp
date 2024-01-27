@@ -1,27 +1,20 @@
 package com.example.gfgapp;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.PointF;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
+import com.example.gfgapp.databases.DBHandler;
+import com.example.gfgapp.modal.CourseModal;
+import com.example.gfgapp.modal.Modal;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHolder> {

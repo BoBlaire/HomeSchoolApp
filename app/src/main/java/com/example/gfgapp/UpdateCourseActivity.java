@@ -12,7 +12,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ComponentActivity;
+
+import com.example.gfgapp.databases.DBHandler;
+import com.example.gfgapp.modal.Modal;
 
 import java.util.Objects;
 

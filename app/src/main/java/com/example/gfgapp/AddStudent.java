@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.gfgapp.databases.StudentDBHandler;
+import com.example.gfgapp.modal.MainModal;
+
 public class AddStudent extends AppCompatActivity {
 
     EditText studentName, studentGrade;

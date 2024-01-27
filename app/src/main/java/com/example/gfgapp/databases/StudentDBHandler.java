@@ -1,11 +1,15 @@
-package com.example.gfgapp;
+package com.example.gfgapp.databases;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.gfgapp.modal.CourseModal;
+import com.example.gfgapp.MainActivity;
+import com.example.gfgapp.modal.MainModal;
+import com.example.gfgapp.modal.StudentModal;
 
 import java.util.ArrayList;
 
@@ -15,7 +19,7 @@ import java.util.ArrayList;
     Tracks=Hours
     Description=Core
 */
-class StudentDBHandler extends SQLiteOpenHelper {
+public class StudentDBHandler extends SQLiteOpenHelper {
 
     /* creating a constant variables for our database.
        below variable is for our database name. */
