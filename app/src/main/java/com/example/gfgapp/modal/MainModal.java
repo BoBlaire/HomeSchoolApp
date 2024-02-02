@@ -1,11 +1,23 @@
 package com.example.gfgapp.modal;
 
+import java.util.ArrayList;
+
 public class MainModal {
-private String userEmail;
-private String userName;
-private String googleEmail;
-private String googleVerification;
-private String email;
+    private String userEmail;
+    private String userName;
+    private String googleEmail;
+    private String googleVerification;
+    private String email;
+
+    public ArrayList<CourseModal> getArrayList() {
+        return arrayList;
+    }
+
+    public void setArrayList(ArrayList<CourseModal> arrayList) {
+        this.arrayList = arrayList;
+    }
+
+    private ArrayList<CourseModal> arrayList;
 
     public String getEmail() {
         return email;

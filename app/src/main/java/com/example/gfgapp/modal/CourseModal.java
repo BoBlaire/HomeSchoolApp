@@ -1,5 +1,7 @@
 package com.example.gfgapp.modal;
 
+import com.google.firebase.firestore.DocumentId;
+
 public class CourseModal {
 
     /* variables for our studentName,
@@ -9,6 +11,18 @@ public class CourseModal {
     private String studentHours;
     private String studentCore;
     private String descrip;
+
+    public String getDocId() {
+        return docId;
+    }
+
+    public void setDocId(String docId) {
+        this.docId = docId;
+    }
+
+    @DocumentId
+    private String docId;
+
 
     public String getDescrip() {
         return descrip;
@@ -66,7 +80,6 @@ public class CourseModal {
     int i = 0;
 
     // creating getter and setter methods
-    
 
 
     public int getId() {
@@ -78,12 +91,13 @@ public class CourseModal {
     }
 
     // constructor
-    public CourseModal(String studentName, String studentSubject, String studentHours, String studentCore, String description) {
+    public CourseModal(String studentName, String studentSubject, String studentHours, String studentCore, String description, String docId) {
         this.studentName = studentName;
         this.studentSubject = studentSubject;
         this.studentHours = studentHours;
         this.studentCore = studentCore;
         this.descrip = description;
+        this.docId = docId;
     }
 
 

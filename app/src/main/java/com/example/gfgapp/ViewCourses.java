@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.gfgapp.dataadapter.AddInfo;
 import com.example.gfgapp.databases.DBHandler;
 import com.example.gfgapp.modal.CourseModal;
 import com.example.gfgapp.modal.MainModal;
@@ -40,6 +41,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class ViewCourses extends AppCompatActivity {
 
@@ -47,6 +49,15 @@ public class ViewCourses extends AppCompatActivity {
     // dbhandler, adapter and recycler view.
     private ArrayList<CourseModal> courseModalArrayList;
     private DBHandler dbHandler;
+
+    public ArrayList<CourseModal> getCourseModalArrayList() {
+        return courseModalArrayList;
+    }
+
+    public void setCourseModalArrayList(ArrayList<CourseModal> courseModalArrayList) {
+        this.courseModalArrayList = courseModalArrayList;
+    }
+
     private CourseRVAdapter courseRVAdapter;
     private RecyclerView coursesRV;
     private Context context;
@@ -68,6 +79,41 @@ public class ViewCourses extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_courses);
 
+
+        AddInfo addInfo = new AddInfo();
+
+        // Call the retrieveData method with the callback
+//        System.out.println("true?: "+mainModal.getGoogleEmail().isEmpty());
+
+
+        try {
+            if (mainModal.getGoogleEmail().isEmpty()) {
+            } else {
+                addInfo.retrieveData(mainModal.getUserName(), mainModal.getGoogleEmail(), new AddInfo.FirestoreCallback() {
+                    @Override
+                    public void onCallback(ArrayList<CourseModal> arrayValue) {
+                        // Handle the retrieved data here
+                        // The 'arrayValue' variable contains the data.
+
+                        // Update your UI or perform other actions with the retrieved data
+                        updateUIWithData(arrayValue);
+                    }
+                });
+            }
+        } catch (Exception e) {
+            addInfo.retrieveData(mainModal.getUserName(), mainModal.getUserEmail(), new AddInfo.FirestoreCallback() {
+                @Override
+                public void onCallback(ArrayList<CourseModal> arrayValue) {
+                    // Handle the retrieved data here
+                    // The 'arrayValue' variable contains the data.
+
+                    // Update your UI or perform other actions with the retrieved data
+                    updateUIWithData(arrayValue);
+                }
+            });
+        }
+
+
         // Getting display size
         WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
@@ -82,7 +128,6 @@ public class ViewCourses extends AppCompatActivity {
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) FloatingActionButton buttonHome = findViewById(R.id.buttonHome);
 
 
-
         toolbar.setTitle("Home School Records");
         // using toolbar as ActionBar
         setSupportActionBar(toolbar);
@@ -92,14 +137,6 @@ public class ViewCourses extends AppCompatActivity {
         courseModalArrayList = new ArrayList<>();
         dbHandler = new DBHandler(ViewCourses.this);
 
-
-        // list from db handler class.
-        System.out.println("Name: " + mainModal.getUserName());
-        try {
-            courseModalArrayList = dbHandler.readCourses(mainModal.getUserName(), mainModal.getUserEmail());
-        } catch (Exception e) {
-            courseModalArrayList = dbHandler.readCourses(mainModal.getUserName(), mainModal.getGoogleEmail());
-        }
         // on below line passing our array lost to our adapter class.
         courseRVAdapter = new CourseRVAdapter(courseModalArrayList, ViewCourses.this);
         coursesRV = findViewById(R.id.idRVCourses);
@@ -124,6 +161,7 @@ public class ViewCourses extends AppCompatActivity {
 
         // setting our adapter to recycler view.
         coursesRV.setAdapter(courseRVAdapter);
+
     }
 
     @Override
@@ -263,4 +301,15 @@ public class ViewCourses extends AppCompatActivity {
             courseRVAdapter.filterList(filteredlist);
         }
     }
+
+    private void updateUIWithData(ArrayList<CourseModal> data) {
+        // Update your UI or perform other actions with the retrieved data
+        // For example, update the adapter or any other UI components.
+        courseModalArrayList.clear();
+        courseModalArrayList.addAll(data);
+        courseRVAdapter.notifyDataSetChanged();
+    }
+
+    // Implement the onItemClick method
+
 }

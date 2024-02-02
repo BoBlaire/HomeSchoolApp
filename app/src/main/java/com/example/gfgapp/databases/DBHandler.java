@@ -116,36 +116,36 @@ public class DBHandler extends SQLiteOpenHelper {
 
 
     // we have created a new method for reading all the courses.
-    public ArrayList<CourseModal> readCourses(String name, String email) {
-        /* on below line we are creating a
-           database for reading our database. */
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        // on below line we are creating a cursor with query to read data from database.
-        Cursor cursorCourses = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + NAME_COL + " = ?" + " AND " + EMAIL_COL + " = ?", new String[]{name, email});
-
-        // on below line we are creating a new array list.
-        ArrayList<CourseModal> courseModalArrayList = new ArrayList<>();
-
-        // moving our cursor to first position.
-        if (cursorCourses.moveToFirst()) {
-            do {
-                // on below line we are adding the data from cursor to our array list.
-                courseModalArrayList.add(new CourseModal(
-                        cursorCourses.getString(1),
-                        cursorCourses.getString(2),
-                        cursorCourses.getString(3),
-                        cursorCourses.getString(4),
-                        cursorCourses.getString(5)
-                ));
-            } while (cursorCourses.moveToNext());
-            // moving our cursor to next.
-        }
-        /* at last closing our cursor
-           and returning our array list. */
-        cursorCourses.close();
-        return courseModalArrayList;
-    }
+//    public ArrayList<CourseModal> readCourses(String name, String email) {
+//        /* on below line we are creating a
+//           database for reading our database. */
+//        SQLiteDatabase db = this.getReadableDatabase();
+//
+//        // on below line we are creating a cursor with query to read data from database.
+//        Cursor cursorCourses = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + NAME_COL + " = ?" + " AND " + EMAIL_COL + " = ?", new String[]{name, email});
+//
+//        // on below line we are creating a new array list.
+//        ArrayList<CourseModal> courseModalArrayList = new ArrayList<>();
+//
+//        // moving our cursor to first position.
+//        if (cursorCourses.moveToFirst()) {
+//            do {
+//                // on below line we are adding the data from cursor to our array list.
+//                courseModalArrayList.add(new CourseModal(
+//                        cursorCourses.getString(1),
+//                        cursorCourses.getString(2),
+//                        cursorCourses.getString(3),
+//                        cursorCourses.getString(4),
+//                        cursorCourses.getString(5)
+//                ));
+//            } while (cursorCourses.moveToNext());
+//            // moving our cursor to next.
+//        }
+//        /* at last closing our cursor
+//           and returning our array list. */
+//        cursorCourses.close();
+//        return courseModalArrayList;
+//    }
 
     // below is the method for updating our courses
     public void updateCourse(String orgStudentName, String studentName, String studentSubject,

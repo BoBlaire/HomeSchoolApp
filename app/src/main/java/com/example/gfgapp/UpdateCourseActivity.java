@@ -13,9 +13,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.gfgapp.dataadapter.UpdateInfo;
 import com.example.gfgapp.databases.DBHandler;
 import com.example.gfgapp.modal.Modal;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class UpdateCourseActivity extends AppCompatActivity {
@@ -24,7 +27,7 @@ public class UpdateCourseActivity extends AppCompatActivity {
     private EditText studentNameUpd, studentHoursUpd, studentSubjectUpd, studentCoreUpd, studentDescriptionUpd;
     private Button updateCourseBtn, deleteCourseBtn;
     private DBHandler dbHandler;
-    String studentName, studentCore, studentSubject, studentHours, id, description;
+    String studentName, studentCore, studentSubject, studentHours, documentId, description;
     private int idPos;
     CourseRVAdapter courseRVAdapter;
     String adapterUpdate;
@@ -56,15 +59,8 @@ public class UpdateCourseActivity extends AppCompatActivity {
         studentSubject = getIntent().getStringExtra("subject");
         studentHours = getIntent().getStringExtra("hours");
         studentCore = getIntent().getStringExtra("core");
-        idPos = Integer.parseInt(Objects.requireNonNull(getIntent().getStringExtra("id")));
         description = getIntent().getStringExtra("description");
-
-
-        /* setting data to edit text
-           of our update activity. */
-        Cursor cursor = dbHandler.getDbId(studentName);
-        Cursor cursorAdapter = dbHandler.getDbIdTrue(studentName);
-        modal = ViewCourses.modal;
+        documentId = getIntent().getStringExtra("documentId");
 
 
         studentNameUpd.setText(studentName);
@@ -72,8 +68,6 @@ public class UpdateCourseActivity extends AppCompatActivity {
         studentHoursUpd.setText(studentHours);
         studentCoreUpd.setText(studentCore);
         studentDescriptionUpd.setText(description);
-
-        System.out.println(modal.isAdapterStatement());
 
 
         String[] core = getResources().getStringArray(R.array.Core);
@@ -86,71 +80,54 @@ public class UpdateCourseActivity extends AppCompatActivity {
         studentSubjectUpd.setAdapter(adapterSubjects);
 
 
-        // adding on click listener to our update course button.
+//         adding on click listener to our update course button.
         updateCourseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /* inside this method we are calling an update course
-                   method and passing all our edit text values. */
 
-                if (modal.isAdapterStatement()) {
-                    if (cursorAdapter.moveToPosition(idPos)) {
-                        String str = cursorAdapter.getString(cursorAdapter.getColumnIndex("id"));
+                String collectionName = "homeschool";
+
+                Map<String, Object> updates = new HashMap<>();
+                updates.put("name", studentNameUpd.getText().toString());
+                updates.put("subject", studentSubjectUpd.getText().toString());
+                updates.put("hours", studentHoursUpd.getText().toString());
+                updates.put("core", studentCoreUpd.getText().toString());
+                updates.put("description", studentDescriptionUpd.getText().toString());
 
 
-                        System.out.println(str);
-                        dbHandler.updateCourse(str, studentNameUpd.getText().toString(), studentSubjectUpd.getText().toString(), studentHoursUpd.getText().toString(), studentCoreUpd.getText().toString(), studentDescriptionUpd.getText().toString());
-
-                        // displaying a toast message that our course has been updated.
+                UpdateInfo.updateDocument(collectionName, documentId, updates, new UpdateInfo.FirestoreUpdateCallback() {
+                    @Override
+                    public void onSuccess() {
+                        // Handle success
+                        // For example, display a toast or update the UI
                         Toast.makeText(UpdateCourseActivity.this, "Course Updated..", Toast.LENGTH_SHORT).show();
-                        modal.setAdapterStatement(false);
-                        // launching our main activity.
-                        Intent i = new Intent(UpdateCourseActivity.this, ViewCourses.class);
-                        startActivity(i);
-                    }
-                } else {
-                    if (cursor.moveToPosition(idPos)) {
-                        String str = cursor.getString(cursor.getColumnIndex("id"));
-
-
-                        System.out.println(str);
-                        dbHandler.updateCourse(str, studentNameUpd.getText().toString(), studentSubjectUpd.getText().toString(), studentHoursUpd.getText().toString(), studentCoreUpd.getText().toString(), studentDescriptionUpd.getText().toString());
-
-                        // displaying a toast message that our course has been updated.
-                        Toast.makeText(UpdateCourseActivity.this, "Course Updated..", Toast.LENGTH_SHORT).show();
-
-                        // launching our main activity.
                         Intent i = new Intent(UpdateCourseActivity.this, ViewCourses.class);
                         startActivity(i);
                     }
 
-                }
+                    @Override
+                    public void onFailure(Exception e) {
+                        // Handle failure
+                        // For example, display an error message
+                        Toast.makeText(UpdateCourseActivity.this, "Error Adding Information", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
-        // adding on click listener for delete button to delete our course.
+       // adding on click listener for delete button to delete our course.
         deleteCourseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(idPos);
-                if (modal.isAdapterStatement()) {
-                    if (cursorAdapter.moveToPosition(idPos)) {
-                        // calling a method to delete our course.
-                        String str = cursorAdapter.getString(cursorAdapter.getColumnIndex("id"));
-                        dbHandler.deleteCourse(str);
-                        Toast.makeText(UpdateCourseActivity.this, "Deleted the course", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(UpdateCourseActivity.this, ViewCourses.class);
-                        startActivity(i);
-                    }
-                } else {
-                    if (cursor.moveToPosition(idPos)) {
-                        // calling a method to delete our course.
-                        String str = cursor.getString(cursor.getColumnIndex("id"));
-                        dbHandler.deleteCourse(str);
-                        Toast.makeText(UpdateCourseActivity.this, "Deleted the course", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(UpdateCourseActivity.this, ViewCourses.class);
-                        startActivity(i);
-                    }
+
+                try {
+                    UpdateInfo updateInfo = new UpdateInfo();
+                    updateInfo.deleteRecord(documentId);
+
+                    Intent i = new Intent(UpdateCourseActivity.this, ViewCourses.class);
+                    startActivity(i);
+                } catch (Exception e) {
+                    Toast.makeText(UpdateCourseActivity.this, "Error: " + e, Toast.LENGTH_SHORT).show();
                 }
             }
         });

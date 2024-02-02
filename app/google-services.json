@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "797331208393",
+    "project_id": "homeschoolop",
+    "storage_bucket": "homeschoolop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:797331208393:android:cc65786cfeaa617749f518",
+        "android_client_info": {
+          "package_name": "com.example.gfgapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnKtgBTlvcVDSl5Qh3Pkqqo3lcdC2LvwA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

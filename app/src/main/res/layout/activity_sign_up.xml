@@ -13,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:paddingTop="28dp"
-        android:paddingBottom="28dp"
+        android:paddingTop="28sp"
+        android:paddingBottom="28sp"
         android:text="Sign Up"
         android:textColor="@color/white"
         android:textSize="24sp" />

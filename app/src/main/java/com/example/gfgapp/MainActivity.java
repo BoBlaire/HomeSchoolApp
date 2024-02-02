@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.gfgapp.dataadapter.AddInfo;
 import com.example.gfgapp.databases.*;
 import com.example.gfgapp.modal.CourseModal;
 import com.example.gfgapp.modal.MainModal;
@@ -91,8 +92,30 @@ public class MainActivity extends AppCompatActivity {
 
         studentName.setText(mainModal.getUserName());
 
-
+//                FirebaseFirestore db = FirebaseFirestore.getInstance();
 //
+//
+//        // Create a new user with a first and last name
+//        Map<String, Object> user = new HashMap<>();
+//        user.put("id", "210793");
+//
+//
+//        // Add a new document with a generated ID
+//        db.collection("id")
+//                .add(user)
+//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                    @Override
+//                    public void onSuccess(DocumentReference documentReference) {
+//                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.w(TAG, "Error adding document", e);
+//                    }
+//                });
+
         String[] core = getResources().getStringArray(R.array.Core);
         String[] subjects = getResources().getStringArray(R.array.Subjects);
 
@@ -103,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         studentSubject.setAdapter(adapterSubjects);
 
         addCourseBtn.setOnClickListener(v -> {
-
+            AddInfo addInfo = new AddInfo();
             // below line is to get data from all edit text fields.
             String studentNameDb = studentName.getText().toString();
             String studentSubjectDb = studentSubject.getText().toString();
@@ -122,13 +145,13 @@ public class MainActivity extends AppCompatActivity {
             } else {
 
 
-               if(mainModal.getUserEmail() == null) {
-                   dbHandler.addNewCourse(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df, mainModal.getGoogleEmail(), studentDescDb);
-               } else {
-                   dbHandler.addNewCourse(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df, mainModal.getUserEmail(), studentDescDb);
-               }
-
-
+                if (mainModal.getUserEmail() == null) {
+                    dbHandler.addNewCourse(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df, mainModal.getGoogleEmail(), studentDescDb);
+                    addInfo.enterData(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df, mainModal.getGoogleEmail(), studentDescDb);
+                } else {
+                    dbHandler.addNewCourse(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df, mainModal.getUserEmail(), studentDescDb);
+                    addInfo.enterData(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df, mainModal.getUserEmail(), studentDescDb);
+                }
 
 
                 Toast.makeText(MainActivity.this, "Course has been added.", Toast.LENGTH_SHORT).show();
