@@ -28,6 +28,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class UserLogin extends AppCompatActivity {
 
@@ -40,6 +44,9 @@ public class UserLogin extends AppCompatActivity {
     private UserDBHandler userDBHandler;
 
     static StudentModal studentModal;
+
+    private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore firebaseFirestore;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -77,24 +84,9 @@ public class UserLogin extends AppCompatActivity {
         });
 
         forgotPassword.setOnClickListener(V -> {
-            // define Intent object with action attribute as ACTION_SEND
-//            Intent intent = new Intent(Intent.ACTION_SEND);
-//
-//            // add three fields to intent using putExtra function
-//            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{emailsend});
-//            intent.putExtra(Intent.EXTRA_SUBJECT, "Password Reset");
-//            intent.putExtra(Intent.EXTRA_TEXT, emailbody);
-//
-//            // set type of intent
-//            intent.setType("message/rfc822");
-//
-//            // startActivity with intent with chooser as Email client using createChooser function
-//            startActivity(Intent.createChooser(intent, "Choose an Email client :"));
             Intent i = new Intent(UserLogin.this, ForgotPassword.class);
             startActivity(i);
         });
-
-
 
 
 //        click listener to login
@@ -117,114 +109,37 @@ public class UserLogin extends AppCompatActivity {
             String userEmailLogin = userEmail.getText().toString();
             String userPasswordLogin = userPassword.getText().toString();
 
-            //passing those two fields and getting our cursor back
-            Cursor cursorEmail = userDBHandler.retrieveEmail(userEmailLogin);
-            Cursor cursorPass = userDBHandler.retrievePassword(userPasswordLogin);
 
             //try statement for login, it trys to login if not the catch says no email
-            try {
-
-                //passing cursors to get an actual variable back
-                @SuppressLint("Range") String strEmail = cursorEmail.getString(cursorEmail.getColumnIndex("email"));
-                @SuppressLint("Range") String strPass = cursorPass.getString(cursorPass.getColumnIndex("password"));
-
-                //Checking weather the login or signup is valid
-                if (userEmailLogin.isEmpty() || userPasswordLogin.isEmpty()) {
-                    Toast.makeText(UserLogin.this, "Please Fill Out All Fields", Toast.LENGTH_SHORT).show();
-                } else if (!userEmailLogin.isEmpty() || !userPasswordLogin.isEmpty()) {
-                    if (strEmail.equals(userEmailLogin) && strPass.equals(userPasswordLogin)) {
-                        mainModal.setUserEmail(strEmail);
-
-                        Toast.makeText(UserLogin.this, "Logged In!", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(UserLogin.this, StudentView.class);
-                        i.putExtra("name", userEmailLogin);
-                        startActivity(i);
-                    } else if (!strEmail.equals(userEmailLogin) || !strPass.equals(userPasswordLogin)) {
-                        Toast.makeText(UserLogin.this, "Email Or Password Incorrect!", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(UserLogin.this, "Something really went wrong..", Toast.LENGTH_SHORT).show();
-                }
-            } catch (Exception e) {
-
-                Toast.makeText(UserLogin.this, "No Account Attached To Email", Toast.LENGTH_SHORT).show();
+            if (userEmailLogin.isEmpty() || userPasswordLogin.isEmpty()) {
+                Toast.makeText(UserLogin.this, "Please Fill Out All Fields", Toast.LENGTH_SHORT).show();
+            } else if (!userEmailLogin.isEmpty() || !userPasswordLogin.isEmpty()) {
+                signInWithEmailAndPassword(userEmailLogin, userPasswordLogin);
+            } else {
+                Toast.makeText(UserLogin.this, "Something really went wrong..", Toast.LENGTH_SHORT).show();
             }
         });
-
-//        //click listener for signup
-//        buttonSignUp.setOnClickListener(v -> {
-//
-//            //getting text for cursor
-//            String userEmailLogin = userEmail.getText().toString();
-//            String userPasswordLogin = userPassword.getText().toString();
-//
-//            //passing text to cursor
-//            Cursor cursorEmail = userDBHandler.retrieveEmail(userEmailLogin);
-//            Cursor cursorPass = userDBHandler.retrievePassword(userPasswordLogin);
-//
-//            //trying to signup, and if theres an email already valid the try says email in use
-//            try {
-//                @SuppressLint("Range") String strEmail = cursorEmail.getString(cursorEmail.getColumnIndex("email"));
-//
-//                //Checking weather the login or signup is valid
-//                if (userEmailLogin.isEmpty() || userPasswordLogin.isEmpty()) {
-//                    Toast.makeText(UserLogin.this, "Please Fill Out All Fields", Toast.LENGTH_SHORT).show();
-//                } else if (!userEmailLogin.isEmpty() || !userPasswordLogin.isEmpty()) {
-//                    if (strEmail.equals(userEmailLogin)) {
-//                        Toast.makeText(UserLogin.this, "This Email Already In Use", Toast.LENGTH_SHORT).show();
-//                    } else if (strEmail.equals(userEmailLogin)) {
-//                        mainModal.setUserEmail(strEmail);
-//                        userDBHandler.addUserInfo(userEmailLogin, userPasswordLogin);
-//
-//                        Toast.makeText(UserLogin.this, "Signed Up!", Toast.LENGTH_SHORT).show();
-//
-//                        Intent i = new Intent(UserLogin.this, StudentView.class);
-//                        startActivity(i);
-//                    }
-//                } else {
-//                    Toast.makeText(UserLogin.this, "Something really went wrong..", Toast.LENGTH_SHORT).show();
-//                }
-//            } catch (Exception e) {
-//
-//                //Checking weather the login or signup is valid
-//                if (userEmailLogin.isEmpty() || userPasswordLogin.isEmpty()) {
-//                    Toast.makeText(UserLogin.this, "Please Fill Out All Fields", Toast.LENGTH_SHORT).show();
-//                } else if (!userEmailLogin.isEmpty() || !userPasswordLogin.isEmpty()) {
-//
-//                    mainModal.setUserEmail(userEmailLogin);
-//                    userDBHandler.addUserInfo(userEmailLogin, userPasswordLogin);
-//
-//                    Toast.makeText(UserLogin.this, "Signed Up!", Toast.LENGTH_SHORT).show();
-//
-//                    Intent i = new Intent(UserLogin.this, StudentView.class);
-//                    startActivity(i);
-//
-//                } else {
-//                    Toast.makeText(UserLogin.this, "Something really went wrong..", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
     }
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            mainModal.setGoogleEmail(account.getEmail());
-            System.out.println("account email: " + account.getEmail());
-
-            Cursor cursorEmail = userDBHandler.retrieveEmail(account.getEmail());
+            mainModal.setUserEmail(account.getEmail());
 
 
-            try {
-                @SuppressLint("Range") String strEmail = cursorEmail.getString(cursorEmail.getColumnIndex("email"));
+//            Cursor cursorEmail = userDBHandler.retrieveEmail(account.getEmail());
 
-                if (!strEmail.equals(account.getEmail())) {
-                    userDBHandler.addUserInfo(account.getEmail(), account.getId());
 
-                }
-            } catch (Exception e) {
-                userDBHandler.addUserInfo(account.getEmail(), account.getId());
-            }
+//            try {
+//                @SuppressLint("Range") String strEmail = cursorEmail.getString(cursorEmail.getColumnIndex("email"));
+//
+//                if (!strEmail.equals(account.getEmail())) {
+//                    userDBHandler.addUserInfo(account.getEmail(), account.getId());
+//
+//                }
+//            } catch (Exception e) {
+//                userDBHandler.addUserInfo(account.getEmail(), account.getId());
+//            }
 
 
             // Signed in successfully, show authenticated UI.
@@ -253,13 +168,6 @@ public class UserLogin extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        // Check for existing Google Sign In account, if the user is already signed in
-        // the GoogleSignInAccount will be non-null.
-//        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-//        if (account != null) {
-//            Intent intent = new Intent(UserLogin.this, StudentView.class);
-//            startActivity(intent);
-//        }
     }
 
     //Change UI according to user data.
@@ -273,5 +181,56 @@ public class UserLogin extends AppCompatActivity {
             Toast.makeText(this, "You Didn't signed in", Toast.LENGTH_LONG).show();
         }
 
+    }
+
+
+    public UserLogin() {
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+    }
+
+    public void signInWithEmailAndPassword(String email, String password) {
+
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // HoursAdapter successful
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
+                        if (user != null) {
+                            checkDatabaseForUser(user.getUid());
+                        }
+                    } else {
+                        // HoursAdapter failed
+                        // Handle the failure (e.g., show an error message)
+                        Toast.makeText(UserLogin.this, "HoursAdapter failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void checkDatabaseForUser(String userId) {
+
+        firebaseFirestore.collection("users").document(userId)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            // User found in the Firestore database
+                            // Do something with the user data
+                            mainModal.setUserEmail(userEmail.getText().toString());
+
+                            Intent i = new Intent(UserLogin.this, StudentView.class);
+                            startActivity(i);
+                        } else {
+                            // User not found in the Firestore database
+                            // Handle the case where the user is not registered
+                            Toast.makeText(UserLogin.this, "User Not Found", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        // Error accessing Firestore database
+                        // Handle the error (e.g., show an error message)
+                        Toast.makeText(UserLogin.this, "Error accessing Firestore: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView courseRV;
     private CourseRVAdapter courseRVAdapter;
     private TextView name;
+
     public static MainModal mainModal = new MainModal();
 
 //    private AutoCompleteTextView studentCore, studentSubject;

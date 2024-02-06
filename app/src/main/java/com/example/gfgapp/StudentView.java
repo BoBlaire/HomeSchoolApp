@@ -8,8 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.gfgapp.dataadapter.AddStudentDB;
 import com.example.gfgapp.databases.DBHandler;
-import com.example.gfgapp.databases.StudentDBHandler;
+//import com.example.gfgapp.databases.StudentDBHandler;
+import com.example.gfgapp.modal.CourseModal;
 import com.example.gfgapp.modal.MainModal;
 import com.example.gfgapp.modal.StudentModal;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -20,13 +22,17 @@ public class StudentView extends AppCompatActivity {
 
     FloatingActionButton addStudent;
 
-    StudentDBHandler studentDBHandler;
+//    StudentDBHandler studentDBHandler;
     String studentName;
 
     StudentAdapter studentAdapter;
 
     MainModal mainModal = MainActivity.mainModal;
     DBHandler dbHandler;
+
+    AddStudentDB addStudentDB;
+    private ArrayList<StudentModal> courseModelArrayList;
+    private  StudentAdapter courseAdapter;
 
 
     @SuppressLint("MissingInflatedId")
@@ -35,41 +41,33 @@ public class StudentView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rec_view);
 
-        addStudent = findViewById(R.id.addStudent);
-
-        studentDBHandler = new StudentDBHandler(StudentView.this);
-
-        dbHandler = new DBHandler(StudentView.this);
-
-        RecyclerView courseRV = findViewById(R.id.recyView);
-
-        // Here, we have created new array list and added data to it
-        ArrayList<StudentModal> courseModelArrayList = new ArrayList<StudentModal>();
-        ArrayList<StudentModal> courseModelArrayListBackup = new ArrayList<>();
-//        ArrayList<StudentModal> totalSubjectHours = new ArrayList<StudentModal>();
-//        courseModelArrayListBackup.add("00000@gmail.com");
-
-//            courseModelArrayList = studentDBHandler.readStudents(mainModal.getUserEmail());
-
-        System.out.println("view: "+mainModal.getGoogleEmail());
-
+        addStudentDB = new AddStudentDB(this);
 
         if (mainModal.getGoogleEmail() != null) {
-            courseModelArrayList = studentDBHandler.readStudents(mainModal.getGoogleEmail());
+            addStudentDB.readStudents(mainModal.getGoogleEmail(), new AddStudentDB.FirestoreCallback() {
+                @Override
+                public void onCallback(ArrayList<StudentModal> arrayValue) {
+                    updateUIWithData(arrayValue);
+                }
+            });
+
         } else if (mainModal.getGoogleEmail() == null) {
-            courseModelArrayList = studentDBHandler.readStudents(mainModal.getUserEmail());
+            addStudentDB.readStudents(mainModal.getUserEmail(), new AddStudentDB.FirestoreCallback() {
+                @Override
+                public void onCallback(ArrayList<StudentModal> arrayValue) {
+                    updateUIWithData(arrayValue);
+                }
+            });
         }
 
 
+        addStudent = findViewById(R.id.addStudent);
 
 
+        RecyclerView courseRV = findViewById(R.id.recyView);
+        courseModelArrayList = new ArrayList<StudentModal>();
 
-
-        studentAdapter = new StudentAdapter(StudentView.this, courseModelArrayList);
-
-
-        // we are initializing our adapter class and passing our arraylist to it.
-        StudentAdapter courseAdapter = new StudentAdapter(this, courseModelArrayList);
+        courseAdapter = new StudentAdapter(this, courseModelArrayList);
 
         // below line is for setting a layout manager for our recycler view.
         // here we are creating vertical list so we will provide orientation as vertical
@@ -88,5 +86,14 @@ public class StudentView extends AppCompatActivity {
         });
 
     }
+
+    private void updateUIWithData(ArrayList<StudentModal> data) {
+        // Update your UI or perform other actions with the retrieved data
+        // For example, update the adapter or any other UI components.
+        courseModelArrayList.clear();
+        courseModelArrayList.addAll(data);
+        courseAdapter.notifyDataSetChanged();
+    }
+
 }
 

@@ -1,6 +1,5 @@
 package com.example.gfgapp;
 
-import static com.google.firebase.database.DatabaseKt.getSnapshots;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,14 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gfgapp.databases.DBHandler;
 import com.example.gfgapp.modal.CourseModal;
 import com.example.gfgapp.modal.Modal;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +67,7 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
         holder.studentSubjectRV.setText(modal.getStudentSubject());
         holder.studentHoursRV.setText(modal.getStudentHours());
 
-//        String documentId = get
+
         // below line is to add on click listener for our recycler view item.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

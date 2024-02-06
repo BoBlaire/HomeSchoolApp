@@ -17,7 +17,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.gfgapp.dataadapter.AddInfo;
+import com.example.gfgapp.dataadapter.HoursAdapter;
 import com.example.gfgapp.databases.DBHandler;
+import com.example.gfgapp.email.PdfGenerator;
+import com.example.gfgapp.email.SendEmail;
 import com.example.gfgapp.modal.CourseModal;
 import com.example.gfgapp.modal.MainModal;
 import com.example.gfgapp.modal.Modal;
@@ -124,7 +127,7 @@ public class ViewCourses extends AppCompatActivity {
         modal.setScreeWidth(width_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) FloatingActionButton button = findViewById(R.id.buttonPanel);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) FloatingActionButton buttonDelete = findViewById(R.id.buttonDeleteAll);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) FloatingActionButton pdf = findViewById(R.id.pdfPrint);
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) FloatingActionButton buttonHome = findViewById(R.id.buttonHome);
 
 
@@ -151,7 +154,7 @@ public class ViewCourses extends AppCompatActivity {
             startActivity(i);
         });
         //calling delete all records
-        buttonDelete.setOnClickListener(v -> {
+        pdf.setOnClickListener(v -> {
             onBackPressed();
         });
         buttonHome.setOnClickListener(v -> {
@@ -167,36 +170,67 @@ public class ViewCourses extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
+        HoursAdapter hoursAdapter = new HoursAdapter();
+
+        hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Math", mainModal.getUserEmail(), "Yes", mathCore -> {
+            hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Math", mainModal.getUserEmail(), "No", math -> {
+                hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "English", mainModal.getUserEmail(), "Yes", englishCore -> {
+                    hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "English", mainModal.getUserEmail(), "No", english -> {
+                        hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Science", mainModal.getUserEmail(), "Yes", scienceCore -> {
+                            hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Science", mainModal.getUserEmail(), "No", science -> {
+                                hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "History", mainModal.getUserEmail(), "Yes", historyCore -> {
+                                    hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "History", mainModal.getUserEmail(), "No", history -> {
+                                        hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Pe", mainModal.getUserEmail(), "Yes", peCore -> {
+                                            hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Pe", mainModal.getUserEmail(), "No", pe -> {
+                                                hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Extracurriculars", mainModal.getUserEmail(), "Yes", extraCore -> {
+                                                    hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Extracurriculars", mainModal.getUserEmail(), "No", extra -> {
+                                                        hoursAdapter.getTotalHoursBySubjectAndCore(mainModal.getUserName(), mainModal.getUserEmail(), totalHours -> {
+                                                            String filePath = getFilesDir().getPath() + "/email.pdf";
+                                                            PdfGenerator.createPDF(filePath, mainModal.getUserName() + " has done great so far. He has a total of: " +totalHours+" hours\n\n This is a list of all the subjects core and non-core hours so far: \n\n Math Core: "+mathCore+"\n Math Non-Core: "+math+"\n History Core: "+historyCore+"\n History Non-Core: "+history+"\n English Core: "+englishCore+"\n English Non-Core: "+english+"\n Science Core: "+scienceCore+"\n Science Non-Core: "+science+math+"\n Pe Core: "+peCore+"\n Pe Non-Core: "+pe+"\n Extracurriculars Core: "+extraCore+"\n Extracurriculars Non-Core: "+extra+"\n\n That is all of his hours.");
+
+                                                        });
+                                                    });
+                                                });
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        });
+
+
+        SendEmail sendEmail = new SendEmail();
         // Create the object of AlertDialog Builder class
-        @SuppressLint("ResourceType") AlertDialog.Builder builder = new AlertDialog.Builder(ViewCourses.this, R.style.AlertDialogCustom);
+        AlertDialog.Builder builder = new AlertDialog.Builder(ViewCourses.this, R.style.AlertDialogCustom);
 
         // Instantiate DBHandler
-        dbHandler = new DBHandler(ViewCourses.this);
 
         // Set the message show for the Alert time
-        builder.setMessage("Do you want to delete all records?");
-
-        // Set Alert Title
-        builder.setTitle("Delete All Records");
+        builder.setTitle("Confirmation");
+        builder.setMessage("This will send a pdf file with all your child's hours, and a projected year end.");
 
         // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
         builder.setCancelable(false);
 
         // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
-        builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
+        builder.setPositiveButton("Yes", (dialog, which) -> {
             // When the user click yes button then app will close
-            dbHandler.massDeleteCourse(mainModal.getUserName());
-            dialog.dismiss();
-            finish();
 
-            startActivity(getIntent());
+
+            sendEmail.sendEmail(mainModal.getUserEmail(), mainModal.getUserName(), ViewCourses.this);
+//            dialog.dismiss();
+//            finish();
         });
 
         // Set the Negative button with No name Lambda OnClickListener method is use of DialogInterface interface.
-        builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
+        builder.setNegativeButton("No", (dialog, which) -> {
             // If user click no then dialog box is canceled.
-            dialog.cancel();
-            dialog.dismiss();
+//            dialog.cancel();
+//            dialog.dismiss();
         });
 
         // Create the Alert dialog
@@ -305,6 +339,7 @@ public class ViewCourses extends AppCompatActivity {
     private void updateUIWithData(ArrayList<CourseModal> data) {
         // Update your UI or perform other actions with the retrieved data
         // For example, update the adapter or any other UI components.
+
         courseModalArrayList.clear();
         courseModalArrayList.addAll(data);
         courseRVAdapter.notifyDataSetChanged();

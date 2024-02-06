@@ -16,7 +16,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:autoSizeTextType="uniform"/>
+            android:autoSizeTextType="uniform"
+
+            />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -77,8 +79,8 @@
         android:layout_gravity="bottom|left"
         android:layout_margin="16dp"
 
-        android:id="@+id/buttonDeleteAll"
-        android:src="@drawable/baseline_delete_24" />
+        android:id="@+id/pdfPrint"
+        android:src="@drawable/baseline_picture_as_pdf_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
