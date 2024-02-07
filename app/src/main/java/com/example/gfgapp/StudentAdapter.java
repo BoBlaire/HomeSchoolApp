@@ -1,33 +1,19 @@
 package com.example.gfgapp;
 
-import static com.example.gfgapp.passwords.ForgotPassword.isValidEmail;
-
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.gfgapp.dataadapter.AddInfo;
 import com.example.gfgapp.dataadapter.HoursAdapter;
-import com.example.gfgapp.databases.DBHandler;
-import com.example.gfgapp.email.PdfGenerator;
-import com.example.gfgapp.email.SendEmail;
-import com.example.gfgapp.modal.CourseModal;
 import com.example.gfgapp.modal.MainModal;
 import com.example.gfgapp.modal.StudentModal;
-import com.example.gfgapp.passwords.ForgotPassword;
-import com.example.gfgapp.passwords.GoogleVerification;
 
 import java.util.ArrayList;
 

@@ -4,7 +4,6 @@ import static androidx.recyclerview.widget.RecyclerView.VERTICAL;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +11,7 @@ import android.os.Bundle;
 import java.io.OutputStream;
 
 import android.bluetooth.BluetoothSocket;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -19,7 +19,8 @@ import android.widget.Toast;
 import com.example.gfgapp.dataadapter.AddInfo;
 import com.example.gfgapp.dataadapter.HoursAdapter;
 import com.example.gfgapp.databases.DBHandler;
-import com.example.gfgapp.email.PdfGenerator;
+import com.example.gfgapp.pdf.CustomAlertDialog;
+import com.example.gfgapp.pdf.PdfGenerator;
 import com.example.gfgapp.email.SendEmail;
 import com.example.gfgapp.modal.CourseModal;
 import com.example.gfgapp.modal.MainModal;
@@ -44,7 +45,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 public class ViewCourses extends AppCompatActivity {
 
@@ -186,7 +186,7 @@ public class ViewCourses extends AppCompatActivity {
                                                     hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Extracurriculars", mainModal.getUserEmail(), "No", extra -> {
                                                         hoursAdapter.getTotalHoursBySubjectAndCore(mainModal.getUserName(), mainModal.getUserEmail(), totalHours -> {
                                                             String filePath = getFilesDir().getPath() + "/email.pdf";
-                                                            PdfGenerator.createPDF(filePath, mainModal.getUserName() + " has done great so far. He has a total of: " +totalHours+" hours\n\n This is a list of all the subjects core and non-core hours so far: \n\n Math Core: "+mathCore+"\n Math Non-Core: "+math+"\n History Core: "+historyCore+"\n History Non-Core: "+history+"\n English Core: "+englishCore+"\n English Non-Core: "+english+"\n Science Core: "+scienceCore+"\n Science Non-Core: "+science+math+"\n Pe Core: "+peCore+"\n Pe Non-Core: "+pe+"\n Extracurriculars Core: "+extraCore+"\n Extracurriculars Non-Core: "+extra+"\n\n That is all of his hours.");
+                                                            PdfGenerator.createPDF(filePath, mainModal.getUserName(), mathCore, math, englishCore, english, scienceCore, science, historyCore, history, peCore, pe, extraCore, extra, totalHours);
 
                                                         });
                                                     });
@@ -201,42 +201,8 @@ public class ViewCourses extends AppCompatActivity {
                 });
             });
         });
-
-
-        SendEmail sendEmail = new SendEmail();
-        // Create the object of AlertDialog Builder class
-        AlertDialog.Builder builder = new AlertDialog.Builder(ViewCourses.this, R.style.AlertDialogCustom);
-
-        // Instantiate DBHandler
-
-        // Set the message show for the Alert time
-        builder.setTitle("Confirmation");
-        builder.setMessage("This will send a pdf file with all your child's hours, and a projected year end.");
-
-        // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
-        builder.setCancelable(false);
-
-        // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
-        builder.setPositiveButton("Yes", (dialog, which) -> {
-            // When the user click yes button then app will close
-
-
-            sendEmail.sendEmail(mainModal.getUserEmail(), mainModal.getUserName(), ViewCourses.this);
-//            dialog.dismiss();
-//            finish();
-        });
-
-        // Set the Negative button with No name Lambda OnClickListener method is use of DialogInterface interface.
-        builder.setNegativeButton("No", (dialog, which) -> {
-            // If user click no then dialog box is canceled.
-//            dialog.cancel();
-//            dialog.dismiss();
-        });
-
-        // Create the Alert dialog
-        AlertDialog alertDialog = builder.create();
-
-        alertDialog.show();
+        CustomAlertDialog alertDialog = new CustomAlertDialog();
+        alertDialog.showCustomDialog(ViewCourses.this);
     }
 
     //resizing text
