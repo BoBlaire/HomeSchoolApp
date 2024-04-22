@@ -96,7 +96,7 @@ public class UserLogin extends AppCompatActivity {
 
                 Intent signInIntent = client.getSignInIntent();
                 startActivityForResult(signInIntent, RC_SIGN_IN);
-
+                mainModal.setSignedIn(true);
 
             } catch (ArrayIndexOutOfBoundsException e) {
                 Toast.makeText(UserLogin.this, "You need to sign-up before logging in with Google", Toast.LENGTH_SHORT).show();

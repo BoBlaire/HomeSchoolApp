@@ -37,26 +37,29 @@ public class AddStudent extends AppCompatActivity {
         AddStudentDB addStudentDB = new AddStudentDB(this);
 
         addStudent.setOnClickListener(v -> {
-            String nameStudent = studentName.getText().toString();
+            try {
+                String nameStudent = studentName.getText().toString();
+                String gradeStudent = studentGrade.getText().toString();
 
-            String gradeStudent = studentGrade.getText().toString();
+                if (nameStudent.isEmpty() || gradeStudent.isEmpty()) {
+                    Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show();
+                } else if (!nameStudent.isEmpty() || !gradeStudent.isEmpty()) {
 
-            if (nameStudent.isEmpty() || gradeStudent.isEmpty()) {
-                Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show();
-            } else if (!nameStudent.isEmpty() || !gradeStudent.isEmpty()) {
+                    System.out.println("user email" + mainModal.getUserEmail());
+                    if (mainModal.getUserEmail() == null) {
 
-                System.out.println("user email"+mainModal.getUserEmail());
-                if (mainModal.getUserEmail() == null) {
-//                    studentDBHandler.addUserInfo(nameStudent, gradeStudent, mainModal.getGoogleEmail());
-                    addStudentDB.addUserInfo(nameStudent, gradeStudent, mainModal.getGoogleEmail());
-                } else {
-//                    studentDBHandler.addUserInfo(nameStudent, gradeStudent, mainModal.getUserEmail());
-                    addStudentDB.addUserInfo(nameStudent, gradeStudent, mainModal.getUserEmail());
+                        addStudentDB.addUserInfo(nameStudent, gradeStudent, mainModal.getGoogleEmail());
+                    } else {
+
+                        addStudentDB.addUserInfo(nameStudent, gradeStudent, mainModal.getUserEmail());
+                    }
+
+
+                    Intent i = new Intent(AddStudent.this, StudentView.class);
+                    startActivity(i);
                 }
-
-
-                Intent i = new Intent(AddStudent.this, StudentView.class);
-                startActivity(i);
+            } catch (Exception e) {
+                System.out.println("Add Student Failed: " + e);
             }
         });
     }

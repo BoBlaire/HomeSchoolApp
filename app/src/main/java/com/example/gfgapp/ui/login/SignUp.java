@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,8 @@ public class SignUp extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
 
+    ImageButton buttonBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +44,12 @@ public class SignUp extends AppCompatActivity {
         userEmail = findViewById(R.id.userEmail);
         userPassword = findViewById(R.id.userPassword);
         buttonSignUp = findViewById(R.id.buttonSignUp);
+        buttonBack = findViewById(R.id.backButton);
 
-        userDBHandler = new UserDBHandler(SignUp.this);
-
+        buttonBack.setOnClickListener(v -> {
+            Intent i = new Intent(SignUp.this, UserLogin.class);
+            startActivity(i);
+        });
         buttonSignUp.setOnClickListener(v -> {
             signUp();
         });
@@ -81,7 +87,7 @@ public class SignUp extends AppCompatActivity {
     }
 
     private void createAccount(String email, String password) {
-      AddUserInfo addInfo = new AddUserInfo();
+        AddUserInfo addInfo = new AddUserInfo();
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -93,7 +99,7 @@ public class SignUp extends AppCompatActivity {
                         Intent i = new Intent(SignUp.this, UserLogin.class);
                         startActivity(i);
                         // Save additional user information to Firestore
-                      addInfo.enterData(email, password, user.getUid());
+                        addInfo.enterData(email, password, user.getUid());
                     } else {
                         // If account creation fails, display a message to the user.
                         Toast.makeText(SignUp.this, "Account creation failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

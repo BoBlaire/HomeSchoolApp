@@ -45,6 +45,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ViewCourses extends AppCompatActivity {
 
@@ -167,27 +171,29 @@ public class ViewCourses extends AppCompatActivity {
 
     }
 
+
     @Override
     public void onBackPressed() {
 
         HoursAdapter hoursAdapter = new HoursAdapter();
+        try {
+            hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Math", mainModal.getUserEmail(), "Yes", mathCore -> {
+                hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Math", mainModal.getUserEmail(), "No", math -> {
+                    hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "English", mainModal.getUserEmail(), "Yes", englishCore -> {
+                        hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "English", mainModal.getUserEmail(), "No", english -> {
+                            hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Science", mainModal.getUserEmail(), "Yes", scienceCore -> {
+                                hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Science", mainModal.getUserEmail(), "No", science -> {
+                                    hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "History", mainModal.getUserEmail(), "Yes", historyCore -> {
+                                        hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "History", mainModal.getUserEmail(), "No", history -> {
+                                            hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Pe", mainModal.getUserEmail(), "Yes", peCore -> {
+                                                hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Pe", mainModal.getUserEmail(), "No", pe -> {
+                                                    hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Extracurriculars", mainModal.getUserEmail(), "Yes", extraCore -> {
+                                                        hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Extracurriculars", mainModal.getUserEmail(), "No", extra -> {
+                                                            hoursAdapter.getTotalHoursBySubjectAndCore(mainModal.getUserName(), mainModal.getUserEmail(), totalHours -> {
+                                                                String filePath = getFilesDir().getPath() + "/email.pdf";
+                                                                PdfGenerator.createPDF(filePath, mainModal.getUserName(), mathCore, math, englishCore, english, scienceCore, science, historyCore, history, peCore, pe, extraCore, extra, totalHours);
 
-        hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Math", mainModal.getUserEmail(), "Yes", mathCore -> {
-            hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Math", mainModal.getUserEmail(), "No", math -> {
-                hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "English", mainModal.getUserEmail(), "Yes", englishCore -> {
-                    hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "English", mainModal.getUserEmail(), "No", english -> {
-                        hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Science", mainModal.getUserEmail(), "Yes", scienceCore -> {
-                            hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Science", mainModal.getUserEmail(), "No", science -> {
-                                hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "History", mainModal.getUserEmail(), "Yes", historyCore -> {
-                                    hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "History", mainModal.getUserEmail(), "No", history -> {
-                                        hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Pe", mainModal.getUserEmail(), "Yes", peCore -> {
-                                            hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Pe", mainModal.getUserEmail(), "No", pe -> {
-                                                hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Extracurriculars", mainModal.getUserEmail(), "Yes", extraCore -> {
-                                                    hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Extracurriculars", mainModal.getUserEmail(), "No", extra -> {
-                                                        hoursAdapter.getTotalHoursBySubjectAndCore(mainModal.getUserName(), mainModal.getUserEmail(), totalHours -> {
-                                                            String filePath = getFilesDir().getPath() + "/email.pdf";
-                                                            PdfGenerator.createPDF(filePath, mainModal.getUserName(), mathCore, math, englishCore, english, scienceCore, science, historyCore, history, peCore, pe, extraCore, extra, totalHours);
-
+                                                            });
                                                         });
                                                     });
                                                 });
@@ -200,9 +206,11 @@ public class ViewCourses extends AppCompatActivity {
                     });
                 });
             });
-        });
-        CustomAlertDialog alertDialog = new CustomAlertDialog();
-        alertDialog.showCustomDialog(ViewCourses.this);
+            CustomAlertDialog alertDialog = new CustomAlertDialog();
+            alertDialog.showCustomDialog(ViewCourses.this);
+        } catch (Exception e) {
+            System.out.println("Well Shit: "+e);
+        }
     }
 
     //resizing text
@@ -227,7 +235,7 @@ public class ViewCourses extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // below line is to get our inflater
         MenuInflater inflater = getMenuInflater();
-//        menuPopupWindow = findViewById(R.id.actionSort);
+        // menuPopupWindow = findViewById(R.id.actionSort);
 
         // inside inflater we are inflating our menu file.
         inflater.inflate(R.menu.search_menu, menu);
@@ -310,7 +318,4 @@ public class ViewCourses extends AppCompatActivity {
         courseModalArrayList.addAll(data);
         courseRVAdapter.notifyDataSetChanged();
     }
-
-    // Implement the onItemClick method
-
 }

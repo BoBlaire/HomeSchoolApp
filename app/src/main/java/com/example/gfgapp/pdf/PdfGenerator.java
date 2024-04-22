@@ -21,21 +21,7 @@ import java.util.ArrayList;
 
 public class PdfGenerator {
 
-//    public static void createPDF(String filePath, String content) {
-//        Document document = new Document();
-//
-//        try {
-//            PdfWriter.getInstance(document, new FileOutputStream(filePath));
-//            document.open();
-//
-//            document.add(new Paragraph(content));
-//
-//        } catch (DocumentException | FileNotFoundException e) {
-//            e.printStackTrace();
-//        } finally {
-//            document.close();
-//        }
-//    }
+
 
     public static void createPDF(String filePath, String name, double mathCore, double math, double englishCore, double english, double scienceCore, double science, double historyCore, double history, double peCore, double pe, double extraCore, double extra, double total) {
         Document document = new Document();

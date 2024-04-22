@@ -104,5 +104,4 @@ public class HoursAdapter {
       public interface FirestoreCallback {
         void onCallback(double result);
     }
-
 }

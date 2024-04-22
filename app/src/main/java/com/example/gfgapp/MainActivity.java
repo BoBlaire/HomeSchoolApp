@@ -93,29 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
         studentName.setText(mainModal.getUserName());
 
-//                FirebaseFirestore db = FirebaseFirestore.getInstance();
-//
-//
-//        // Create a new user with a first and last name
-//        Map<String, Object> user = new HashMap<>();
-//        user.put("id", "210793");
-//
-//
-//        // Add a new document with a generated ID
-//        db.collection("id")
-//                .add(user)
-//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                    @Override
-//                    public void onSuccess(DocumentReference documentReference) {
-//                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.w(TAG, "Error adding document", e);
-//                    }
-//                });
+
 
         String[] core = getResources().getStringArray(R.array.Core);
         String[] subjects = getResources().getStringArray(R.array.Subjects);
@@ -144,13 +122,9 @@ public class MainActivity extends AppCompatActivity {
 
 
             } else {
-
-
                 if (mainModal.getUserEmail() == null) {
-                    dbHandler.addNewCourse(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df, mainModal.getGoogleEmail(), studentDescDb);
                     addInfo.enterData(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df, mainModal.getGoogleEmail(), studentDescDb);
                 } else {
-                    dbHandler.addNewCourse(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df, mainModal.getUserEmail(), studentDescDb);
                     addInfo.enterData(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df, mainModal.getUserEmail(), studentDescDb);
                 }
 
@@ -162,14 +136,6 @@ public class MainActivity extends AppCompatActivity {
                 studentCore.setAdapter(adapter);
                 studentDescription.setText("");
             }
-
-            /* on below line we are calling a method to add new
-               course to sqlite data and pass all our values to it.*/
-
-
-            // after adding the data we are displaying a toast message.
-
-
         });
 
 
@@ -177,11 +143,6 @@ public class MainActivity extends AppCompatActivity {
             // opening a new activity via a intent.
             Intent i = new Intent(MainActivity.this, ViewCourses.class);
             startActivity(i);
-
         });
-
-
     }
-
-
 }

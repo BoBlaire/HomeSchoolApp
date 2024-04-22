@@ -8,6 +8,15 @@ public class MainModal {
     private String googleEmail;
     private String googleVerification;
     private String email;
+    private boolean isSignedIn;
+
+    public boolean isSignedIn() {
+        return isSignedIn;
+    }
+
+    public void setSignedIn(boolean signedIn) {
+        isSignedIn = signedIn;
+    }
 
     public ArrayList<CourseModal> getArrayList() {
         return arrayList;

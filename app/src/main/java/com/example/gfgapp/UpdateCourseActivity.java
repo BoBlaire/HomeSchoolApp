@@ -51,7 +51,7 @@ public class UpdateCourseActivity extends AppCompatActivity {
         AutoCompleteTextView studentCoreUpd = (AutoCompleteTextView) findViewById(R.id.updStudentCore);
 
         // on below line we are initialing our dbhandler class.
-        dbHandler = new DBHandler(UpdateCourseActivity.this);
+//        dbHandler = new DBHandler(UpdateCourseActivity.this);
 
         /* on below lines we are getting data which
            we passed in our adapter class. */
@@ -81,54 +81,48 @@ public class UpdateCourseActivity extends AppCompatActivity {
 
 
 //         adding on click listener to our update course button.
-        updateCourseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        updateCourseBtn.setOnClickListener(v -> {
 
-                String collectionName = "homeschool";
+            String collectionName = "homeschool";
 
-                Map<String, Object> updates = new HashMap<>();
-                updates.put("name", studentNameUpd.getText().toString());
-                updates.put("subject", studentSubjectUpd.getText().toString());
-                updates.put("hours", studentHoursUpd.getText().toString());
-                updates.put("core", studentCoreUpd.getText().toString());
-                updates.put("description", studentDescriptionUpd.getText().toString());
+            Map<String, Object> updates = new HashMap<>();
+            updates.put("name", studentNameUpd.getText().toString());
+            updates.put("subject", studentSubjectUpd.getText().toString());
+            updates.put("hours", studentHoursUpd.getText().toString());
+            updates.put("core", studentCoreUpd.getText().toString());
+            updates.put("description", studentDescriptionUpd.getText().toString());
 
 
-                UpdateInfo.updateDocument(collectionName, documentId, updates, new UpdateInfo.FirestoreUpdateCallback() {
-                    @Override
-                    public void onSuccess() {
-                        // Handle success
-                        // For example, display a toast or update the UI
-                        Toast.makeText(UpdateCourseActivity.this, "Course Updated..", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(UpdateCourseActivity.this, ViewCourses.class);
-                        startActivity(i);
-                    }
+            UpdateInfo.updateDocument(collectionName, documentId, updates, new UpdateInfo.FirestoreUpdateCallback() {
+                @Override
+                public void onSuccess() {
+                    // Handle success
+                    // For example, display a toast or update the UI
+                    Toast.makeText(UpdateCourseActivity.this, "Course Updated..", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(UpdateCourseActivity.this, ViewCourses.class);
+                    startActivity(i);
+                }
 
-                    @Override
-                    public void onFailure(Exception e) {
-                        // Handle failure
-                        // For example, display an error message
-                        Toast.makeText(UpdateCourseActivity.this, "Error Adding Information", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
+                @Override
+                public void onFailure(Exception e) {
+                    // Handle failure
+                    // For example, display an error message
+                    Toast.makeText(UpdateCourseActivity.this, "Error Adding Information", Toast.LENGTH_SHORT).show();
+                }
+            });
         });
 
        // adding on click listener for delete button to delete our course.
-        deleteCourseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        deleteCourseBtn.setOnClickListener(v -> {
 
-                try {
-                    UpdateInfo updateInfo = new UpdateInfo();
-                    updateInfo.deleteRecord(documentId);
+            try {
+                UpdateInfo updateInfo = new UpdateInfo();
+                updateInfo.deleteRecord(documentId);
 
-                    Intent i = new Intent(UpdateCourseActivity.this, ViewCourses.class);
-                    startActivity(i);
-                } catch (Exception e) {
-                    Toast.makeText(UpdateCourseActivity.this, "Error: " + e, Toast.LENGTH_SHORT).show();
-                }
+                Intent i = new Intent(UpdateCourseActivity.this, ViewCourses.class);
+                startActivity(i);
+            } catch (Exception e) {
+                Toast.makeText(UpdateCourseActivity.this, "Error: " + e, Toast.LENGTH_SHORT).show();
             }
         });
     }
