@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.gfgapp.dataadapter.AddInfo;
 import com.example.gfgapp.dataadapter.HoursAdapter;
 import com.example.gfgapp.databases.DBHandler;
+import com.example.gfgapp.modal.SubjectModal;
 import com.example.gfgapp.pdf.CustomAlertDialog;
 import com.example.gfgapp.pdf.PdfGenerator;
 import com.example.gfgapp.email.SendEmail;
@@ -66,6 +67,8 @@ public class ViewCourses extends AppCompatActivity {
     }
 
     private CourseRVAdapter courseRVAdapter;
+
+    private String subjects;
     private RecyclerView coursesRV;
     private Context context;
     byte FONT_TYPE;
@@ -91,12 +94,15 @@ public class ViewCourses extends AppCompatActivity {
 
         // Call the retrieveData method with the callback
 //        System.out.println("true?: "+mainModal.getGoogleEmail().isEmpty());
+//        subjects = getIntent().getStringExtra("subjects");
+        SubjectModal subs = SubjectModal.getInstance();
+        String subject = subs.getSubject();
 
 
         try {
             if (mainModal.getGoogleEmail().isEmpty()) {
             } else {
-                addInfo.retrieveData(mainModal.getUserName(), mainModal.getGoogleEmail(), new AddInfo.FirestoreCallback() {
+                addInfo.retrieveData(mainModal.getUserName(), mainModal.getGoogleEmail(), subject, new AddInfo.FirestoreCallback() {
                     @Override
                     public void onCallback(ArrayList<CourseModal> arrayValue) {
                         // Handle the retrieved data here
@@ -108,7 +114,7 @@ public class ViewCourses extends AppCompatActivity {
                 });
             }
         } catch (Exception e) {
-            addInfo.retrieveData(mainModal.getUserName(), mainModal.getUserEmail(), new AddInfo.FirestoreCallback() {
+            addInfo.retrieveData(mainModal.getUserName(), mainModal.getUserEmail(), subject, new AddInfo.FirestoreCallback() {
                 @Override
                 public void onCallback(ArrayList<CourseModal> arrayValue) {
                     // Handle the retrieved data here
@@ -135,7 +141,7 @@ public class ViewCourses extends AppCompatActivity {
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) FloatingActionButton buttonHome = findViewById(R.id.buttonHome);
 
 
-        toolbar.setTitle("Home School Records");
+        toolbar.setTitle(mainModal.getUserName());
         // using toolbar as ActionBar
         setSupportActionBar(toolbar);
 
@@ -158,11 +164,11 @@ public class ViewCourses extends AppCompatActivity {
             startActivity(i);
         });
         //calling delete all records
-        pdf.setOnClickListener(v -> {
-            onBackPressed();
-        });
+//        pdf.setOnClickListener(v -> {
+//            onBackPressed();
+//        });
         buttonHome.setOnClickListener(v -> {
-            Intent i = new Intent(ViewCourses.this, StudentView.class);
+            Intent i = new Intent(ViewCourses.this, Snapshots.class);
             startActivity(i);
         });
 
@@ -171,47 +177,6 @@ public class ViewCourses extends AppCompatActivity {
 
     }
 
-
-    @Override
-    public void onBackPressed() {
-
-        HoursAdapter hoursAdapter = new HoursAdapter();
-        try {
-            hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Math", mainModal.getUserEmail(), "Yes", mathCore -> {
-                hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Math", mainModal.getUserEmail(), "No", math -> {
-                    hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "English", mainModal.getUserEmail(), "Yes", englishCore -> {
-                        hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "English", mainModal.getUserEmail(), "No", english -> {
-                            hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Science", mainModal.getUserEmail(), "Yes", scienceCore -> {
-                                hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Science", mainModal.getUserEmail(), "No", science -> {
-                                    hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "History", mainModal.getUserEmail(), "Yes", historyCore -> {
-                                        hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "History", mainModal.getUserEmail(), "No", history -> {
-                                            hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Pe", mainModal.getUserEmail(), "Yes", peCore -> {
-                                                hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Pe", mainModal.getUserEmail(), "No", pe -> {
-                                                    hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Extracurriculars", mainModal.getUserEmail(), "Yes", extraCore -> {
-                                                        hoursAdapter.getTotalSubjectHours(mainModal.getUserName(), "Extracurriculars", mainModal.getUserEmail(), "No", extra -> {
-                                                            hoursAdapter.getTotalHoursBySubjectAndCore(mainModal.getUserName(), mainModal.getUserEmail(), totalHours -> {
-                                                                String filePath = getFilesDir().getPath() + "/email.pdf";
-                                                                PdfGenerator.createPDF(filePath, mainModal.getUserName(), mathCore, math, englishCore, english, scienceCore, science, historyCore, history, peCore, pe, extraCore, extra, totalHours);
-
-                                                            });
-                                                        });
-                                                    });
-                                                });
-                                            });
-                                        });
-                                    });
-                                });
-                            });
-                        });
-                    });
-                });
-            });
-            CustomAlertDialog alertDialog = new CustomAlertDialog();
-            alertDialog.showCustomDialog(ViewCourses.this);
-        } catch (Exception e) {
-            System.out.println("Well Shit: "+e);
-        }
-    }
 
     //resizing text
     public void reziseText(View view) {

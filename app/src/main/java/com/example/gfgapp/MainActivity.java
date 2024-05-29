@@ -23,6 +23,7 @@ import com.example.gfgapp.dataadapter.AddInfo;
 import com.example.gfgapp.databases.*;
 import com.example.gfgapp.modal.CourseModal;
 import com.example.gfgapp.modal.MainModal;
+import com.example.gfgapp.modal.SubjectModal;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -88,9 +89,6 @@ public class MainActivity extends AppCompatActivity {
         courseRV = findViewById(R.id.idRVCourses);
 
         // initializing db class
-        dbHandler = new DBHandler(MainActivity.this);
-
-
         studentName.setText(mainModal.getUserName());
 
 
@@ -138,10 +136,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        SubjectModal subs = SubjectModal.getInstance();
+        String subject = subs.getSubject();
         readCourseBtn.setOnClickListener(v -> {
             // opening a new activity via a intent.
-            Intent i = new Intent(MainActivity.this, ViewCourses.class);
+            Intent i = new Intent(MainActivity.this, Snapshots.class);
+            subs.setSubject(subject);
             startActivity(i);
         });
     }

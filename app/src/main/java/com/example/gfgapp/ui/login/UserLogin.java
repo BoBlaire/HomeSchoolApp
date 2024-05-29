@@ -217,6 +217,7 @@ public class UserLogin extends AppCompatActivity {
                         if (document.exists()) {
                             // User found in the Firestore database
                             // Do something with the user data
+
                             mainModal.setUserEmail(userEmail.getText().toString());
 
                             Intent i = new Intent(UserLogin.this, StudentView.class);

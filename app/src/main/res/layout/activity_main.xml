@@ -57,8 +57,7 @@
             android:layout_weight="1"
             android:inputType="none"
             android:text="Subject"
-
-            />
+            android:textColor="@color/white" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,7 +108,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:inputType="none"
-            android:text="Core" />
+            android:text="Core"
+            android:textColor="@color/white" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -145,7 +145,7 @@
             android:maxLength="2000"
             android:maxLines="4"
             android:textColor="@color/white"
-            android:textColorHint="@color/light_gray" />
+            android:textColorHint="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!--button for adding new course-->
@@ -163,7 +163,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="View Inputs"
+        android:text="Back"
         android:textAllCaps="false" />
 
 

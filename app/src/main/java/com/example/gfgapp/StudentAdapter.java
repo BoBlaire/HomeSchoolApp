@@ -53,7 +53,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
 
         holder.itemView.setOnClickListener(v -> {
             mainModal.setUserName(modal.getName());
-            Intent i = new Intent(context, ViewCourses.class);
+            Intent i = new Intent(context, Snapshots.class);
 
             context.startActivity(i);
         });
@@ -64,9 +64,9 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
             holder.studentName.setText(modal.getName());
             holder.grade.setText(modal.getGrade());
 
-            hours.getTotalHoursBySubjectAndCore(modal.getName(), mainModal.getUserEmail(),result -> {
-                holder.totalHours.setText(String.valueOf(result));
-            });
+//            hours.getTotalHoursBySubjectAndCore(modal.getName(), mainModal.getUserEmail(),result -> {
+//                holder.totalHours.setText(result);
+//            });
 
         } catch (Exception e) {
             Toast.makeText(context, "Error: " + e, Toast.LENGTH_SHORT).show();

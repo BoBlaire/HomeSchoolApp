@@ -34,7 +34,8 @@
             android:text="Name: "
             android:textColor="@color/white"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/grade"
@@ -52,7 +53,8 @@
             android:text="Grade: "
             android:textColor="@color/white"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
 
 
         <TextView
@@ -71,7 +73,8 @@
             android:text="Total Hours: "
             android:textColor="@color/white"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/totalHoursInput"
@@ -91,25 +94,28 @@
             android:text="TH"
             android:textColor="@color/white"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/displayName"
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_toEndOf="@id/studentNameCard"
             android:autoSizeMaxTextSize="100sp"
             android:autoSizeMinTextSize="12sp"
             android:autoSizeStepGranularity="2sp"
             android:autoSizeTextType="uniform"
             android:background="@drawable/small_border"
+            android:gravity="center"
+            android:maxLines="1"
             android:text="name"
             android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="95sp"
             android:textStyle="bold" />
 
         <TextView
@@ -130,9 +136,8 @@
             android:text="grade"
             android:textColor="@color/white"
             android:textSize="15sp"
-            android:textStyle="bold" />
-
-
+            android:textStyle="bold"
+            android:visibility="gone" />
 
 
     </RelativeLayout>

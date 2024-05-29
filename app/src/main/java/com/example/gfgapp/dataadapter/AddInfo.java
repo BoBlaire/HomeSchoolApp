@@ -63,7 +63,7 @@ public class AddInfo {
         void onCallback(ArrayList<CourseModal> arrayValue);
     }
 
-    public void retrieveData(String userName, String userEmail, FirestoreCallback callback) {
+    public void retrieveData(String userName, String userEmail, String userSubject, FirestoreCallback callback) {
         MainModal mainModal = MainActivity.mainModal;
 
 
@@ -73,7 +73,8 @@ public class AddInfo {
 
         Query query = collectionRef
                 .whereEqualTo("name", userName)
-                .whereEqualTo("email", userEmail);
+                .whereEqualTo("email", userEmail)
+                .whereEqualTo("subject", userSubject);
 
 
         query.get().addOnCompleteListener(task -> {

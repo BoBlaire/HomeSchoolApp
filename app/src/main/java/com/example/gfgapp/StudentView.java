@@ -23,13 +23,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.Scope;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
 public class StudentView extends AppCompatActivity {
 
-    FloatingActionButton addStudent, calendar;
+    ExtendedFloatingActionButton addStudent, calendar;
     private static final int RC_SIGN_IN = 718;
 
     //    StudentDBHandler studentDBHandler;
@@ -59,26 +60,26 @@ public class StudentView extends AppCompatActivity {
 
         GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        calendar = findViewById(R.id.calender);
+//        calendar = findViewById(R.id.calender);
 
-        calendarWebView = findViewById(R.id.calendarWebView);
+//        calendarWebView = findViewById(R.id.calendarWebView);
 
-        calendar.setOnClickListener(v -> {
-            // Load Google Calendar in the WebView
-            loadGoogleCalendar();
-        });
+//        calendar.setOnClickListener(v -> {
+//            // Load Google Calendar in the WebView
+//            loadGoogleCalendar();
+//        });
 
         // Configure the WebView
-        WebSettings webSettings = calendarWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        calendarWebView.setWebViewClient(new WebViewClient() {
-            // If you want to handle links within the WebView
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-        });
+//        WebSettings webSettings = calendarWebView.getSettings();
+//        webSettings.setJavaScriptEnabled(true);
+//        calendarWebView.setWebViewClient(new WebViewClient() {
+//            // If you want to handle links within the WebView
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                view.loadUrl(url);
+//                return true;
+//            }
+//        });
 
 
 
@@ -113,15 +114,15 @@ public class StudentView extends AppCompatActivity {
 
         });
 
-        calendar.setOnClickListener(v -> {
-
-//            Intent signInIntent = googleSignInClient.getSignInIntent();
-//            startActivityForResult(signInIntent, RC_SIGN_IN);
-
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse("https://calendar.google.com"));
-            startActivity(intent);
-        });
+//        calendar.setOnClickListener(v -> {
+//
+////            Intent signInIntent = googleSignInClient.getSignInIntent();
+////            startActivityForResult(signInIntent, RC_SIGN_IN);
+//
+//            Intent intent = new Intent(Intent.ACTION_VIEW);
+//            intent.setData(Uri.parse("https://calendar.google.com"));
+//            startActivity(intent);
+//        });
 
     }
 

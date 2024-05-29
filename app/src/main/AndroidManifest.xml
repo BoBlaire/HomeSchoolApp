@@ -14,7 +14,6 @@
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,6 +21,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GFGApp">
+        <activity
+            android:name=".Snapshots"
+            android:exported="false" />
         <activity
             android:name=".passwords.ChangePassword"
             android:exported="false" />
