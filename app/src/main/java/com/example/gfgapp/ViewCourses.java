@@ -5,6 +5,8 @@ import static androidx.recyclerview.widget.RecyclerView.VERTICAL;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -79,7 +81,7 @@ public class ViewCourses extends AppCompatActivity {
     static Modal modal = new Modal(false);
     Button menuPopupWindow;
 
-    MainModal mainModal = MainActivity.mainModal;
+    MainModal mainModal = MainModal.getInstance();
 
 
     @RequiresApi(api = Build.VERSION_CODES.R)
@@ -214,7 +216,9 @@ public class ViewCourses extends AppCompatActivity {
         // getting search view of our item.
         SearchView searchView = (SearchView) ((MenuItem) searchItem).getActionView();
 
+        searchView.setBackgroundResource(R.drawable.rounded_search);
 
+        searchView.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
         // below line is to call set on query text listener method.
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 

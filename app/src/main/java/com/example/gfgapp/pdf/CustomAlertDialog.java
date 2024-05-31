@@ -1,7 +1,5 @@
 package com.example.gfgapp.pdf;
 
-import static com.example.gfgapp.MainActivity.mainModal;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -13,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.gfgapp.R;
 import com.example.gfgapp.email.SendEmail;
+import com.example.gfgapp.modal.MainModal;
 
 public class CustomAlertDialog {
 
@@ -22,6 +21,8 @@ public class CustomAlertDialog {
         LayoutInflater inflater = LayoutInflater.from(context);
         View dialogView = inflater.inflate(R.layout.alert, null);
         builder.setView(dialogView);
+
+        MainModal mainModal = MainModal.getInstance();
 
         SendEmail sendEmail = new SendEmail();
 

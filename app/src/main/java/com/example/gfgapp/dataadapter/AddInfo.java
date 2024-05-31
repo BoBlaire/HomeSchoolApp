@@ -64,7 +64,7 @@ public class AddInfo {
     }
 
     public void retrieveData(String userName, String userEmail, String userSubject, FirestoreCallback callback) {
-        MainModal mainModal = MainActivity.mainModal;
+        MainModal mainModal = MainModal.getInstance();
 
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();

@@ -20,7 +20,7 @@ public class AddStudent extends AppCompatActivity {
     EditText studentName, studentGrade;
     Button addStudent;
 
-    MainModal mainModal = MainActivity.mainModal;
+    MainModal mainModal = MainModal.getInstance();
 
     @SuppressLint("MissingInflatedId")
     @Override

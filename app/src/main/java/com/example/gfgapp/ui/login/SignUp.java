@@ -27,7 +27,7 @@ public class SignUp extends AppCompatActivity {
 
     EditText userEmail, userPassword;
     Button button, buttonSignUp;
-    MainModal mainModal = MainActivity.mainModal;
+    MainModal mainModal = MainModal.getInstance();
     private UserDBHandler userDBHandler;
 
     private FirebaseAuth firebaseAuth;

@@ -43,6 +43,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:layout_margin="16dp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/accent_orange"
         android:textStyle="bold"
         android:text="Add Student" />
 

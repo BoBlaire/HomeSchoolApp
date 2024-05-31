@@ -17,7 +17,7 @@ public class GoogleVerification extends AppCompatActivity {
     private DBHandler dbHandler;
     EditText box1c, box2c, box3c, box4c, box5c, box6c;
     Button submit;
-    MainModal mainModal = MainActivity.mainModal;
+    MainModal mainModal = MainModal.getInstance();
 
 
     @Override

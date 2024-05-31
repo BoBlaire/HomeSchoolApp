@@ -17,7 +17,7 @@ public class ChangePassword extends AppCompatActivity {
     Button button;
     EditText newPassword;
     private UserDBHandler dbHandler;
-    MainModal mainModal = MainActivity.mainModal;
+    MainModal mainModal = MainModal.getInstance();
 
 
     @Override

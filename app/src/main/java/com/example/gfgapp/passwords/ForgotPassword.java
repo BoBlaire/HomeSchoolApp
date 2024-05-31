@@ -36,7 +36,7 @@ public class ForgotPassword extends AppCompatActivity {
     EditText email;
     Button sendEmail;
 
-    MainModal mainModal = MainActivity.mainModal;
+    MainModal mainModal = MainModal.getInstance();
     EditText et_to, et_message, et_subject;
     Button btn_send;
     Context c;

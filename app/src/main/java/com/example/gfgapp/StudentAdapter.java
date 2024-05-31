@@ -22,7 +22,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
     private final Context context;
     private final ArrayList<StudentModal> courseModelArrayList;
 
-    MainModal mainModal = MainActivity.mainModal;
+    MainModal mainModal = MainModal.getInstance();
 
     String GMail = "1krackerapp@gmail.com"; //replace with you GMail
     String GMailPass = "oskg pwzy huzb xycu"; // replace with you GMail Password

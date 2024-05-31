@@ -44,7 +44,7 @@ import java.util.Random;
 
 public class SendEmail {
 
-    MainModal mainModal = MainActivity.mainModal;
+    MainModal mainModal = MainModal.getInstance();
 
     String GMail = "1krackerapp@gmail.com"; //replace with you GMail
     String GMailPass = "oskg pwzy huzb xycu"; // replace with you GMail Password

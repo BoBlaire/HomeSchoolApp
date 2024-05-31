@@ -33,14 +33,8 @@ public class StudentView extends AppCompatActivity {
     ExtendedFloatingActionButton addStudent, calendar;
     private static final int RC_SIGN_IN = 718;
 
-    //    StudentDBHandler studentDBHandler;
-    String studentName;
+    MainModal mainModal = MainModal.getInstance();
 
-    StudentAdapter studentAdapter;
-    private WebView calendarWebView;
-
-    MainModal mainModal = MainActivity.mainModal;
-    DBHandler dbHandler;
 
     AddStudentDB addStudentDB;
     private ArrayList<StudentModal> courseModelArrayList;
@@ -134,18 +128,18 @@ public class StudentView extends AppCompatActivity {
         courseAdapter.notifyDataSetChanged();
     }
 
-    private void loadGoogleCalendar() {
-        calendarWebView.setVisibility(WebView.VISIBLE);
-        calendarWebView.loadUrl("https://calendar.google.com");
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (calendarWebView.canGoBack()) {
-            calendarWebView.goBack();
-        } else {
-            super.onBackPressed();
-        }
-    }
+//    private void loadGoogleCalendar() {
+//        calendarWebView.setVisibility(WebView.VISIBLE);
+//        calendarWebView.loadUrl("https://calendar.google.com");
+//    }
+//
+//    @Override
+//    public void onBackPressed() {
+//        if (calendarWebView.canGoBack()) {
+//            calendarWebView.goBack();
+//        } else {
+//            super.onBackPressed();
+//        }
+//    }
 }
 

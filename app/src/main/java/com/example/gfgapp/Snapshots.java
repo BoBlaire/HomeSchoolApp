@@ -25,16 +25,18 @@ public class Snapshots extends AppCompatActivity {
 
     private Button addRecord, buttonReports, buttonHome;
     private TextView name, sciHours, mathHours, histHours, elaHours;
-    static private double sci, math, hist, ela;
-    MainModal mainModal = MainActivity.mainModal;
+
+
 
     SubjectModal subs = SubjectModal.getInstance();
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "NewApi"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.snapshots);
+
+        MainModal mainModal = MainModal.getInstance();
 
         trEnglish = findViewById(R.id.trEnglish);
         trMath = findViewById(R.id.trMath);
@@ -50,10 +52,25 @@ public class Snapshots extends AppCompatActivity {
         histHours = findViewById(R.id.historyHours);
         elaHours = findViewById(R.id.englishHours);
 
-        sciHours.setText(String.valueOf(sci));
-        mathHours.setText(String.valueOf(math));
-        histHours.setText(String.valueOf(hist));
-        elaHours.setText(String.valueOf(ela));
+
+        getCoreHours().thenAccept(coreHours -> {
+            // Use the core hours as needed
+            double mathCore = coreHours[0];
+            double englishCore = coreHours[1];
+            double scienceCore = coreHours[2];
+            double historyCore = coreHours[3];
+
+
+            // Do something with the core hours
+
+            sciHours.setText(String.valueOf(scienceCore));
+            mathHours.setText(String.valueOf(mathCore));
+            histHours.setText(String.valueOf(historyCore));
+            elaHours.setText(String.valueOf(englishCore));
+        }).exceptionally(ex -> {
+            System.out.println("Error: " + ex);
+            return null;
+        });
 
 
         trEnglish.setOnClickListener(v -> {
@@ -96,17 +113,21 @@ public class Snapshots extends AppCompatActivity {
         });
 
         buttonReports.setOnClickListener(v -> {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            try {
                 onBackPressed();
+            } catch (Exception e) {
+                System.out.println("fuck: " + e);
             }
         });
 
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    @SuppressLint("NewApi")
     @Override
     public void onBackPressed() {
+        MainModal mainModal = MainModal.getInstance();
+
         HoursAdapter hoursAdapter = new HoursAdapter();
         String userName = mainModal.getUserName();
         String userEmail = mainModal.getUserEmail();
@@ -151,10 +172,7 @@ public class Snapshots extends AppCompatActivity {
             CompletableFuture<Double> extraFuture = extraCoreFuture.thenCompose(extraCore ->
                     hoursAdapter.getTotalSubjectHours(userName, "Extracurriculars", userEmail, "No")
             );
-            sci = sci + scienceCoreFuture.join();
-            math = math + mathCoreFuture.join();
-            hist = hist + historyCoreFuture.join();
-            ela = ela + englishCoreFuture.join();
+
 
             extraFuture.thenCompose(extra ->
                     hoursAdapter.getTotalHoursBySubjectAndCore(userName, userEmail)
@@ -180,5 +198,31 @@ public class Snapshots extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public CompletableFuture<Double[]> getCoreHours() {
+        MainModal mainModal = MainModal.getInstance();
 
+        HoursAdapter hoursAdapter = new HoursAdapter();
+        String userName = mainModal.getUserName();
+        String userEmail = mainModal.getUserEmail();
+
+        CompletableFuture<Double> mathCoreFuture = hoursAdapter.getTotalSubjectHours(userName, "Math", userEmail, "Yes");
+        CompletableFuture<Double> englishCoreFuture = hoursAdapter.getTotalSubjectHours(userName, "English", userEmail, "Yes");
+        CompletableFuture<Double> scienceCoreFuture = hoursAdapter.getTotalSubjectHours(userName, "Science", userEmail, "Yes");
+        CompletableFuture<Double> historyCoreFuture = hoursAdapter.getTotalSubjectHours(userName, "History", userEmail, "Yes");
+        CompletableFuture<Double> peCoreFuture = hoursAdapter.getTotalSubjectHours(userName, "Pe", userEmail, "Yes");
+        CompletableFuture<Double> extraCoreFuture = hoursAdapter.getTotalSubjectHours(userName, "Extracurriculars", userEmail, "Yes");
+
+        return CompletableFuture.allOf(
+                mathCoreFuture,
+                englishCoreFuture,
+                scienceCoreFuture,
+                historyCoreFuture
+        ).thenApply(voidd -> new Double[]{
+                mathCoreFuture.join(),
+                englishCoreFuture.join(),
+                scienceCoreFuture.join(),
+                historyCoreFuture.join()
+        });
+    }
 }

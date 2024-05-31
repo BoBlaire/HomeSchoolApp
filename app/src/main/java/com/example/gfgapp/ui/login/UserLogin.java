@@ -40,7 +40,7 @@ public class UserLogin extends AppCompatActivity {
 
     TextView signup, forgotPassword;
     Button button, buttonSignUp;
-    MainModal mainModal = MainActivity.mainModal;
+    MainModal mainModal = MainModal.getInstance();
     private UserDBHandler userDBHandler;
 
     static StudentModal studentModal;
@@ -64,15 +64,15 @@ public class UserLogin extends AppCompatActivity {
 
 
         // Set the dimensions of the sign-in button.
-        SignInButton signInButton = findViewById(R.id.sign_in_button);
-        signInButton.setSize(SignInButton.SIZE_STANDARD);
+//        SignInButton signInButton = findViewById(R.id.sign_in_button);
+//        signInButton.setSize(SignInButton.SIZE_STANDARD);
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        // Build a GoogleSignInClient with the options specified by gso.
-        GoogleSignInClient client = GoogleSignIn.getClient(this, gso);
+//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestEmail()
+//                .build();
+//
+//        // Build a GoogleSignInClient with the options specified by gso.
+//        GoogleSignInClient client = GoogleSignIn.getClient(this, gso);
 
 
         //calling user database
@@ -90,18 +90,18 @@ public class UserLogin extends AppCompatActivity {
 
 
 //        click listener to login
-        signInButton.setOnClickListener(v -> {
-            try {
-
-
-                Intent signInIntent = client.getSignInIntent();
-                startActivityForResult(signInIntent, RC_SIGN_IN);
-                mainModal.setSignedIn(true);
-
-            } catch (ArrayIndexOutOfBoundsException e) {
-                Toast.makeText(UserLogin.this, "You need to sign-up before logging in with Google", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        signInButton.setOnClickListener(v -> {
+//            try {
+//
+//
+//                Intent signInIntent = client.getSignInIntent();
+//                startActivityForResult(signInIntent, RC_SIGN_IN);
+//                mainModal.setSignedIn(true);
+//
+//            } catch (ArrayIndexOutOfBoundsException e) {
+//                Toast.makeText(UserLogin.this, "You need to sign-up before logging in with Google", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         button.setOnClickListener(v -> {
 

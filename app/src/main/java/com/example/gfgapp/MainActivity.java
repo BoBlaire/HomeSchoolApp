@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private CourseRVAdapter courseRVAdapter;
     private TextView name;
 
-    public static MainModal mainModal = new MainModal();
+    private MainModal mainModal = MainModal.getInstance();
 
 //    private AutoCompleteTextView studentCore, studentSubject;
 

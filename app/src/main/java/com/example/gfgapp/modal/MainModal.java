@@ -3,13 +3,28 @@ package com.example.gfgapp.modal;
 import java.util.ArrayList;
 
 public class MainModal {
+    private static MainModal instance;
+
     private String userEmail;
     private String userName;
     private String googleEmail;
     private String googleVerification;
     private String email;
     private boolean isSignedIn;
+    private ArrayList<CourseModal> arrayList;
 
+    // Private constructor to prevent instantiation
+    private MainModal() {}
+
+    // Public method to provide access to the singleton instance
+    public static synchronized MainModal getInstance() {
+        if (instance == null) {
+            instance = new MainModal();
+        }
+        return instance;
+    }
+
+    // Getter and setter methods
     public boolean isSignedIn() {
         return isSignedIn;
     }
@@ -25,8 +40,6 @@ public class MainModal {
     public void setArrayList(ArrayList<CourseModal> arrayList) {
         this.arrayList = arrayList;
     }
-
-    private ArrayList<CourseModal> arrayList;
 
     public String getEmail() {
         return email;
