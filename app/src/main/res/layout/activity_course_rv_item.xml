@@ -12,17 +12,7 @@
 <!--        android:layout_weight="1" />-->
 
 
-    <TextView
-        android:id="@+id/displayName"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:background="@drawable/boarder"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:maxLines="1"
-        android:padding="10dp"
-        android:text="@string/name"
-        android:textColor="@color/white" />
+
 
 
     <TextView
@@ -60,6 +50,18 @@
         android:maxLines="1"
         android:text="@string/core"
         android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/displayDate"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:background="@drawable/boarder"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:text="@string/name"
+        android:textColor="@color/white" />
 
 
 </LinearLayout>

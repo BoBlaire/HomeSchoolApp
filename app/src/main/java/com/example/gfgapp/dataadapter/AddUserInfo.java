@@ -78,7 +78,7 @@ public class AddUserInfo {
                     String desc = data.getDescription();
                     String docId = document.getId();
 
-                    arrayValue.add(new CourseModal(name, subject, hours, core, desc, docId));
+                    arrayValue.add(new CourseModal(name, subject, hours, core, desc, docId, date));
                 }
             } else {
                 // Handle the error

@@ -76,7 +76,7 @@ public class ViewCourses extends AppCompatActivity {
     byte FONT_TYPE;
     private static BluetoothSocket btsocket;
     private static OutputStream btoutputstream;
-    private TextView name, subject, hours, core;
+    private TextView date, subject, hours, core, subjectText, coreText, hoursText, dateText;
     private int position;
     static Modal modal = new Modal(false);
     Button menuPopupWindow;
@@ -91,6 +91,13 @@ public class ViewCourses extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_courses);
 
+        subjectText = findViewById(R.id.subject);
+        hoursText = findViewById(R.id.hours);
+        coreText = findViewById(R.id.core);
+        dateText = findViewById(R.id.date);
+
+
+        resizeText();
 
         AddInfo addInfo = new AddInfo();
 
@@ -144,6 +151,7 @@ public class ViewCourses extends AppCompatActivity {
 
 
         toolbar.setTitle(mainModal.getUserName());
+        toolbar.setTitleTextColor(Color.parseColor("#FFFFFFFF"));
         // using toolbar as ActionBar
         setSupportActionBar(toolbar);
 
@@ -183,16 +191,24 @@ public class ViewCourses extends AppCompatActivity {
     //resizing text
     public void reziseText(View view) {
 
-        name = view.findViewById(R.id.displayName);
+//        name = view.findViewById(R.id.displayName);
+        date = view.findViewById(R.id.displayDate);
         subject = view.findViewById(R.id.displaySubject);
         hours = view.findViewById(R.id.displayHours);
         core = view.findViewById(R.id.displayCore);
 
-
-        name.setWidth(modal.getScreeWidth() / 4);
+//        name.setWidth(modal.getScreeWidth() / 4);
         subject.setWidth(modal.getScreeWidth() / 4);
         hours.setWidth(modal.getScreeWidth() / 4);
         core.setWidth(modal.getScreeWidth() / 4);
+        date.setWidth(modal.getScreeWidth() / 4);
+    }
+
+    public void resizeText() {
+        subjectText.setWidth(modal.getScreeWidth() / 4);
+        hoursText.setWidth(modal.getScreeWidth() / 4);
+        coreText.setWidth(modal.getScreeWidth() / 4);
+        dateText.setWidth(modal.getScreeWidth() / 4);
 
     }
 

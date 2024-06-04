@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/right_border.xml -->
+<!-- res/drawable/right_border.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="#D3D3D3"/>
+        </shape>
+    </item>
+    <item android:right="2dp">
+        <shape>
+            <solid android:color="#242424"/>
+        </shape>
+    </item>
+</layer-list>
+

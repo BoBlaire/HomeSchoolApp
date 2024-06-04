@@ -94,7 +94,7 @@ public class AddInfo {
                     String desc = data.getDescription();
                     String docId = document.getId();
 
-                    arrayValue.add(new CourseModal(name, subject, hours, core, desc, docId));
+                    arrayValue.add(new CourseModal(name, subject, hours, core, desc, docId, date));
                 }
 
                 // Call the callback with the populated array.

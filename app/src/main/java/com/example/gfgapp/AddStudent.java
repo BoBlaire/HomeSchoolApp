@@ -1,65 +1,58 @@
 package com.example.gfgapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.gfgapp.dataadapter.AddStudentDB;
-//import com.example.gfgapp.databases.StudentDBHandler;
-import com.example.gfgapp.modal.MainModal;
+import androidx.appcompat.app.AppCompatActivity;
 
-import org.checkerframework.checker.units.qual.A;
+import com.example.gfgapp.dataadapter.AddStudentDB;
+import com.example.gfgapp.modal.MainModal;
 
 public class AddStudent extends AppCompatActivity {
 
-    EditText studentName, studentGrade;
-    Button addStudent;
+    private EditText nameEditText, gradeEditText, emailEditText;
+    private Button addButton;
+    private AddStudentDB addStudentDB;
 
     MainModal mainModal = MainModal.getInstance();
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_student);
 
-        addStudent = findViewById(R.id.addStudentData);
-        studentGrade = findViewById(R.id.studentGrade);
-        studentName = findViewById(R.id.studentNameEdit);
+        nameEditText = findViewById(R.id.studentNameEdit);
+        gradeEditText = findViewById(R.id.studentGrade);
+        addButton = findViewById(R.id.addStudentData);
 
+        addStudentDB = new AddStudentDB(this);
 
-//        StudentDBHandler studentDBHandler = new StudentDBHandler(AddStudent.this);
-        AddStudentDB addStudentDB = new AddStudentDB(this);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = nameEditText.getText().toString().trim();
+                String grade = gradeEditText.getText().toString().trim();
 
-        addStudent.setOnClickListener(v -> {
-            try {
-                String nameStudent = studentName.getText().toString();
-                String gradeStudent = studentGrade.getText().toString();
-
-                if (nameStudent.isEmpty() || gradeStudent.isEmpty()) {
-                    Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show();
-                } else if (!nameStudent.isEmpty() || !gradeStudent.isEmpty()) {
-
-                    System.out.println("user email" + mainModal.getUserEmail());
-                    if (mainModal.getUserEmail() == null) {
-
-                        addStudentDB.addUserInfo(nameStudent, gradeStudent, mainModal.getGoogleEmail());
-                    } else {
-
-                        addStudentDB.addUserInfo(nameStudent, gradeStudent, mainModal.getUserEmail());
-                    }
-
-
-                    Intent i = new Intent(AddStudent.this, StudentView.class);
-                    startActivity(i);
+                if (name.isEmpty() || grade.isEmpty()) {
+                    Toast.makeText(AddStudent.this, "Please fill out all fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    addStudentDB.addUserInfo(name, grade, mainModal.getUserEmail(), new Runnable() {
+                        @Override
+                        public void run() {
+                            // Callback to update the UI after adding a new student
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(AddStudent.this, "Student added successfully", Toast.LENGTH_SHORT).show();
+                                    finish(); // Close the activity and go back to the student list
+                                }
+                            });
+                        }
+                    });
                 }
-            } catch (Exception e) {
-                System.out.println("Add Student Failed: " + e);
             }
         });
     }

@@ -47,7 +47,7 @@ public class SignUp extends AppCompatActivity {
         buttonBack = findViewById(R.id.backButton);
 
         buttonBack.setOnClickListener(v -> {
-            Intent i = new Intent(SignUp.this, UserLogin.class);
+            Intent i = new Intent(SignUp.this, SplashPage.class);
             startActivity(i);
         });
         buttonSignUp.setOnClickListener(v -> {

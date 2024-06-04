@@ -76,7 +76,7 @@ public class UserLogin extends AppCompatActivity {
 
 
         //calling user database
-        userDBHandler = new UserDBHandler(UserLogin.this);
+//        userDBHandler = new UserDBHandler(UserLogin.this);
 
         signup.setOnClickListener(v -> {
             Intent i = new Intent(UserLogin.this, SignUp.class);
@@ -87,21 +87,6 @@ public class UserLogin extends AppCompatActivity {
             Intent i = new Intent(UserLogin.this, ForgotPassword.class);
             startActivity(i);
         });
-
-
-//        click listener to login
-//        signInButton.setOnClickListener(v -> {
-//            try {
-//
-//
-//                Intent signInIntent = client.getSignInIntent();
-//                startActivityForResult(signInIntent, RC_SIGN_IN);
-//                mainModal.setSignedIn(true);
-//
-//            } catch (ArrayIndexOutOfBoundsException e) {
-//                Toast.makeText(UserLogin.this, "You need to sign-up before logging in with Google", Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
         button.setOnClickListener(v -> {
 

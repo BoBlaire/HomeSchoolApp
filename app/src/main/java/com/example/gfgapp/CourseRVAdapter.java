@@ -62,11 +62,11 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
         // Set the document ID for the current item
 //        holder.setDocumentId(modal.getDocumentId()); // Replace 'modal' with the appropriate model class
 
-        holder.studentNameRV.setText(modal.getStudentName());
+//        holder.studentNameRV.setText(modal.getStudentName());
         holder.studentCoreRV.setText(modal.getStudentCore());
         holder.studentSubjectRV.setText(modal.getStudentSubject());
         holder.studentHoursRV.setText(modal.getStudentHours());
-
+        holder.date.setText(modal.getDate());
 
         // below line is to add on click listener for our recycler view item.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -113,17 +113,18 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         // creating variables for our text views and document ID.
-        private TextView studentNameRV, studentCoreRV, studentSubjectRV, studentHoursRV;
+        private TextView studentCoreRV, studentSubjectRV, studentHoursRV, date;
         private String documentId; // New variable to store document ID
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             // initializing our text views
-            studentNameRV = itemView.findViewById(R.id.displayName);
+//            studentNameRV = itemView.findViewById(R.id.displayName);
             studentCoreRV = itemView.findViewById(R.id.displayCore);
             studentSubjectRV = itemView.findViewById(R.id.displaySubject);
             studentHoursRV = itemView.findViewById(R.id.displayHours);
+            date = itemView.findViewById(R.id.displayDate);
 
         }
     }

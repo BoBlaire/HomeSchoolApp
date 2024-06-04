@@ -15,9 +15,9 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:background="@color/background"
             android:layout_height="?attr/actionBarSize"
             android:autoSizeTextType="uniform"
+            android:background="@color/background"
 
             />
 
@@ -25,11 +25,11 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-<androidx.core.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        android:background="#353738">
+        android:background="#353738"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -37,26 +37,78 @@
             android:background="@color/light_gray"
             android:orientation="vertical">
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#353738"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView"
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:background="#242424"
-                    android:text="Student Name | Student Subject | Student Hours | Student Core"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    app:autoSizeMaxTextSize="80sp"
-                    app:autoSizeMinTextSize="2.5sp"
-                    app:autoSizeStepGranularity="2sp"
-                    app:autoSizeTextType="uniform"/>
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/subject"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:gravity="center"
+                        android:text="Subject"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        app:autoSizeMaxTextSize="80sp"
+                        app:autoSizeMinTextSize="2.5sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <TextView
+                        android:id="@+id/hours"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:gravity="center"
+                        android:text="Hours"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        app:autoSizeMaxTextSize="80sp"
+                        app:autoSizeMinTextSize="2.5sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <TextView
+                        android:id="@+id/core"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:gravity="center"
+                        android:text="Core"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        app:autoSizeMaxTextSize="80sp"
+                        app:autoSizeMinTextSize="2.5sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Entry Date"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        app:autoSizeMaxTextSize="80sp"
+                        app:autoSizeMinTextSize="2.5sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+                </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/idRVCourses"
@@ -69,41 +121,40 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/buttonPanel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:visibility="gone"
-        android:id="@+id/buttonPanel"
-        android:src="@drawable/baseline_add_24" />
+        android:src="@drawable/baseline_add_24"
+        android:visibility="gone" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/pdfPrint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|left"
         android:layout_margin="16dp"
-android:visibility="gone"
-        android:id="@+id/pdfPrint"
-        android:src="@drawable/baseline_picture_as_pdf_24" />
+        android:src="@drawable/baseline_picture_as_pdf_24"
+        android:visibility="gone" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/buttonHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:layout_margin="16dp"
-        android:id="@+id/buttonHome"
-
         android:backgroundTint="@color/accent_blue"
         android:src="@drawable/baseline_home_24" />
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="bottom|left"-->
-<!--        android:layout_margin="16dp"-->
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="bottom|left"-->
+    <!--        android:layout_margin="16dp"-->
 
-<!--        android:id="@+id/buttonPrint"-->
-<!--        android:src="@drawable/baseline_print_24" />-->
+    <!--        android:id="@+id/buttonPrint"-->
+    <!--        android:src="@drawable/baseline_print_24" />-->
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
