@@ -23,6 +23,7 @@
         android:theme="@style/Theme.GFGApp">
         <activity
             android:name=".ui.login.SplashPage"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,30 +33,38 @@
         </activity>
         <activity
             android:name=".Snapshots"
+            android:screenOrientation="fullSensor"
             android:exported="false" />
         <activity
             android:name=".passwords.ChangePassword"
+            android:screenOrientation="fullSensor"
             android:exported="false" />
         <activity
             android:name=".passwords.GoogleVerification"
+            android:screenOrientation="fullSensor"
             android:exported="false" />
         <activity
             android:name=".passwords.ForgotPassword"
+            android:screenOrientation="fullSensor"
             android:exported="false" />
         <activity
             android:name=".ui.login.SignUp"
+            android:screenOrientation="fullSensor"
             android:exported="false" />
 
         <meta-data
             android:name="android.app.default_searchable"
+
             android:value=".MainActivity" />
 
         <activity
             android:name=".ui.login.UserLogin"
+            android:screenOrientation="fullSensor"
             android:exported="true">
         </activity>
         <activity
             android:name=".StudentView"
+            android:screenOrientation="fullSensor"
             android:exported="true">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
@@ -65,6 +74,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="fullSensor"
             android:exported="true">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
@@ -79,6 +89,7 @@
         </activity>
         <activity
             android:name=".ViewCourses"
+            android:screenOrientation="fullSensor"
             android:exported="true">
             <intent-filter>
 <!--                <action android:name="android.intent.action.MAIN" />-->
@@ -89,6 +100,7 @@
         </activity>
         <activity
             android:name=".UpdateCourseActivity"
+            android:screenOrientation="fullSensor"
             android:exported="true">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
@@ -98,6 +110,7 @@
         </activity>
         <activity
             android:name=".AddStudent"
+            android:screenOrientation="fullSensor"
             android:exported="true">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->

@@ -120,10 +120,12 @@ public class MainActivity extends AppCompatActivity {
 
 
             } else {
-                if (mainModal.getUserEmail() == null) {
-                    addInfo.enterData(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df, mainModal.getGoogleEmail(), studentDescDb);
-                } else {
+
+
+                try {
                     addInfo.enterData(studentNameDb, studentSubjectDb, studentHoursDb, studentCoreDb, df, mainModal.getUserEmail(), studentDescDb);
+                } catch (Exception e) {
+                    Toast.makeText(MainActivity.this, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
                 }
 
 
