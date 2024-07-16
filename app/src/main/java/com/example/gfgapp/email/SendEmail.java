@@ -46,8 +46,8 @@ public class SendEmail {
 
     MainModal mainModal = MainModal.getInstance();
 
-    String GMail = "1krackerapp@gmail.com"; //replace with you GMail
-    String GMailPass = "oskg pwzy huzb xycu"; // replace with you GMail Password
+    String GMail = "1krackerapp@gmail.com"; // Gmail for the program to send through
+    String GMailPass = "oskg pwzy huzb xycu"; // Gmail passkey for remote logins
 
     public void sendEmail(String to, String name, Context context) {
 
@@ -58,56 +58,33 @@ public class SendEmail {
         //Check if 'To:' field is a valid email
         if (isValidEmail(to)) {
 
-            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                @Override
-                public void run() {
-                    Log.w("Error", "Error Occurred");
-                }
-            });
+            new Handler(Looper.getMainLooper()).post(() -> Log.w("Error", "Error Occurred"));
             sendEmail(to, name+"'s Hours", "this is ur pdf", context);
         } else {
-            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                @Override
-                public void run() {
+            new Handler(Looper.getMainLooper()).post(() -> {
 
-                }
             });
         }
     }
 
     private void sendEmail(final String to, final String subject, final String message, Context context) {
 
-        new Thread(new Runnable() {
+        new Thread(() -> {
+            try {
+                PDFSender sender = new PDFSender(GMail,
+                        GMailPass);
+                sender.sendMail(subject,
+                        message,
+                        GMail,
+                        to, context.getFilesDir().getPath() + "/email.pdf");
+                Log.w("sendEmail", "Email successfully sent!");
 
-            @Override
-            public void run() {
-                try {
-                    PDFSender sender = new PDFSender(GMail,
-                            GMailPass);
-                    sender.sendMail(subject,
-                            message,
-                            GMail,
-                            to, context.getFilesDir().getPath() + "/email.pdf");
-                    Log.w("sendEmail", "Email successfully sent!");
+                new Handler(Looper.getMainLooper()).post(() -> Log.w("sendEmail", "Email successfully sent!"));
 
-                    new Handler(Looper.getMainLooper()).post(new Runnable() {
-                        @Override
-                        public void run() {
+            } catch (final Exception e) {
+                Log.e("sendEmail", e.getMessage(), e);
 
-                            Log.w("sendEmail", "Email successfully sent!");
-                        }
-                    });
-
-                } catch (final Exception e) {
-                    Log.e("sendEmail", e.getMessage(), e);
-
-                    new Handler(Looper.getMainLooper()).post(new Runnable() {
-                        @Override
-                        public void run() {
-                            Log.w("notSent", "Email not sent. \n\n Error: " + e.getMessage().toString());
-                        }
-                    });
-                }
+                new Handler(Looper.getMainLooper()).post(() -> Log.w("notSent", "Email not sent. \n\n Error: " + e.getMessage().toString()));
             }
         }).start();
     }

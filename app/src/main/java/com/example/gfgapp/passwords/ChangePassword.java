@@ -7,9 +7,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.gfgapp.MainActivity;
 import com.example.gfgapp.R;
-import com.example.gfgapp.databases.*;
+import com.example.gfgapp.DEAD.*;
 import com.example.gfgapp.modal.MainModal;
 import com.example.gfgapp.ui.login.UserLogin;
 

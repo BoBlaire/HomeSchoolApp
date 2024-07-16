@@ -2,9 +2,7 @@ package com.example.gfgapp;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -14,12 +12,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gfgapp.dataadapter.UpdateInfo;
-import com.example.gfgapp.databases.DBHandler;
+import com.example.gfgapp.DEAD.DBHandler;
 import com.example.gfgapp.modal.Modal;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class UpdateCourseActivity extends AppCompatActivity {
 

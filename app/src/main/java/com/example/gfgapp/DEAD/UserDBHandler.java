@@ -1,4 +1,4 @@
-package com.example.gfgapp.databases;
+package com.example.gfgapp.DEAD;
 
 import android.content.ContentValues;
 import android.content.Context;

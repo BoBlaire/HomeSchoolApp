@@ -6,25 +6,19 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 
 import java.io.OutputStream;
 
 import android.bluetooth.BluetoothSocket;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.gfgapp.dataadapter.AddInfo;
-import com.example.gfgapp.dataadapter.HoursAdapter;
-import com.example.gfgapp.databases.DBHandler;
+import com.example.gfgapp.DEAD.DBHandler;
 import com.example.gfgapp.modal.SubjectModal;
-import com.example.gfgapp.pdf.CustomAlertDialog;
-import com.example.gfgapp.pdf.PdfGenerator;
-import com.example.gfgapp.email.SendEmail;
 import com.example.gfgapp.modal.CourseModal;
 import com.example.gfgapp.modal.MainModal;
 import com.example.gfgapp.modal.Modal;
@@ -39,7 +33,6 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.appcompat.widget.SearchView;
@@ -48,10 +41,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ViewCourses extends AppCompatActivity {
 

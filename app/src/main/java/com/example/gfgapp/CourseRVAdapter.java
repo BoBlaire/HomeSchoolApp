@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.gfgapp.databases.DBHandler;
+import com.example.gfgapp.DEAD.DBHandler;
 import com.example.gfgapp.modal.CourseModal;
 import com.example.gfgapp.modal.Modal;
 

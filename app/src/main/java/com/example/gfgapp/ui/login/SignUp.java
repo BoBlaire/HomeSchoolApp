@@ -15,10 +15,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-import com.example.gfgapp.MainActivity;
 import com.example.gfgapp.R;
 import com.example.gfgapp.dataadapter.AddUserInfo;
-import com.example.gfgapp.databases.UserDBHandler;
+import com.example.gfgapp.DEAD.UserDBHandler;
 import com.example.gfgapp.modal.MainModal;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.SignInMethodQueryResult;

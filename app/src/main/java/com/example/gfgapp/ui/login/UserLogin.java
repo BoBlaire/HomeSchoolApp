@@ -4,7 +4,6 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -15,17 +14,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gfgapp.passwords.ForgotPassword;
-import com.example.gfgapp.MainActivity;
 import com.example.gfgapp.modal.MainModal;
 import com.example.gfgapp.R;
 import com.example.gfgapp.modal.StudentModal;
 import com.example.gfgapp.StudentView;
-import com.example.gfgapp.databases.UserDBHandler;
+import com.example.gfgapp.DEAD.UserDBHandler;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

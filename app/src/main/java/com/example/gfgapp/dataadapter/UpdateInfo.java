@@ -2,73 +2,73 @@ package com.example.gfgapp.dataadapter;
 
 import android.util.Log;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class UpdateInfo {
 
+    // Log tag for debugging
     private static final String TAG = "FirestoreUpdateHelper";
 
+    // Callback interface for update operations
     public interface FirestoreUpdateCallback {
-        void onSuccess();
+        void onSuccess(); // Called on successful update
 
-        void onFailure(Exception e);
+        void onFailure(Exception e); // Called on update failure
     }
 
+    /**
+     * Updates a document in Firestore.
+     * @param collectionName The name of the Firestore collection.
+     * @param documentId     The ID of the document to update.
+     * @param updates        A map containing the fields to update.
+     * @param callback       The callback to notify the result.
+     */
     public static void updateDocument(String collectionName, String documentId, Map<String, Object> updates, FirestoreUpdateCallback callback) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference collectionRef = db.collection(collectionName);
-        DocumentReference documentRef = collectionRef.document(documentId);
+        FirebaseFirestore db = FirebaseFirestore.getInstance(); // Get Firestore instance
+        CollectionReference collectionRef = db.collection(collectionName); // Reference to the collection
+        DocumentReference documentRef = collectionRef.document(documentId); // Reference to the document
 
+        // Update the document with the provided updates
         documentRef.update(updates)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully updated!");
-                        if (callback != null) {
-                            callback.onSuccess();
-                        }
+                .addOnSuccessListener(aVoid -> {
+                    // Log and notify on successful update
+                    Log.d(TAG, "DocumentSnapshot successfully updated!");
+                    if (callback != null) {
+                        callback.onSuccess(); // Trigger callback success
                     }
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(Exception e) {
-                        Log.w(TAG, "Error updating document", e);
-                        if (callback != null) {
-                            callback.onFailure(e);
-                        }
+                .addOnFailureListener(e -> {
+                    // Log and notify on update failure
+                    Log.w(TAG, "Error updating document", e);
+                    if (callback != null) {
+                        callback.onFailure(e); // Trigger callback failure
                     }
                 });
     }
 
+    /**
+     * Deletes a document from Firestore.
+     * @param documentId The ID of the document to delete.
+     */
     public void deleteRecord(String documentId) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance(); // Get Firestore instance
 
-        // Reference the specific document using the documentId
+        // Reference to the specific document to delete
         DocumentReference documentReference = db.collection("homeschool").document(documentId);
 
         // Delete the document
         documentReference.delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        // Handle successful deletion
-                        System.out.println("Record deleted successfully");
-                    }
+                .addOnSuccessListener(aVoid -> {
+                    // Handle and log successful deletion
+                    System.out.println("Record deleted successfully");
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(Exception e) {
-                        // Handle failure
-                        System.out.println("Error deleting record: " + e.getMessage());
-                    }
+                .addOnFailureListener(e -> {
+                    // Handle and log deletion failure
+                    System.out.println("Error deleting record: " + e.getMessage());
                 });
     }
-
 }

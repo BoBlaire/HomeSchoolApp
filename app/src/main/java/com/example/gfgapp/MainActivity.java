@@ -20,7 +20,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gfgapp.dataadapter.AddInfo;
-import com.example.gfgapp.databases.*;
+import com.example.gfgapp.DEAD.*;
 import com.example.gfgapp.modal.CourseModal;
 import com.example.gfgapp.modal.MainModal;
 import com.example.gfgapp.modal.SubjectModal;

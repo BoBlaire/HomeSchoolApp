@@ -15,19 +15,27 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class PDFSender {
+    // SMTP server details
     private String mailhost = "smtp.gmail.com";
-    private String user;
-    private String password;
-    private Session session;
+    private String user; // Gmail username
+    private String password; // Gmail password
+    private Session session; // Email session
 
     static {
+        // Add JSSE provider for SSL
         Security.addProvider(new JSSEProvider());
     }
 
+    /**
+     * Constructor initializes the user credentials and sets up mail properties.
+     * @param user     Gmail username.
+     * @param password Gmail password.
+     */
     public PDFSender(final String user, final String password) {
         this.user = user;
         this.password = password;
 
+        // Set mail properties for Gmail SMTP
         Properties props = new Properties();
         props.setProperty("mail.transport.protocol", "smtp");
         props.setProperty("mail.host", mailhost);
@@ -38,36 +46,50 @@ public class PDFSender {
         props.put("mail.smtp.socketFactory.fallback", "false");
         props.setProperty("mail.smtp.quitwait", "false");
 
-        session = Session.getDefaultInstance(props,
-                new Authenticator(){
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(
-                                user, password);// Specify the Username and the PassWord
-                    }
-                });
+        // Initialize the mail session with authentication
+        session = Session.getDefaultInstance(props, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                // Return the Gmail username and password for authentication
+                return new PasswordAuthentication(user, password);
+            }
+        });
     }
-    /*
-        protected PasswordAuthentication getPasswordAuthentication() {
-            return new javax.mail.PasswordAuthentication(user, password);
-        }
-    */
-    public synchronized void sendMail(String subject, String body,
-                                      String sender, String recipients, String filePath) throws Exception {
+
+    /**
+     * Sends an email with the given subject, body, sender, recipients, and file attachment.
+     * @param subject    Subject of the email.
+     * @param body       Body of the email.
+     * @param sender     Sender's email address.
+     * @param recipients Recipients' email addresses.
+     * @param filePath   Path to the file to be attached.
+     * @throws Exception If an error occurs while sending the email.
+     */
+    public synchronized void sendMail(String subject, String body, String sender, String recipients, String filePath) throws Exception {
+        // Create a new MimeMessage
         MimeMessage message = new MimeMessage(session);
+
+        // Set the data handler with the email body
         DataHandler handler = new DataHandler((DataSource) new ByteArrayDataSource(body.getBytes(), "text/plain"));
+
+        // Set the data source with the file to be attached
         DataSource source = new FileDataSource(filePath);
 
-
+        // Set the sender's email address
         message.setSender(new InternetAddress(sender));
+        // Set the email subject
         message.setSubject(subject);
+        // Attach the file to the email
         message.setDataHandler(new DataHandler(source));
+        // Set the filename for the attachment
         message.setFileName("Student Hour's.pdf");
 
+        // Check if there are multiple recipients
         if (recipients.indexOf(',') > 0)
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipients));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipients)); // Set multiple recipients
         else
-            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipients));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipients)); // Set single recipient
 
+        // Send the email
         Transport.send(message);
     }
 }
